@@ -1,0 +1,93 @@
+:root {
+  /* ═══════════════════════════════════════════
+     Base Colors
+     ═══════════════════════════════════════════ */
+  --bg-primary: #0a0a10;
+  --bg-secondary: #12121a;
+  --bg-tertiary: #1a1a24;
+  --bg-quaternary: #22222e;
+
+  /* Glass / Acrylic surfaces */
+  --bg-glass: rgba(18, 18, 26, 0.75);
+  --bg-glass-hover: rgba(26, 26, 36, 0.85);
+  --bg-glass-active: rgba(30, 30, 42, 0.9);
+  --glass-blur: 16px;
+  --glass-border: 1px solid rgba(255, 255, 255, 0.06);
+  --glass-border-hover: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --glass-shadow-elevated: 0 8px 40px rgba(0, 0, 0, 0.5);
+
+  /* ═══════════════════════════════════════════
+     Text Colors
+     ═══════════════════════════════════════════ */
+  --text-primary: #e4e4ea;
+  --text-secondary: #9090a8;
+  --text-muted: #5c5c72;
+  --text-inverse: #0a0a10;
+
+  /* ═══════════════════════════════════════════
+     Accent Colors
+     ═══════════════════════════════════════════ */
+  --accent: #6c6cff;
+  --accent-hover: #8484ff;
+  --accent-muted: rgba(108, 108, 255, 0.15);
+  --accent-text: #a0a0ff;
+
+  /* ═══════════════════════════════════════════
+     Semantic Colors
+     ═══════════════════════════════════════════ */
+  --positive: #34c77b;
+  --positive-muted: rgba(52, 199, 123, 0.15);
+  --warning: #f0b040;
+  --warning-muted: rgba(240, 176, 64, 0.15);
+  --negative: #f04060;
+  --negative-muted: rgba(240, 64, 96, 0.15);
+
+  /* ═══════════════════════════════════════════
+     Spacing
+     ═══════════════════════════════════════════ */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+
+  /* ═══════════════════════════════════════════
+     Radius
+     ═══════════════════════════════════════════ */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* ═══════════════════════════════════════════
+     Typography
+     ═══════════════════════════════════════════ */
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 13px;
+  --text-md: 14px;
+  --text-lg: 16px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+
+  /* ═══════════════════════════════════════════
+     Layout
+     ═══════════════════════════════════════════ */
+  --sidebar-width: 240px;
+  --inspector-width: 300px;
+  --topbar-height: 48px;
+  --statusbar-height: 28px;
+
+  /* ═══════════════════════════════════════════
+     Transitions
+     ═══════════════════════════════════════════ */
+  --transition-fast: 120ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow: 300ms ease;
+}
