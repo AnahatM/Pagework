@@ -1,0 +1,18 @@
+.inspector {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dangerZone {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.dangerLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--status-error);
+  margin-bottom: 8px;
+}

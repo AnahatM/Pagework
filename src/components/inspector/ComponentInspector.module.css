@@ -1,0 +1,34 @@
+.inspector {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.componentInfo {
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.componentType {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.componentDesc {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  margin: 4px 0 0;
+}
+
+.noSelection {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.propGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
