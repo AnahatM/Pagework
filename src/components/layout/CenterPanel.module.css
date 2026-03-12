@@ -1,0 +1,73 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ── Component tree ──── */
+
+.tree {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-sm);
+}
+
+.treeNode {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  transition: background var(--transition-fast);
+}
+
+.treeNode:hover {
+  background: var(--bg-tertiary);
+}
+
+.treeNode.selected {
+  background: var(--accent-muted);
+  color: var(--accent);
+}
+
+.nodeType {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  background: var(--bg-secondary);
+  padding: 1px 5px;
+  border-radius: var(--radius-sm);
+}
+
+.nodeLabel {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.children {
+  padding-left: 16px;
+  border-left: 1px solid var(--glass-border);
+  margin-left: 11px;
+}
+
+/* ── Code preview ──── */
+
+.codeContainer {
+  flex: 1;
+  overflow: hidden;
+}

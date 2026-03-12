@@ -1,0 +1,70 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-md);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--glass-border);
+  gap: var(--space-md);
+  -webkit-app-region: drag;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  -webkit-app-region: no-drag;
+}
+
+.projectName {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.dirty {
+  color: var(--accent);
+  font-size: 0.7rem;
+  margin-left: 4px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  -webkit-app-region: no-drag;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.iconButton:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.iconButton.active {
+  background: var(--accent-muted);
+  color: var(--accent);
+}

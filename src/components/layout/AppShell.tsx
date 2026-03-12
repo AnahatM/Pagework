@@ -3,34 +3,37 @@
    Main layout when a project is open
    ═══════════════════════════════════════════ */
 
+import { useProjectStore } from "@stores/projectStore";
+import { useUIStore } from "@stores/uiStore";
+import { useEffect } from "react";
 import styles from "./AppShell.module.css";
+import { CenterPanel } from "./CenterPanel";
+import { LeftSidebar } from "./LeftSidebar";
+import { RightSidebar } from "./RightSidebar";
+import { StatusBar } from "./StatusBar";
+import { TopBar } from "./TopBar";
 
 export function AppShell() {
+  const pages = useProjectStore((s) => s.manifest?.pages ?? []);
+  const selectedPageId = useUIStore((s) => s.selectedPageId);
+  const selectPage = useUIStore((s) => s.selectPage);
+
+  // Auto-select first page if none selected
+  useEffect(() => {
+    if (!selectedPageId && pages.length > 0) {
+      selectPage(pages[0].id);
+    }
+  }, [selectedPageId, pages, selectPage]);
+
   return (
     <div className={styles.shell}>
-      <header className={styles.topbar}>
-        <span className={styles.projectName}>Project</span>
-      </header>
+      <TopBar />
       <div className={styles.body}>
-        <aside className={styles.leftSidebar}>
-          <p style={{ padding: "var(--space-md)", color: "var(--text-muted)", fontSize: "0.8rem" }}>
-            Pages will appear here
-          </p>
-        </aside>
-        <main className={styles.center}>
-          <p style={{ padding: "var(--space-md)", color: "var(--text-muted)", fontSize: "0.8rem" }}>
-            Page structure will appear here
-          </p>
-        </main>
-        <aside className={styles.rightSidebar}>
-          <p style={{ padding: "var(--space-md)", color: "var(--text-muted)", fontSize: "0.8rem" }}>
-            Inspector will appear here
-          </p>
-        </aside>
+        <LeftSidebar />
+        <CenterPanel />
+        <RightSidebar />
       </div>
-      <footer className={styles.statusbar}>
-        <span className={styles.statusText}>Ready</span>
-      </footer>
+      <StatusBar />
     </div>
   );
 }

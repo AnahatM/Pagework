@@ -3,8 +3,8 @@
    Thin wrappers around Tauri invoke calls
    ═══════════════════════════════════════════ */
 
-import { invoke } from "@tauri-apps/api/core";
 import type { SiteBuilderManifest } from "@/types/manifest";
+import { invoke } from "@tauri-apps/api/core";
 
 export interface RecentProject {
   name: string;
@@ -36,8 +36,6 @@ export async function getRecentProjects(): Promise<RecentProject[]> {
   return invoke("get_recent_projects");
 }
 
-export async function addRecentProject(
-  project: RecentProject,
-): Promise<void> {
+export async function addRecentProject(project: RecentProject): Promise<void> {
   return invoke("add_recent_project", { project });
 }

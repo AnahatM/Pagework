@@ -7,52 +7,8 @@
   overflow: hidden;
 }
 
-.topbar {
-  display: flex;
-  align-items: center;
-  padding: 0 var(--space-md);
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--glass-border);
-}
-
-.projectName {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
 .body {
   display: grid;
   grid-template-columns: var(--sidebar-width) 1fr var(--inspector-width);
   overflow: hidden;
-}
-
-.leftSidebar {
-  background: var(--bg-secondary);
-  border-right: 1px solid var(--glass-border);
-  overflow-y: auto;
-}
-
-.center {
-  background: var(--bg-primary);
-  overflow-y: auto;
-}
-
-.rightSidebar {
-  background: var(--bg-secondary);
-  border-left: 1px solid var(--glass-border);
-  overflow-y: auto;
-}
-
-.statusbar {
-  display: flex;
-  align-items: center;
-  padding: 0 var(--space-md);
-  background: var(--bg-tertiary);
-  border-top: 1px solid var(--glass-border);
-}
-
-.statusText {
-  font-size: 0.7rem;
-  color: var(--text-muted);
 }

@@ -1,0 +1,84 @@
+.templateGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.templateCard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  background: var(--bg-secondary);
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.templateCard:hover {
+  border-color: var(--accent);
+  background: var(--bg-tertiary);
+}
+
+.templateCard.selected {
+  border-color: var(--accent);
+  background: var(--accent-muted);
+}
+
+.templateName {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.templateDesc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.templatePages {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  margin-top: auto;
+}
+
+.locationRow {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.locationRow > div:first-child {
+  flex: 1;
+}
+
+.browseButton {
+  height: 34px;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+.sectionLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  margin-top: 16px;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.errorText {
+  color: var(--status-error);
+  font-size: 0.8rem;
+  margin-top: 4px;
+}

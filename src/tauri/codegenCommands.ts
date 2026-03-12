@@ -2,8 +2,8 @@
    Codegen IPC Commands
    ═══════════════════════════════════════════ */
 
-import { invoke } from "@tauri-apps/api/core";
 import type { SiteBuilderManifest } from "@/types/manifest";
+import { invoke } from "@tauri-apps/api/core";
 
 export async function regenerateAll(
   projectPath: string,

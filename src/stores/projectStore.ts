@@ -3,16 +3,16 @@
    Central manifest state and all mutation actions
    ═══════════════════════════════════════════ */
 
-import { create } from "zustand";
 import type {
+  ComponentInstance,
+  FooterColumn,
+  NavItem,
+  PageConfig,
   SiteBuilderManifest,
   SiteSettings,
-  PageConfig,
-  ComponentInstance,
-  NavItem,
-  FooterColumn,
   SocialLink,
 } from "@/types/manifest";
+import { create } from "zustand";
 
 interface ProjectState {
   manifest: SiteBuilderManifest | null;
@@ -33,14 +33,31 @@ interface ProjectActions {
   reorderPages: (fromIndex: number, toIndex: number) => void;
 
   /* ── Component operations ──────────────── */
-  addComponent: (pageId: string, parentId: string | null, component: ComponentInstance) => void;
+  addComponent: (
+    pageId: string,
+    parentId: string | null,
+    component: ComponentInstance,
+  ) => void;
   removeComponent: (pageId: string, componentId: string) => void;
-  updateComponentProp: (pageId: string, componentId: string, propName: string, value: unknown) => void;
-  moveComponent: (pageId: string, componentId: string, direction: "up" | "down") => void;
+  updateComponentProp: (
+    pageId: string,
+    componentId: string,
+    propName: string,
+    value: unknown,
+  ) => void;
+  moveComponent: (
+    pageId: string,
+    componentId: string,
+    direction: "up" | "down",
+  ) => void;
   duplicateComponent: (pageId: string, componentId: string) => void;
 
   /* ── Theme ─────────────────────────────── */
-  updateThemeColor: (theme: "light" | "dark", variable: string, value: string) => void;
+  updateThemeColor: (
+    theme: "light" | "dark",
+    variable: string,
+    value: string,
+  ) => void;
   updateGlobalColor: (variable: string, value: string) => void;
   updateFont: (variable: "normal" | "display", fontFamily: string) => void;
 
@@ -73,7 +90,10 @@ function findAndRemoveComponent(
   for (let i = 0; i < components.length; i++) {
     if (components[i].id === id) {
       const removed = components[i];
-      return { updated: [...components.slice(0, i), ...components.slice(i + 1)], removed };
+      return {
+        updated: [...components.slice(0, i), ...components.slice(i + 1)],
+        removed,
+      };
     }
     const result = findAndRemoveComponent(components[i].children, id);
     if (result.removed) {
@@ -109,13 +129,20 @@ function addComponentToParent(
       return { ...c, children: [...c.children, component] };
     }
     if (c.children.length > 0) {
-      return { ...c, children: addComponentToParent(c.children, parentId, component) };
+      return {
+        ...c,
+        children: addComponentToParent(c.children, parentId, component),
+      };
     }
     return c;
   });
 }
 
-function moveInArray<T>(arr: T[], index: number, direction: "up" | "down"): T[] {
+function moveInArray<T>(
+  arr: T[],
+  index: number,
+  direction: "up" | "down",
+): T[] {
   const newArr = [...arr];
   const targetIndex = direction === "up" ? index - 1 : index + 1;
   if (targetIndex < 0 || targetIndex >= newArr.length) return newArr;
@@ -140,7 +167,10 @@ function moveComponentInTree(
   });
 }
 
-function deepCloneComponent(component: ComponentInstance, newIdPrefix: string): ComponentInstance {
+function deepCloneComponent(
+  component: ComponentInstance,
+  newIdPrefix: string,
+): ComponentInstance {
   return {
     ...component,
     id: `${newIdPrefix}_${crypto.randomUUID().slice(0, 8)}`,
@@ -172,210 +202,227 @@ function duplicateComponentInTree(
    Store
    ══════════════════════════════════════════════ */
 
-export const useProjectStore = create<ProjectState & ProjectActions>()((set) => ({
-  manifest: null,
-  projectPath: null,
-  isDirty: false,
+export const useProjectStore = create<ProjectState & ProjectActions>()(
+  (set) => ({
+    manifest: null,
+    projectPath: null,
+    isDirty: false,
 
-  /* ── Project lifecycle ─────────────────── */
+    /* ── Project lifecycle ─────────────────── */
 
-  setProject: (manifest, projectPath) =>
-    set({ manifest, projectPath, isDirty: false }),
+    setProject: (manifest, projectPath) =>
+      set({ manifest, projectPath, isDirty: false }),
 
-  closeProject: () =>
-    set({ manifest: null, projectPath: null, isDirty: false }),
+    closeProject: () =>
+      set({ manifest: null, projectPath: null, isDirty: false }),
 
-  markClean: () => set({ isDirty: false }),
+    markClean: () => set({ isDirty: false }),
 
-  /* ── Page operations ───────────────────── */
+    /* ── Page operations ───────────────────── */
 
-  addPage: (page) =>
-    set((state) =>
-      updateManifest(state, (m) => ({ ...m, pages: [...m.pages, page] })),
-    ),
+    addPage: (page) =>
+      set((state) =>
+        updateManifest(state, (m) => ({ ...m, pages: [...m.pages, page] })),
+      ),
 
-  updatePage: (pageId, updates) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        pages: m.pages.map((p) =>
-          p.id === pageId ? { ...p, ...updates } : p,
-        ),
-      })),
-    ),
+    updatePage: (pageId, updates) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          pages: m.pages.map((p) =>
+            p.id === pageId ? { ...p, ...updates } : p,
+          ),
+        })),
+      ),
 
-  removePage: (pageId) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        pages: m.pages.filter((p) => p.id !== pageId),
-      })),
-    ),
+    removePage: (pageId) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          pages: m.pages.filter((p) => p.id !== pageId),
+        })),
+      ),
 
-  reorderPages: (fromIndex, toIndex) =>
-    set((state) =>
-      updateManifest(state, (m) => {
-        const pages = [...m.pages];
-        const [moved] = pages.splice(fromIndex, 1);
-        pages.splice(toIndex, 0, moved);
-        return { ...m, pages };
-      }),
-    ),
-
-  /* ── Component operations ──────────────── */
-
-  addComponent: (pageId, parentId, component) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        pages: m.pages.map((p) => {
-          if (p.id !== pageId) return p;
-          if (parentId === null) {
-            return { ...p, components: [...p.components, component] };
-          }
-          return {
-            ...p,
-            components: addComponentToParent(p.components, parentId, component),
-          };
+    reorderPages: (fromIndex, toIndex) =>
+      set((state) =>
+        updateManifest(state, (m) => {
+          const pages = [...m.pages];
+          const [moved] = pages.splice(fromIndex, 1);
+          pages.splice(toIndex, 0, moved);
+          return { ...m, pages };
         }),
-      })),
-    ),
+      ),
 
-  removeComponent: (pageId, componentId) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        pages: m.pages.map((p) => {
-          if (p.id !== pageId) return p;
-          const { updated } = findAndRemoveComponent(p.components, componentId);
-          return { ...p, components: updated };
-        }),
-      })),
-    ),
+    /* ── Component operations ──────────────── */
 
-  updateComponentProp: (pageId, componentId, propName, value) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        pages: m.pages.map((p) => {
-          if (p.id !== pageId) return p;
-          return {
-            ...p,
-            components: updateComponentInTree(p.components, componentId, (c) => ({
-              ...c,
-              props: { ...c.props, [propName]: value },
-            })),
-          };
-        }),
-      })),
-    ),
+    addComponent: (pageId, parentId, component) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          pages: m.pages.map((p) => {
+            if (p.id !== pageId) return p;
+            if (parentId === null) {
+              return { ...p, components: [...p.components, component] };
+            }
+            return {
+              ...p,
+              components: addComponentToParent(
+                p.components,
+                parentId,
+                component,
+              ),
+            };
+          }),
+        })),
+      ),
 
-  moveComponent: (pageId, componentId, direction) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        pages: m.pages.map((p) => {
-          if (p.id !== pageId) return p;
-          return {
-            ...p,
-            components: moveComponentInTree(p.components, componentId, direction),
-          };
-        }),
-      })),
-    ),
+    removeComponent: (pageId, componentId) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          pages: m.pages.map((p) => {
+            if (p.id !== pageId) return p;
+            const { updated } = findAndRemoveComponent(
+              p.components,
+              componentId,
+            );
+            return { ...p, components: updated };
+          }),
+        })),
+      ),
 
-  duplicateComponent: (pageId, componentId) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        pages: m.pages.map((p) => {
-          if (p.id !== pageId) return p;
-          return {
-            ...p,
-            components: duplicateComponentInTree(p.components, componentId),
-          };
-        }),
-      })),
-    ),
+    updateComponentProp: (pageId, componentId, propName, value) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          pages: m.pages.map((p) => {
+            if (p.id !== pageId) return p;
+            return {
+              ...p,
+              components: updateComponentInTree(
+                p.components,
+                componentId,
+                (c) => ({
+                  ...c,
+                  props: { ...c.props, [propName]: value },
+                }),
+              ),
+            };
+          }),
+        })),
+      ),
 
-  /* ── Theme ─────────────────────────────── */
+    moveComponent: (pageId, componentId, direction) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          pages: m.pages.map((p) => {
+            if (p.id !== pageId) return p;
+            return {
+              ...p,
+              components: moveComponentInTree(
+                p.components,
+                componentId,
+                direction,
+              ),
+            };
+          }),
+        })),
+      ),
 
-  updateThemeColor: (theme, variable, value) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        theme: {
-          ...m.theme,
-          [theme]: { ...m.theme[theme], [variable]: value },
-        },
-      })),
-    ),
+    duplicateComponent: (pageId, componentId) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          pages: m.pages.map((p) => {
+            if (p.id !== pageId) return p;
+            return {
+              ...p,
+              components: duplicateComponentInTree(p.components, componentId),
+            };
+          }),
+        })),
+      ),
 
-  updateGlobalColor: (variable, value) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        theme: {
-          ...m.theme,
-          global: { ...m.theme.global, [variable]: value },
-        },
-      })),
-    ),
+    /* ── Theme ─────────────────────────────── */
 
-  updateFont: (variable, fontFamily) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        theme: {
-          ...m.theme,
-          fonts: { ...m.theme.fonts, [variable]: fontFamily },
-        },
-      })),
-    ),
+    updateThemeColor: (theme, variable, value) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          theme: {
+            ...m.theme,
+            [theme]: { ...m.theme[theme], [variable]: value },
+          },
+        })),
+      ),
 
-  /* ── Navigation ────────────────────────── */
+    updateGlobalColor: (variable, value) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          theme: {
+            ...m.theme,
+            global: { ...m.theme.global, [variable]: value },
+          },
+        })),
+      ),
 
-  updateNavItems: (items) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        navigation: { ...m.navigation, navItems: items },
-      })),
-    ),
+    updateFont: (variable, fontFamily) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          theme: {
+            ...m.theme,
+            fonts: { ...m.theme.fonts, [variable]: fontFamily },
+          },
+        })),
+      ),
 
-  updateNavLogo: (logoPath) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        navigation: { ...m.navigation, logoPath },
-      })),
-    ),
+    /* ── Navigation ────────────────────────── */
 
-  /* ── Footer ────────────────────────────── */
+    updateNavItems: (items) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          navigation: { ...m.navigation, navItems: items },
+        })),
+      ),
 
-  updateFooterColumns: (columns) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        footer: { ...m.footer, columns },
-      })),
-    ),
+    updateNavLogo: (logoPath) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          navigation: { ...m.navigation, logoPath },
+        })),
+      ),
 
-  updateSocialLinks: (links) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        footer: { ...m.footer, socialLinks: links },
-      })),
-    ),
+    /* ── Footer ────────────────────────────── */
 
-  /* ── Site settings ─────────────────────── */
+    updateFooterColumns: (columns) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          footer: { ...m.footer, columns },
+        })),
+      ),
 
-  updateSiteSettings: (settings) =>
-    set((state) =>
-      updateManifest(state, (m) => ({
-        ...m,
-        siteSettings: { ...m.siteSettings, ...settings },
-      })),
-    ),
-}));
+    updateSocialLinks: (links) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          footer: { ...m.footer, socialLinks: links },
+        })),
+      ),
+
+    /* ── Site settings ─────────────────────── */
+
+    updateSiteSettings: (settings) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          siteSettings: { ...m.siteSettings, ...settings },
+        })),
+      ),
+  }),
+);
