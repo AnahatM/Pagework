@@ -3,10 +3,17 @@
    Shown when no project is open
    ═══════════════════════════════════════════ */
 
-import { faFolderOpen, faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFolderOpen,
+  faMinus,
+  faSquare,
+  faSquarePlus,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useProjectStore } from "@stores/projectStore";
 import { useUIStore } from "@stores/uiStore";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import { open } from "@tauri-apps/plugin-dialog";
 import { addRecentProject, openProject } from "@tauri/projectCommands";
 import { APP_DESCRIPTION, APP_NAME } from "@utils/branding";
@@ -39,6 +46,31 @@ export function WelcomeScreen() {
 
   return (
     <div className={styles.container}>
+      <div className={styles.titleBar}>
+        <div className={styles.windowControls}>
+          <button
+            className={styles.winBtn}
+            onClick={() => getCurrentWindow().minimize()}
+            title="Minimize"
+          >
+            <FontAwesomeIcon icon={faMinus} />
+          </button>
+          <button
+            className={styles.winBtn}
+            onClick={() => getCurrentWindow().toggleMaximize()}
+            title="Maximize"
+          >
+            <FontAwesomeIcon icon={faSquare} />
+          </button>
+          <button
+            className={`${styles.winBtn} ${styles.winClose}`}
+            onClick={() => getCurrentWindow().close()}
+            title="Close"
+          >
+            <FontAwesomeIcon icon={faXmark} />
+          </button>
+        </div>
+      </div>
       <h1 className={styles.title}>{APP_NAME}</h1>
       <p className={styles.subtitle}>{APP_DESCRIPTION}</p>
 

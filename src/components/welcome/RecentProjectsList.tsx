@@ -1,6 +1,7 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useProjectStore } from "@stores/projectStore";
+import { ask } from "@tauri-apps/plugin-dialog";
 import {
   addRecentProject,
   getRecentProjects,
@@ -44,7 +45,19 @@ export function RecentProjectsList() {
       });
       setProject(manifest, project.path);
     } catch {
-      // Project may have been deleted — silently ignore
+      const remove = await ask(
+        `The project "${project.name}" appears to have been moved or deleted.\n\nRemove it from the recent projects list?`,
+        {
+          title: "Project Not Found",
+          kind: "warning",
+          okLabel: "Remove",
+          cancelLabel: "Keep",
+        },
+      );
+      if (remove) {
+        await removeRecentProject(project.path);
+        setProjects((prev) => prev.filter((p) => p.path !== project.path));
+      }
     }
   }
 

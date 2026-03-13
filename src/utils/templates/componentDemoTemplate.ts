@@ -38,13 +38,21 @@ export function componentDemoTemplate(
       path: "/",
       isHomePage: true,
       components: [
-        component("Banner", { altText: "Hero Banner", showScrollHint: true }, [
-          component("BannerHeader", {
-            preHeadingText: "Welcome to",
-            titleText: projectName,
-            subtitleText: "A showcase of every component",
-          }),
-        ]),
+        component(
+          "Banner",
+          {
+            imageUrl: "/assets/banners/banner.webp",
+            altText: "Hero Banner",
+            showScrollHint: true,
+          },
+          [
+            component("BannerHeader", {
+              preHeadingText: "Welcome to",
+              titleText: projectName,
+              subtitleText: "A showcase of every component",
+            }),
+          ],
+        ),
         component("GenericSection", {}, [
           component("SectionHeader", {
             title: "Section Header",

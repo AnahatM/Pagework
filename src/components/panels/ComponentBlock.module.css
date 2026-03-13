@@ -5,7 +5,6 @@
   transition:
     border-color var(--transition-fast),
     box-shadow var(--transition-fast);
-  overflow: hidden;
 }
 
 .block:hover {

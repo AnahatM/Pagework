@@ -158,3 +158,40 @@
     transform: translateX(-50%) translateY(0);
   }
 }
+
+/* ── Window controls ──── */
+
+.windowControls {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-left: var(--space-sm);
+  -webkit-app-region: no-drag;
+  flex-shrink: 0;
+}
+
+.winBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition:
+    background 0.12s,
+    color 0.12s;
+}
+
+.winBtn:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.winClose:hover {
+  background: #e81123;
+  color: #fff;
+}

@@ -6,7 +6,9 @@ import {
   faFloppyDisk,
   faFolderOpen,
   faLayerGroup,
+  faMinus,
   faPlay,
+  faSquare,
   faStop,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
@@ -15,8 +17,13 @@ import { useDevServerStore } from "@stores/devServerStore";
 import { useOutputLogStore } from "@stores/outputLogStore";
 import { useProjectStore } from "@stores/projectStore";
 import { useUIStore } from "@stores/uiStore";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import { regenerateAll } from "@tauri/codegenCommands";
-import { startDevServer, stopDevServer } from "@tauri/devServerCommands";
+import {
+  getDevServerStatus,
+  startDevServer,
+  stopDevServer,
+} from "@tauri/devServerCommands";
 import { saveManifest } from "@tauri/projectCommands";
 import { openInExplorer } from "@tauri/systemCommands";
 import { useEffect } from "react";
@@ -44,11 +51,14 @@ export function TopBar() {
   const addLog = useOutputLogStore((s) => s.addEntry);
 
   useEffect(() => {
-    document.title = projectPath
+    const title = projectPath
       ? `SiteBuilder — ${manifest?.projectName ?? "Untitled"} (${projectPath})`
       : "SiteBuilder";
+    document.title = title;
+    getCurrentWindow().setTitle(title);
     return () => {
       document.title = "SiteBuilder";
+      getCurrentWindow().setTitle("SiteBuilder");
     };
   }, [projectPath, manifest?.projectName]);
 
@@ -88,8 +98,11 @@ export function TopBar() {
       addLog("Starting dev server…");
       await startDevServer(projectPath);
 
-      setRunning(5173);
-      addLog("✓ Dev server ready — opening preview");
+      const status = await getDevServerStatus();
+      setRunning(status.port ?? 5173);
+      addLog(
+        `✓ Dev server ready on port ${status.port ?? 5173} — opening preview`,
+      );
       setCenterPanel("preview");
     } catch (err) {
       addLog(String(err), "error");
@@ -207,6 +220,30 @@ export function TopBar() {
           <FontAwesomeIcon icon={faXmark} />
           Close
         </Button>
+      </div>
+
+      <div className={styles.windowControls}>
+        <button
+          className={styles.winBtn}
+          onClick={() => getCurrentWindow().minimize()}
+          title="Minimize"
+        >
+          <FontAwesomeIcon icon={faMinus} />
+        </button>
+        <button
+          className={styles.winBtn}
+          onClick={() => getCurrentWindow().toggleMaximize()}
+          title="Maximize"
+        >
+          <FontAwesomeIcon icon={faSquare} />
+        </button>
+        <button
+          className={`${styles.winBtn} ${styles.winClose}`}
+          onClick={() => getCurrentWindow().close()}
+          title="Close"
+        >
+          <FontAwesomeIcon icon={faXmark} />
+        </button>
       </div>
     </header>
   );
