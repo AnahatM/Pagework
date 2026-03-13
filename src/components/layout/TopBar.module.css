@@ -32,6 +32,24 @@
   margin-left: 4px;
 }
 
+.folderButton {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 2px 4px;
+  font-size: 0.8rem;
+  border-radius: var(--radius-sm);
+  transition:
+    color 0.15s,
+    background 0.15s;
+}
+
+.folderButton:hover {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
 .center {
   position: absolute;
   left: 50%;

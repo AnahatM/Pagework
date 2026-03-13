@@ -4,6 +4,7 @@ import {
   faCode,
   faEye,
   faFloppyDisk,
+  faFolderOpen,
   faLayerGroup,
   faPlay,
   faStop,
@@ -17,6 +18,8 @@ import { useUIStore } from "@stores/uiStore";
 import { regenerateAll } from "@tauri/codegenCommands";
 import { startDevServer, stopDevServer } from "@tauri/devServerCommands";
 import { saveManifest } from "@tauri/projectCommands";
+import { openInExplorer } from "@tauri/systemCommands";
+import { useEffect } from "react";
 import styles from "./TopBar.module.css";
 
 export function TopBar() {
@@ -39,6 +42,15 @@ export function TopBar() {
   const setError = useDevServerStore((s) => s.setError);
 
   const addLog = useOutputLogStore((s) => s.addEntry);
+
+  useEffect(() => {
+    document.title = projectPath
+      ? `SiteBuilder — ${manifest?.projectName ?? "Untitled"} (${projectPath})`
+      : "SiteBuilder";
+    return () => {
+      document.title = "SiteBuilder";
+    };
+  }, [projectPath, manifest?.projectName]);
 
   async function handleSave() {
     if (!manifest || !projectPath) return;
@@ -114,6 +126,15 @@ export function TopBar() {
           {manifest?.projectName ?? "Untitled"}
         </span>
         {isDirty && <span className={styles.dirty}>(unsaved)</span>}
+        {projectPath && (
+          <button
+            className={styles.folderButton}
+            onClick={() => openInExplorer(projectPath)}
+            title="Open in file explorer"
+          >
+            <FontAwesomeIcon icon={faFolderOpen} />
+          </button>
+        )}
       </div>
 
       <div className={styles.center}>
