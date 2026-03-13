@@ -179,4 +179,5 @@ export type ProjectTemplate =
   | "portfolio"
   | "landing-page"
   | "blog"
-  | "content-creator";
+  | "content-creator"
+  | "component-demo";

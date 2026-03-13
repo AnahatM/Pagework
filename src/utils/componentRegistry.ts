@@ -673,7 +673,9 @@ const LinkButton: ComponentDefinition = {
   ],
 };
 
-const CustomButton: ComponentDefinition = {
+// CustomButton is intentionally excluded from COMPONENT_REGISTRY
+// (requires custom coding, not suitable for no-code palette)
+const _CustomButton: ComponentDefinition = {
   type: "CustomButton",
   displayName: "Button",
   description: "Interactive button for forms or actions.",
@@ -981,7 +983,6 @@ export const COMPONENT_REGISTRY: Record<string, ComponentDefinition> = {
   VideoEmbed,
   // Interactive
   LinkButton,
-  CustomButton,
   // Data
   Table,
   DecoratedList,

@@ -430,6 +430,329 @@ function contentCreatorTemplate(projectName: string): SiteBuilderManifest {
 
 /* ── Public API ───────────────────────────── */
 
+function componentDemoTemplate(projectName: string): SiteBuilderManifest {
+  const m = baseManifest(projectName);
+  m.siteSettings.siteDescription =
+    "A demo website showcasing every available component.";
+  m.navigation.navItems = [
+    { id: uid("nav"), linkName: "Home", path: "/", linkIcon: "", subPages: [] },
+    {
+      id: uid("nav"),
+      linkName: "Content",
+      path: "/content",
+      linkIcon: "",
+      subPages: [],
+    },
+    {
+      id: uid("nav"),
+      linkName: "Data",
+      path: "/data",
+      linkIcon: "",
+      subPages: [],
+    },
+    {
+      id: uid("nav"),
+      linkName: "Layout",
+      path: "/layout",
+      linkIcon: "",
+      subPages: [],
+    },
+  ];
+  m.pages = [
+    // ── Page 1: Home — Banner, headers, text ──
+    page({
+      name: "Home",
+      path: "/",
+      isHomePage: true,
+      components: [
+        component("Banner", { altText: "Hero Banner", showScrollHint: true }, [
+          component("BannerHeader", {
+            preHeadingText: "Welcome to",
+            titleText: projectName,
+            subtitleText: "A showcase of every component",
+          }),
+        ]),
+        component("GenericSection", {}, [
+          component("SectionHeader", {
+            title: "Section Header",
+            subtitle: "With an optional subtitle and pre-heading.",
+            preHeading: "DEMO",
+            linkButtonUrl: "#",
+            linkButtonText: "Learn More",
+          }),
+          component("TextParagraph", {
+            text: "This is a **TextParagraph** component. It supports basic text content and is the primary way to add body copy to your pages.",
+          }),
+          component("LargeText", {
+            text: "Large Text stands out.",
+            widthPercent: 100,
+          }),
+        ]),
+        component("GenericSection", {}, [
+          component("SectionHeader", { title: "Number Displays" }),
+          component(
+            "FlexRow",
+            { gap: 40, justifyContent: "center", wrap: "wrap" },
+            [
+              component("NumberDisplay", {
+                displayNumber: "42",
+                numberLabel: "Components",
+              }),
+              component("NumberDisplay", {
+                displayNumber: "∞",
+                numberLabel: "Possibilities",
+              }),
+              component("NumberDisplay", {
+                displayNumber: "0",
+                numberLabel: "Limits",
+              }),
+            ],
+          ),
+        ]),
+        component("GenericSection", {}, [
+          component("SectionHeader", { title: "Buttons & Links" }),
+          component(
+            "FlexRow",
+            { gap: 12, justifyContent: "flex-start", wrap: "wrap" },
+            [
+              component("LinkButton", {
+                linktext: "Primary Button",
+                href: "#",
+                backgroundType: "primary",
+              }),
+              component("LinkButton", {
+                linktext: "Secondary",
+                href: "#",
+                backgroundType: "secondary",
+              }),
+              component("LinkButton", {
+                linktext: "Positive",
+                href: "#",
+                backgroundType: "positive",
+              }),
+              component("LinkButton", {
+                linktext: "Warning",
+                href: "#",
+                backgroundType: "warning",
+              }),
+              component("LinkButton", {
+                linktext: "Negative",
+                href: "#",
+                backgroundType: "negative",
+              }),
+            ],
+          ),
+        ]),
+      ],
+    }),
+
+    // ── Page 2: Content — media, code, carousel ──
+    page({
+      name: "Content",
+      path: "/content",
+      components: [
+        component("GenericSection", {}, [
+          component("SectionHeader", { title: "Code Block" }),
+          component("CopyCodeBox", {
+            code: 'const greeting = "Hello, World!";\nconsole.log(greeting);',
+          }),
+        ]),
+        component(
+          "SectionWithImage",
+          {
+            imageUrl: "",
+            altText: "Demo image",
+            imagePosition: "right",
+            imageStyle: "floating",
+          },
+          [
+            component("SectionHeader", { title: "Section with Image" }),
+            component("TextParagraph", {
+              text: "This layout places content on one side and an image on the other. Set an image URL in the inspector to see it.",
+            }),
+          ],
+        ),
+        component("GenericSection", {}, [
+          component("SectionHeader", { title: "Video Embed" }),
+          component("VideoEmbed", {
+            url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            title: "Sample Video",
+          }),
+        ]),
+        component("GenericSection", {}, [
+          component("SectionHeader", { title: "Image Carousel" }),
+          component("ImageCarousel", {
+            images: [
+              { url: "", alt: "Slide 1", caption: "First slide" },
+              { url: "", alt: "Slide 2", caption: "Second slide" },
+              { url: "", alt: "Slide 3", caption: "Third slide" },
+            ],
+          }),
+        ]),
+        component("GenericSection", {}, [
+          component("SectionHeader", { title: "Collapsible / Accordion" }),
+          component(
+            "Collapsible",
+            {
+              title: "Click to expand",
+              openByDefault: false,
+            },
+            [
+              component("TextParagraph", {
+                text: "This content is hidden until the user clicks the header. Great for FAQs.",
+              }),
+            ],
+          ),
+          component(
+            "Collapsible",
+            {
+              title: "Another collapsible section",
+              openByDefault: true,
+            },
+            [
+              component("TextParagraph", {
+                text: "This one starts open by default.",
+              }),
+            ],
+          ),
+        ]),
+      ],
+    }),
+
+    // ── Page 3: Data — table, list ──
+    page({
+      name: "Data",
+      path: "/data",
+      components: [
+        component("GenericSection", {}, [
+          component("SectionHeader", { title: "Data Table" }),
+          component("Table", {
+            columns: [
+              { header: "Name", key: "name" },
+              { header: "Type", key: "type" },
+              { header: "Category", key: "category" },
+            ],
+            data: [
+              { name: "Banner", type: "Content", category: "Hero" },
+              { name: "Table", type: "Data", category: "Display" },
+              { name: "TextParagraph", type: "Text", category: "Body" },
+              { name: "LinkButton", type: "Interactive", category: "Action" },
+            ],
+            showBorders: true,
+            alternatingRows: true,
+          }),
+        ]),
+        component("GenericSection", {}, [
+          component("SectionHeader", { title: "Decorated List" }),
+          component("DecoratedList", {
+            items: [
+              {
+                title: "First Item",
+                description: "A description for the first item.",
+              },
+              {
+                title: "Second Item",
+                description: "A description for the second item.",
+              },
+              {
+                title: "Third Item",
+                description: "A description for the third item.",
+              },
+            ],
+          }),
+        ]),
+      ],
+    }),
+
+    // ── Page 4: Layout — split, dynamic row, scroll, grid, invisible ──
+    page({
+      name: "Layout",
+      path: "/layout",
+      components: [
+        component("GenericSection", {}, [
+          component("SectionHeader", { title: "Split Section" }),
+        ]),
+        component("SplitSection", {}, [
+          component("GenericSection", {}, [
+            component("SectionHeader", { title: "Left Column" }),
+            component("TextParagraph", {
+              text: "SplitSection creates a two-column layout that stacks on mobile.",
+            }),
+          ]),
+          component("GenericSection", {}, [
+            component("SectionHeader", { title: "Right Column" }),
+            component("TextParagraph", {
+              text: "Each side can contain its own set of components.",
+            }),
+          ]),
+        ]),
+        component("GenericSection", {}, [
+          component("SectionHeader", { title: "Dynamic Section Row" }),
+        ]),
+        component("DynamicSectionRow", { gap: 20, minSectionWidth: 250 }, [
+          component("GenericSection", {}, [
+            component("SectionHeader", { title: "Card 1" }),
+            component("TextParagraph", { text: "Auto-wrapping grid." }),
+          ]),
+          component("GenericSection", {}, [
+            component("SectionHeader", { title: "Card 2" }),
+            component("TextParagraph", { text: "Responsive columns." }),
+          ]),
+          component("GenericSection", {}, [
+            component("SectionHeader", { title: "Card 3" }),
+            component("TextParagraph", { text: "Minimum width control." }),
+          ]),
+        ]),
+        component("InvisibleSection", {}, [
+          component("SectionHeader", { title: "Invisible Section" }),
+          component("TextParagraph", {
+            text: "This section has no visible panel styling — content floats directly on the page background.",
+          }),
+        ]),
+        component("GenericSection", {}, [
+          component("SectionHeader", { title: "Scrollable Container" }),
+          component(
+            "ScrollableContainer",
+            { maxHeight: "200px", enableBorder: true, showScrollHint: true },
+            [
+              component("TextParagraph", {
+                text: "Line 1: This container scrolls when content overflows.",
+              }),
+              component("TextParagraph", {
+                text: "Line 2: Keep adding content to see scrolling.",
+              }),
+              component("TextParagraph", {
+                text: "Line 3: The scroll hint fades at the bottom.",
+              }),
+              component("TextParagraph", {
+                text: "Line 4: Useful for limiting tall content areas.",
+              }),
+              component("TextParagraph", {
+                text: "Line 5: The max height is configurable.",
+              }),
+            ],
+          ),
+        ]),
+        component("GenericSection", {}, [
+          component("SectionHeader", { title: "Sized Box Spacer" }),
+          component("TextParagraph", { text: "Above the spacer." }),
+          component("SizedBox", { height: 60 }),
+          component("TextParagraph", { text: "Below the 60px spacer." }),
+        ]),
+        component("GridBackground", {}, [
+          component("GenericSection", {}, [
+            component("SectionHeader", { title: "Grid Background" }),
+            component("TextParagraph", {
+              text: "This section has a grid pattern background behind it.",
+            }),
+          ]),
+        ]),
+      ],
+    }),
+  ];
+  return m;
+}
+
 export function generateTemplateManifest(
   template: ProjectTemplate,
   projectName: string,
@@ -445,6 +768,8 @@ export function generateTemplateManifest(
       return blogTemplate(projectName);
     case "content-creator":
       return contentCreatorTemplate(projectName);
+    case "component-demo":
+      return componentDemoTemplate(projectName);
   }
 }
 
@@ -485,5 +810,11 @@ export const TEMPLATES: TemplateInfo[] = [
     name: "Content Creator",
     description: "Showcase videos, stats, and social links.",
     pageCount: 3,
+  },
+  {
+    id: "component-demo",
+    name: "Component Demo",
+    description: "Showcases every available component for testing.",
+    pageCount: 4,
   },
 ];

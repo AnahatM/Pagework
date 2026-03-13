@@ -10,7 +10,6 @@ import navConfig from "@routes/NavigationConfiguration.json";
 import { useEffect, useRef, useState, type JSX } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
-import NavigationSpecialButton from "./NavbarSpecialButton.tsx";
 import NavigationButton from "./NavigationButton.tsx";
 
 /**
@@ -107,30 +106,26 @@ export default function Navbar(): JSX.Element {
               />
             ))}
 
-            {/* More Pages Button */}
-            <NavigationButton
-              label="More"
-              url="#"
-              clickable={false}
-              isActive={false}
-              hasSubPages={true}
-              isSubPage={false}
-              subPages={otherPages}
-              colorOnHover={false}
-              coloredByDefault={false}
-            />
+            {/* More Pages Button — only show when there are extra pages */}
+            {otherPages.length > 0 && (
+              <NavigationButton
+                label="More"
+                url="#"
+                clickable={false}
+                isActive={false}
+                hasSubPages={true}
+                isSubPage={false}
+                subPages={otherPages}
+                colorOnHover={false}
+                coloredByDefault={false}
+              />
+            )}
           </>
         </div>
       )}
 
       {!isMobile && (
         <div className="navbar-right-ui">
-          {/* About Me button on Desktop */}
-          <NavigationSpecialButton
-            label={"About Me"}
-            url={"/about"}
-            isActive={isActive("/about")}
-          />
           {/* Theme Switch for Desktop */}
           <ThemeSwitch />
         </div>

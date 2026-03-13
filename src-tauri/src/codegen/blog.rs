@@ -214,8 +214,12 @@ fn render_props(
         let value = &props[key];
         match value {
             serde_json::Value::String(s) => {
-                let escaped = s.replace('\\', "\\\\").replace('"', "\\\"");
-                result.push(format!("{}=\"{}\"", key, escaped));
+                if s.contains('\n') || s.contains('"') {
+                    let escaped = s.replace('\\', "\\\\").replace('`', "\\`").replace("${", "\\${");
+                    result.push(format!("{}={{`{}`}}", key, escaped));
+                } else {
+                    result.push(format!("{}=\"{}\"", key, s));
+                }
             }
             serde_json::Value::Bool(true) => result.push(key.to_string()),
             serde_json::Value::Bool(false) => result.push(format!("{}={{false}}", key)),

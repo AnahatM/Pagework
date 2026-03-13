@@ -101,9 +101,14 @@ fn render_props(props: &std::collections::HashMap<String, serde_json::Value>) ->
         let value = &props[key];
         match value {
             serde_json::Value::String(s) => {
-                // String prop: key="value"
-                let escaped = s.replace('\\', "\\\\").replace('"', "\\\"");
-                result.push(format!("{}=\"{}\"", key, escaped));
+                if s.contains('\n') || s.contains('"') {
+                    // Use JS template literal for strings with newlines or quotes
+                    let escaped = s.replace('\\', "\\\\").replace('`', "\\`").replace("${", "\\${");
+                    result.push(format!("{}={{`{}`}}", key, escaped));
+                } else {
+                    // Simple string prop: key="value"
+                    result.push(format!("{}=\"{}\"", key, s));
+                }
             }
             serde_json::Value::Bool(true) => {
                 // Boolean true: just the prop name
