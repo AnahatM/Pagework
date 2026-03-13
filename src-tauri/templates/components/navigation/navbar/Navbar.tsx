@@ -82,7 +82,7 @@ export default function Navbar(): JSX.Element {
     >
       {/* Logo with Link to Homepage */}
       <Link to="/" className="navbar-logo-link">
-        <span className="navbar-logo-text">{document.title || "Home"}</span>
+        <span className="navbar-logo-text">Home</span>
       </Link>
 
       {/* Navigation Links Loaded from Nav Config */}

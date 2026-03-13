@@ -116,7 +116,7 @@ nav.navbar .navbar-logo-link {
 nav.navbar .navbar-logo-text {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--navbar-text);
   white-space: nowrap;
 }
 
@@ -165,6 +165,16 @@ nav.navbar .theme-switch-button {
 nav.navbar .theme-switch-button svg {
   width: 16px;
   height: 16px;
+  color: var(--navbar-text);
+}
+
+:root[data-theme="light"] nav.navbar .theme-switch-button {
+  border-color: var(--navbar-text);
+}
+
+:root[data-theme="light"] nav.navbar .theme-switch-button svg {
+  color: var(--navbar-text);
+  opacity: 1;
 }
 
 @media (max-width: 820px) {

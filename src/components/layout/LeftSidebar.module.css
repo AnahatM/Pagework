@@ -102,25 +102,27 @@
   flex-shrink: 0;
 }
 
-/* ── Nav tabs at bottom ─── */
+/* ── Inspector tabs ─── */
 
 .tabs {
   display: flex;
-  border-top: 1px solid var(--glass-border);
+  flex-direction: column;
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .tab {
-  flex: 1;
-  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 7px var(--space-md);
   border: none;
+  border-left: 2px solid transparent;
   background: transparent;
   color: var(--text-tertiary);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
   cursor: pointer;
-  text-align: center;
+  text-align: left;
   transition:
     color var(--transition-fast),
     background var(--transition-fast);
@@ -134,4 +136,5 @@
 .tab.activeTab {
   color: var(--accent);
   background: var(--accent-muted);
+  border-left-color: var(--accent);
 }

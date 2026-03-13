@@ -1,4 +1,5 @@
 import { useDevServerStore } from "@stores/devServerStore";
+import { openUrl } from "@tauri-apps/plugin-opener";
 import { useRef, useState } from "react";
 import styles from "./PreviewPanel.module.css";
 
@@ -15,7 +16,7 @@ export function PreviewPanel() {
   }
 
   function handleOpenExternal() {
-    if (url) window.open(url, "_blank");
+    if (url) openUrl(url);
   }
 
   if (status !== "running" || !url) {
