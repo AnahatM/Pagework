@@ -1,3 +1,9 @@
+.wrapper {
+  width: 100%;
+  max-width: 480px;
+  margin-top: var(--space-md);
+}
+
 .list {
   display: flex;
   flex-direction: column;
@@ -48,11 +54,28 @@
   flex-shrink: 0;
 }
 
-.empty {
+.removeButton {
+  background: none;
+  border: none;
   color: var(--text-tertiary);
-  font-size: 0.8rem;
-  text-align: center;
-  padding: 24px 0;
+  cursor: pointer;
+  padding: 4px 6px;
+  font-size: 0.75rem;
+  border-radius: var(--radius-sm);
+  opacity: 0;
+  transition:
+    opacity var(--transition-fast),
+    color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.item:hover .removeButton {
+  opacity: 1;
+}
+
+.removeButton:hover {
+  color: var(--text-primary);
+  background: var(--bg-secondary);
 }
 
 .heading {

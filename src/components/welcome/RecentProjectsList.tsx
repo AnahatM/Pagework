@@ -1,8 +1,11 @@
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useProjectStore } from "@stores/projectStore";
 import {
   addRecentProject,
   getRecentProjects,
   openProject,
+  removeRecentProject,
   type RecentProject,
 } from "@tauri/projectCommands";
 import { useEffect, useState } from "react";
@@ -45,30 +48,39 @@ export function RecentProjectsList() {
     }
   }
 
-  if (loading) return null;
+  async function handleRemove(e: React.MouseEvent, projectPath: string) {
+    e.stopPropagation();
+    await removeRecentProject(projectPath);
+    setProjects((prev) => prev.filter((p) => p.path !== projectPath));
+  }
+
+  if (loading || projects.length === 0) return null;
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <p className={styles.heading}>Recent Projects</p>
-      {projects.length === 0 ? (
-        <p className={styles.empty}>No recent projects</p>
-      ) : (
-        <div className={styles.list}>
-          {projects.map((p) => (
-            <div
-              key={p.path}
-              className={styles.item}
-              onClick={() => handleOpen(p)}
-            >
-              <div className={styles.info}>
-                <div className={styles.name}>{p.name}</div>
-                <div className={styles.path}>{p.path}</div>
-              </div>
-              <span className={styles.date}>{formatDate(p.lastOpened)}</span>
+      <div className={styles.list}>
+        {projects.map((p) => (
+          <div
+            key={p.path}
+            className={styles.item}
+            onClick={() => handleOpen(p)}
+          >
+            <div className={styles.info}>
+              <div className={styles.name}>{p.name}</div>
+              <div className={styles.path}>{p.path}</div>
             </div>
-          ))}
-        </div>
-      )}
+            <span className={styles.date}>{formatDate(p.lastOpened)}</span>
+            <button
+              className={styles.removeButton}
+              onClick={(e) => handleRemove(e, p.path)}
+              title="Remove from list"
+            >
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

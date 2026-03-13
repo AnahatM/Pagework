@@ -119,6 +119,35 @@ pub async fn add_recent_project(
         .map_err(|e| format!("Failed to write recent projects: {e}"))
 }
 
+/// Remove a project from the recent projects list by path.
+#[tauri::command]
+pub async fn remove_recent_project(
+    app_handle: tauri::AppHandle,
+    project_path: String,
+) -> Result<(), String> {
+    let app_data_dir = app_handle
+        .path()
+        .app_data_dir()
+        .map_err(|e| format!("Failed to get app data directory: {e}"))?;
+
+    let recent_path = app_data_dir.join("recent-projects.json");
+    if !recent_path.exists() {
+        return Ok(());
+    }
+
+    let content = std::fs::read_to_string(&recent_path)
+        .map_err(|e| format!("Failed to read recent projects: {e}"))?;
+    let mut projects: Vec<RecentProject> =
+        serde_json::from_str(&content).unwrap_or_else(|_| vec![]);
+
+    projects.retain(|p| p.path != project_path);
+
+    let content = serde_json::to_string_pretty(&projects)
+        .map_err(|e| format!("Failed to serialize recent projects: {e}"))?;
+    std::fs::write(&recent_path, content)
+        .map_err(|e| format!("Failed to write recent projects: {e}"))
+}
+
 /// Read a file from the generated project.
 #[tauri::command]
 pub async fn read_project_file(

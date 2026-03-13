@@ -3,7 +3,8 @@
    Shown when no project is open
    ═══════════════════════════════════════════ */
 
-import { Button } from "@components/shared/Button";
+import { faFolderOpen, faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useProjectStore } from "@stores/projectStore";
 import { useUIStore } from "@stores/uiStore";
 import { open } from "@tauri-apps/plugin-dialog";
@@ -38,21 +39,24 @@ export function WelcomeScreen() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
-        <h1 className={styles.title}>{APP_NAME}</h1>
-        <p className={styles.subtitle}>{APP_DESCRIPTION}</p>
+      <h1 className={styles.title}>{APP_NAME}</h1>
+      <p className={styles.subtitle}>{APP_DESCRIPTION}</p>
 
-        <div className={styles.actions}>
-          <Button onClick={() => openModal("new-project")}>
-            Create New Project
-          </Button>
-          <Button variant="secondary" onClick={handleOpenExisting}>
-            Open Existing Project
-          </Button>
-        </div>
-
-        <RecentProjectsList />
+      <div className={styles.actions}>
+        <button
+          className={styles.actionButton}
+          onClick={() => openModal("new-project")}
+        >
+          <FontAwesomeIcon icon={faSquarePlus} className={styles.actionIcon} />
+          <span className={styles.actionLabel}>Create New Project</span>
+        </button>
+        <button className={styles.actionButton} onClick={handleOpenExisting}>
+          <FontAwesomeIcon icon={faFolderOpen} className={styles.actionIcon} />
+          <span className={styles.actionLabel}>Open Existing Project</span>
+        </button>
       </div>
+
+      <RecentProjectsList />
     </div>
   );
 }

@@ -18,6 +18,7 @@ pub fn run() {
             commands::project::save_manifest,
             commands::project::get_recent_projects,
             commands::project::add_recent_project,
+            commands::project::remove_recent_project,
             commands::project::read_project_file,
             commands::project::list_project_files,
             // Codegen

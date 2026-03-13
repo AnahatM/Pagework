@@ -40,6 +40,10 @@ export async function addRecentProject(project: RecentProject): Promise<void> {
   return invoke("add_recent_project", { project });
 }
 
+export async function removeRecentProject(projectPath: string): Promise<void> {
+  return invoke("remove_recent_project", { projectPath });
+}
+
 export async function readProjectFile(
   projectPath: string,
   relativePath: string,
