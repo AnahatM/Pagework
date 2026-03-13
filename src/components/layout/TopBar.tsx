@@ -39,7 +39,6 @@ export function TopBar() {
   const setError = useDevServerStore((s) => s.setError);
 
   const addLog = useOutputLogStore((s) => s.addEntry);
-  const openOutput = useOutputLogStore((s) => s.setOpen);
 
   async function handleSave() {
     if (!manifest || !projectPath) return;
@@ -57,7 +56,6 @@ export function TopBar() {
     }
 
     try {
-      openOutput(true);
       addLog("Preparing preview…");
 
       // Save manifest if dirty

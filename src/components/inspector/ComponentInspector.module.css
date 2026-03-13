@@ -32,3 +32,21 @@
   flex-direction: column;
   gap: 8px;
 }
+
+.editTableBtn {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md);
+  background: var(--accent-muted);
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.editTableBtn:hover {
+  background: var(--accent);
+  color: white;
+}

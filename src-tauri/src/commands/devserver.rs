@@ -121,41 +121,35 @@ pub async fn start_devserver(
     }
     emit_log(&app, "✓ package.json found", "info");
 
-    // Check if node_modules exists, run npm install if not
-    let node_modules = std::path::PathBuf::from(&project_path).join("node_modules");
-    if !node_modules.exists() {
-        emit_log(&app, "node_modules not found — running npm install…", "info");
-        // Set installing status
-        {
-            let mut status = state.status.lock().map_err(|e| e.to_string())?;
-            status.installing = true;
-        }
-
-        let install = Command::new("cmd")
-            .args(["/c", "npm", "install"])
-            .current_dir(&project_path)
-            .stdout(Stdio::piped())
-            .stderr(Stdio::piped())
-            .output()
-            .map_err(|e| {
-                emit_log(&app, &format!("npm install failed to start: {e}"), "error");
-                format!("npm install failed: {e}")
-            })?;
-
-        {
-            let mut status = state.status.lock().map_err(|e| e.to_string())?;
-            status.installing = false;
-        }
-
-        if !install.status.success() {
-            let stderr = String::from_utf8_lossy(&install.stderr);
-            emit_log(&app, &format!("npm install failed:\n{stderr}"), "error");
-            return Err(format!("npm install failed: {stderr}"));
-        }
-        emit_log(&app, "✓ npm install completed", "info");
-    } else {
-        emit_log(&app, "✓ node_modules found — skipping install", "info");
+    // Always run npm install to ensure dependencies are in sync with package.json
+    emit_log(&app, "Running npm install…", "info");
+    {
+        let mut status = state.status.lock().map_err(|e| e.to_string())?;
+        status.installing = true;
     }
+
+    let install = Command::new("cmd")
+        .args(["/c", "npm", "install"])
+        .current_dir(&project_path)
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .output()
+        .map_err(|e| {
+            emit_log(&app, &format!("npm install failed to start: {e}"), "error");
+            format!("npm install failed: {e}")
+        })?;
+
+    {
+        let mut status = state.status.lock().map_err(|e| e.to_string())?;
+        status.installing = false;
+    }
+
+    if !install.status.success() {
+        let stderr = String::from_utf8_lossy(&install.stderr);
+        emit_log(&app, &format!("npm install failed:\n{stderr}"), "error");
+        return Err(format!("npm install failed: {stderr}"));
+    }
+    emit_log(&app, "✓ npm install completed", "info");
 
     emit_log(&app, "Starting Vite dev server…", "info");
 

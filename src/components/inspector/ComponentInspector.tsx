@@ -1,8 +1,10 @@
 import type { PropDefinition } from "@/types/components";
 import type { ComponentInstance } from "@/types/manifest";
+import { TableEditorModal } from "@components/modals/TableEditorModal";
 import { useProjectStore } from "@stores/projectStore";
 import { useUIStore } from "@stores/uiStore";
 import { getComponentDefinition } from "@utils/componentRegistry";
+import { useState } from "react";
 import styles from "./ComponentInspector.module.css";
 import {
   ColorPickerControl,
@@ -153,6 +155,7 @@ export function ComponentInspector() {
   const selectedPageId = useUIStore((s) => s.selectedPageId);
   const pages = useProjectStore((s) => s.manifest?.pages ?? []);
   const updateComponentProp = useProjectStore((s) => s.updateComponentProp);
+  const [tableEditorOpen, setTableEditorOpen] = useState(false);
 
   if (!selectedComponentId) {
     return (
@@ -177,9 +180,13 @@ export function ComponentInspector() {
     );
   }
 
+  const isTable = comp.type === "Table";
+
   // Group props by their group field
   const grouped = new Map<string, PropDefinition[]>();
   for (const p of def.props) {
+    // Skip columns/data for Table — handled by the table editor
+    if (isTable && (p.name === "columns" || p.name === "data")) continue;
     const group = p.group ?? "Properties";
     if (!grouped.has(group)) grouped.set(group, []);
     grouped.get(group)!.push(p);
@@ -191,6 +198,30 @@ export function ComponentInspector() {
         <p className={styles.componentType}>{def.displayName}</p>
         <p className={styles.componentDesc}>{def.description}</p>
       </div>
+
+      {isTable && (
+        <div className={styles.propGroup}>
+          <button
+            className={styles.editTableBtn}
+            onClick={() => setTableEditorOpen(true)}
+          >
+            Edit Table Data
+          </button>
+          {tableEditorOpen && (
+            <TableEditorModal
+              columns={
+                (comp.props.columns as { header: string; key: string }[]) ?? []
+              }
+              data={(comp.props.data as Record<string, string>[]) ?? []}
+              onSave={(columns, data) => {
+                updateComponentProp(page.id, comp.id, "columns", columns);
+                updateComponentProp(page.id, comp.id, "data", data);
+              }}
+              onClose={() => setTableEditorOpen(false)}
+            />
+          )}
+        </div>
+      )}
 
       {Array.from(grouped.entries()).map(([groupName, props]) => (
         <div key={groupName} className={styles.propGroup}>
