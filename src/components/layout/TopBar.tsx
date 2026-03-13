@@ -20,6 +20,7 @@ export function TopBar() {
 
   const serverStatus = useDevServerStore((s) => s.status);
   const serverPort = useDevServerStore((s) => s.port);
+  const serverError = useDevServerStore((s) => s.errorMessage);
   const setRunning = useDevServerStore((s) => s.setRunning);
   const setStarting = useDevServerStore((s) => s.setStarting);
   const setStopped = useDevServerStore((s) => s.setStopped);
@@ -41,11 +42,13 @@ export function TopBar() {
     }
 
     try {
-      // Save + regenerate first
+      // Save manifest if dirty, then always regenerate to ensure files exist
       if (isDirty) {
-        await handleSave();
+        await saveManifest(projectPath, manifest);
+        markClean();
       }
       setStarting();
+      await regenerateAll(projectPath, manifest);
       await startDevServer(projectPath);
       // Server started — port will be updated via status polling
       // For now, assume default Vite port
@@ -67,6 +70,19 @@ export function TopBar() {
 
   return (
     <header className={styles.topbar}>
+      {serverStatus === "error" && serverError && (
+        <div className={styles.errorBanner}>
+          <span className={styles.errorIcon}>⚠</span>
+          <span className={styles.errorMsg}>{serverError}</span>
+          <button
+            className={styles.errorDismiss}
+            onClick={setStopped}
+            title="Dismiss"
+          >
+            ✕
+          </button>
+        </div>
+      )}
       <div className={styles.left}>
         <span className={styles.projectName}>
           {manifest?.projectName ?? "Untitled"}

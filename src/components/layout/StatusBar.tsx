@@ -4,6 +4,7 @@ import styles from "./StatusBar.module.css";
 
 export function StatusBar() {
   const status = useDevServerStore((s) => s.status);
+  const errorMessage = useDevServerStore((s) => s.errorMessage);
   const projectPath = useProjectStore((s) => s.projectPath);
 
   const statusLabels: Record<string, string> = {
@@ -19,6 +20,11 @@ export function StatusBar() {
       <div className={styles.left}>
         <span className={`${styles.indicator} ${styles[status]}`} />
         <span className={styles.statusLabel}>{statusLabels[status]}</span>
+        {status === "error" && errorMessage && (
+          <span className={styles.errorText} title={errorMessage}>
+            — {errorMessage}
+          </span>
+        )}
       </div>
       <div className={styles.right}>
         {projectPath && <span className={styles.pathText}>{projectPath}</span>}

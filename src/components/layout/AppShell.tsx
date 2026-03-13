@@ -4,6 +4,7 @@
    ═══════════════════════════════════════════ */
 
 import { useAutoSave } from "@hooks/useAutoSave";
+import { useResizablePanel } from "@hooks/useResizablePanel";
 import { useProjectStore } from "@stores/projectStore";
 import { useUIStore } from "@stores/uiStore";
 import { useEffect } from "react";
@@ -20,6 +21,20 @@ export function AppShell() {
   const selectPage = useUIStore((s) => s.selectPage);
   const { saveIndicator } = useAutoSave();
 
+  const leftPanel = useResizablePanel({
+    initialWidth: 240,
+    minWidth: 160,
+    maxWidth: 400,
+    side: "left",
+  });
+
+  const rightPanel = useResizablePanel({
+    initialWidth: 300,
+    minWidth: 200,
+    maxWidth: 480,
+    side: "right",
+  });
+
   // Auto-select first page if none selected
   useEffect(() => {
     if (!selectedPageId && pages.length > 0) {
@@ -31,9 +46,21 @@ export function AppShell() {
     <div className={styles.shell}>
       <TopBar />
       <div className={styles.body}>
-        <LeftSidebar />
+        <div style={{ width: leftPanel.width, flexShrink: 0 }}>
+          <LeftSidebar />
+        </div>
+        <div
+          className={styles.resizeHandle}
+          onMouseDown={leftPanel.onMouseDown}
+        />
         <CenterPanel />
-        <RightSidebar />
+        <div
+          className={styles.resizeHandle}
+          onMouseDown={rightPanel.onMouseDown}
+        />
+        <div style={{ width: rightPanel.width, flexShrink: 0 }}>
+          <RightSidebar />
+        </div>
       </div>
       <StatusBar />
       {saveIndicator && <div className={styles.saveToast}>Saved</div>}

@@ -9,9 +9,22 @@
 }
 
 .body {
-  display: grid;
-  grid-template-columns: var(--sidebar-width) 1fr var(--inspector-width);
+  display: flex;
   overflow: hidden;
+}
+
+.resizeHandle {
+  width: 4px;
+  cursor: col-resize;
+  background: transparent;
+  flex-shrink: 0;
+  transition: background var(--transition-fast);
+  z-index: 5;
+}
+
+.resizeHandle:hover,
+.resizeHandle:active {
+  background: var(--accent-muted);
 }
 
 .saveToast {

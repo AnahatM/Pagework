@@ -1,6 +1,7 @@
 use std::io::{BufRead, BufReader};
 use std::process::{Child, Command, Stdio};
 use std::sync::Mutex;
+use std::time::Duration;
 use tauri::State;
 
 pub struct DevServerState {
@@ -51,8 +52,8 @@ pub async fn run_npm_install(
     }
 
     let result = (|| -> Result<String, String> {
-        let output = Command::new("npm")
-            .arg("install")
+        let output = Command::new("cmd")
+            .args(["/c", "npm", "install"])
             .current_dir(&project_path)
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
@@ -92,6 +93,12 @@ pub async fn start_devserver(
         }
     }
 
+    // Verify package.json exists before attempting npm install
+    let package_json = std::path::PathBuf::from(&project_path).join("package.json");
+    if !package_json.exists() {
+        return Err("package.json not found. Run code generation first.".to_string());
+    }
+
     // Check if node_modules exists, run npm install if not
     let node_modules = std::path::PathBuf::from(&project_path).join("node_modules");
     if !node_modules.exists() {
@@ -101,8 +108,8 @@ pub async fn start_devserver(
             status.installing = true;
         }
 
-        let install = Command::new("npm")
-            .arg("install")
+        let install = Command::new("cmd")
+            .args(["/c", "npm", "install"])
             .current_dir(&project_path)
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
@@ -121,36 +128,52 @@ pub async fn start_devserver(
     }
 
     // Use cmd /c on Windows to run npm
+    // Vite outputs its ready message to stderr, so pipe stderr for port detection
     let mut child = Command::new("cmd")
         .args(["/c", "npm", "run", "dev"])
         .current_dir(&project_path)
-        .stdout(Stdio::piped())
+        .stdout(Stdio::null())
         .stderr(Stdio::piped())
         .spawn()
         .map_err(|e| format!("Failed to start dev server: {e}"))?;
 
-    // Read stdout to detect port
-    let stdout = child.stdout.take();
-    let port = if let Some(stdout) = stdout {
-        let reader = BufReader::new(stdout);
-        let mut detected_port: Option<u16> = None;
+    // Read stderr in a background thread to detect port
+    let stderr = child.stderr.take();
+    let (tx, rx) = std::sync::mpsc::channel();
 
-        for line in reader.lines() {
-            let line = line.map_err(|e| format!("read stdout: {e}"))?;
-            // Vite outputs something like "Local:   http://localhost:5173/"
-            if let Some(port) = extract_port(&line) {
-                detected_port = Some(port);
-                break;
+    if let Some(stderr) = stderr {
+        std::thread::spawn(move || {
+            let reader = BufReader::new(stderr);
+            let mut found = false;
+            for line in reader.lines() {
+                match line {
+                    Ok(line) => {
+                        if !found {
+                            if let Some(port) = extract_port(&line) {
+                                let _ = tx.send(Some(port));
+                                found = true;
+                                // Continue draining so the pipe doesn't fill up
+                            }
+                            if line.contains("EADDRINUSE") {
+                                let _ = tx.send(None);
+                                return;
+                            }
+                        }
+                    }
+                    Err(_) => break,
+                }
             }
-            // Also check for error patterns
-            if line.contains("error") && line.contains("EADDRINUSE") {
-                return Err("Port is already in use. Stop other dev servers first.".to_string());
+            if !found {
+                let _ = tx.send(None);
             }
-        }
-        detected_port
-    } else {
-        None
-    };
+        });
+    }
+
+    // Wait up to 30 seconds for port detection, fall back to default
+    let port = rx
+        .recv_timeout(Duration::from_secs(30))
+        .unwrap_or(None)
+        .or(Some(5173));
 
     // Store child process handle
     {

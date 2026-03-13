@@ -3,8 +3,8 @@ use std::path::PathBuf;
 /// Check if Node.js is installed and return its version.
 #[tauri::command]
 pub async fn check_node_installed() -> Result<String, String> {
-    let output = std::process::Command::new("node")
-        .arg("--version")
+    let output = std::process::Command::new("cmd")
+        .args(["/c", "node", "--version"])
         .output()
         .map_err(|_| "Node.js is not installed or not in PATH".to_string())?;
 
@@ -19,8 +19,8 @@ pub async fn check_node_installed() -> Result<String, String> {
 /// Check if npm is installed and return its version.
 #[tauri::command]
 pub async fn check_npm_installed() -> Result<String, String> {
-    let output = std::process::Command::new("npm")
-        .arg("--version")
+    let output = std::process::Command::new("cmd")
+        .args(["/c", "npm", "--version"])
         .output()
         .map_err(|_| "npm is not installed or not in PATH".to_string())?;
 

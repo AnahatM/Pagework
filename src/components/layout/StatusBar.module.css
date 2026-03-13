@@ -65,6 +65,14 @@
   color: var(--text-muted);
 }
 
+.errorText {
+  color: var(--negative);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 500px;
+}
+
 .pathText {
   color: var(--text-muted);
   white-space: nowrap;
