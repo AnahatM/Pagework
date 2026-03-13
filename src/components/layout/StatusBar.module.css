@@ -73,6 +73,30 @@
   max-width: 500px;
 }
 
+.outputToggle {
+  background: none;
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  padding: 1px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.outputToggle:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.outputActive {
+  color: var(--accent);
+  border-color: var(--accent-muted);
+  background: var(--accent-muted);
+}
+
 .pathText {
   color: var(--text-muted);
   white-space: nowrap;

@@ -1,0 +1,88 @@
+.panel {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px var(--space-md);
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--glass-border);
+  flex-shrink: 0;
+}
+
+.headerTitle {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.headerActions {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.headerBtn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.headerBtn:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.logArea {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-sm) var(--space-md);
+  font-family: "Consolas", "SF Mono", "Monaco", monospace;
+  font-size: 0.7rem;
+  line-height: 1.6;
+}
+
+.logLine {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.logLine.info {
+  color: var(--text-secondary);
+}
+
+.logLine.warn {
+  color: var(--status-warning);
+}
+
+.logLine.error {
+  color: var(--status-error);
+}
+
+.timestamp {
+  color: var(--text-muted);
+  margin-right: var(--space-sm);
+  user-select: none;
+}
+
+.empty {
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+  padding: var(--space-lg);
+  font-size: 0.75rem;
+}

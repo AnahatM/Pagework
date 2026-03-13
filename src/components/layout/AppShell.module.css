@@ -1,6 +1,6 @@
 .shell {
-  display: grid;
-  grid-template-rows: var(--topbar-height) 1fr var(--statusbar-height);
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100vh;
   background: var(--bg-primary);
@@ -11,6 +11,8 @@
 .body {
   display: flex;
   overflow: hidden;
+  flex: 1;
+  min-height: 0;
 }
 
 .resizeHandle {
@@ -24,6 +26,20 @@
 
 .resizeHandle:hover,
 .resizeHandle:active {
+  background: var(--accent-muted);
+}
+
+.hResizeHandle {
+  height: 4px;
+  cursor: row-resize;
+  background: transparent;
+  flex-shrink: 0;
+  transition: background var(--transition-fast);
+  z-index: 5;
+}
+
+.hResizeHandle:hover,
+.hResizeHandle:active {
   background: var(--accent-muted);
 }
 

@@ -171,9 +171,12 @@ pub fn generate_vercel_json() -> &'static str {
 
 /// Copy template files from the bundled templates directory to the project.
 pub fn copy_template_files(templates_dir: &Path, project_dir: &Path) -> Result<(), String> {
+    eprintln!("[codegen] copy_template_files: templates_dir={}", templates_dir.display());
+
     // Copy components directory
     let src_components = templates_dir.join("components");
     let dst_components = project_dir.join("src").join("components");
+    eprintln!("[codegen] copying components: src={} (exists={}), dst={}", src_components.display(), src_components.exists(), dst_components.display());
     copy_dir_recursive(&src_components, &dst_components)?;
 
     // Copy hooks directory

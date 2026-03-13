@@ -4,13 +4,17 @@
    ═══════════════════════════════════════════ */
 
 import { useAutoSave } from "@hooks/useAutoSave";
+import { useResizableHeight } from "@hooks/useResizableHeight";
 import { useResizablePanel } from "@hooks/useResizablePanel";
+import { useOutputLogStore } from "@stores/outputLogStore";
 import { useProjectStore } from "@stores/projectStore";
 import { useUIStore } from "@stores/uiStore";
+import { listen } from "@tauri-apps/api/event";
 import { useEffect } from "react";
 import styles from "./AppShell.module.css";
 import { CenterPanel } from "./CenterPanel";
 import { LeftSidebar } from "./LeftSidebar";
+import { OutputPanel } from "./OutputPanel";
 import { RightSidebar } from "./RightSidebar";
 import { StatusBar } from "./StatusBar";
 import { TopBar } from "./TopBar";
@@ -20,6 +24,24 @@ export function AppShell() {
   const selectedPageId = useUIStore((s) => s.selectedPageId);
   const selectPage = useUIStore((s) => s.selectPage);
   const { saveIndicator } = useAutoSave();
+  const outputOpen = useOutputLogStore((s) => s.isOpen);
+  const addLogEntry = useOutputLogStore((s) => s.addEntry);
+
+  // Listen for devserver-log events from Rust backend
+  useEffect(() => {
+    const unlisten = listen<{ message: string; level: string }>(
+      "devserver-log",
+      (event) => {
+        addLogEntry(
+          event.payload.message,
+          event.payload.level as "info" | "warn" | "error",
+        );
+      },
+    );
+    return () => {
+      unlisten.then((fn) => fn());
+    };
+  }, [addLogEntry]);
 
   const leftPanel = useResizablePanel({
     initialWidth: 240,
@@ -33,6 +55,12 @@ export function AppShell() {
     minWidth: 200,
     maxWidth: 480,
     side: "right",
+  });
+
+  const outputPanel = useResizableHeight({
+    initialHeight: 180,
+    minHeight: 80,
+    maxHeight: 500,
   });
 
   // Auto-select first page if none selected
@@ -62,6 +90,15 @@ export function AppShell() {
           <RightSidebar />
         </div>
       </div>
+      {outputOpen && (
+        <>
+          <div
+            className={styles.hResizeHandle}
+            onMouseDown={outputPanel.onMouseDown}
+          />
+          <OutputPanel height={outputPanel.height} />
+        </>
+      )}
       <StatusBar />
       {saveIndicator && <div className={styles.saveToast}>Saved</div>}
     </div>

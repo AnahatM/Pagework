@@ -2,7 +2,14 @@ use std::io::{BufRead, BufReader};
 use std::process::{Child, Command, Stdio};
 use std::sync::Mutex;
 use std::time::Duration;
-use tauri::State;
+use tauri::{AppHandle, Emitter, State};
+
+/// Payload for devserver-log events sent to the frontend.
+#[derive(Clone, serde::Serialize)]
+struct LogPayload {
+    message: String,
+    level: String, // "info" | "warn" | "error"
+}
 
 pub struct DevServerState {
     pub status: Mutex<DevServerStatus>,
@@ -37,6 +44,17 @@ pub async fn get_devserver_status(
 ) -> Result<DevServerStatus, String> {
     let status = state.status.lock().map_err(|e| e.to_string())?;
     Ok(status.clone())
+}
+
+/// Emit a log event to the frontend.
+fn emit_log(app: &AppHandle, message: &str, level: &str) {
+    let _ = app.emit(
+        "devserver-log",
+        LogPayload {
+            message: message.to_string(),
+            level: level.to_string(),
+        },
+    );
 }
 
 /// Run npm install in the project directory.
@@ -82,6 +100,7 @@ pub async fn run_npm_install(
 /// Start the Vite dev server in the project directory.
 #[tauri::command]
 pub async fn start_devserver(
+    app: AppHandle,
     state: State<'_, DevServerState>,
     project_path: String,
 ) -> Result<(), String> {
@@ -89,6 +108,7 @@ pub async fn start_devserver(
     {
         let status = state.status.lock().map_err(|e| e.to_string())?;
         if status.running {
+            emit_log(&app, "Dev server is already running", "info");
             return Ok(());
         }
     }
@@ -96,12 +116,15 @@ pub async fn start_devserver(
     // Verify package.json exists before attempting npm install
     let package_json = std::path::PathBuf::from(&project_path).join("package.json");
     if !package_json.exists() {
+        emit_log(&app, "ERROR: package.json not found in project directory", "error");
         return Err("package.json not found. Run code generation first.".to_string());
     }
+    emit_log(&app, "✓ package.json found", "info");
 
     // Check if node_modules exists, run npm install if not
     let node_modules = std::path::PathBuf::from(&project_path).join("node_modules");
     if !node_modules.exists() {
+        emit_log(&app, "node_modules not found — running npm install…", "info");
         // Set installing status
         {
             let mut status = state.status.lock().map_err(|e| e.to_string())?;
@@ -114,7 +137,10 @@ pub async fn start_devserver(
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
             .output()
-            .map_err(|e| format!("npm install failed: {e}"))?;
+            .map_err(|e| {
+                emit_log(&app, &format!("npm install failed to start: {e}"), "error");
+                format!("npm install failed: {e}")
+            })?;
 
         {
             let mut status = state.status.lock().map_err(|e| e.to_string())?;
@@ -123,57 +149,88 @@ pub async fn start_devserver(
 
         if !install.status.success() {
             let stderr = String::from_utf8_lossy(&install.stderr);
+            emit_log(&app, &format!("npm install failed:\n{stderr}"), "error");
             return Err(format!("npm install failed: {stderr}"));
         }
+        emit_log(&app, "✓ npm install completed", "info");
+    } else {
+        emit_log(&app, "✓ node_modules found — skipping install", "info");
     }
 
-    // Use cmd /c on Windows to run npm
-    // Vite outputs its ready message to stderr, so pipe stderr for port detection
+    emit_log(&app, "Starting Vite dev server…", "info");
+
+    // Pipe both stdout and stderr — Vite may output the URL on either stream
     let mut child = Command::new("cmd")
         .args(["/c", "npm", "run", "dev"])
         .current_dir(&project_path)
-        .stdout(Stdio::null())
+        .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()
-        .map_err(|e| format!("Failed to start dev server: {e}"))?;
+        .map_err(|e| {
+            emit_log(&app, &format!("Failed to spawn dev server process: {e}"), "error");
+            format!("Failed to start dev server: {e}")
+        })?;
 
-    // Read stderr in a background thread to detect port
+    emit_log(&app, "Vite process spawned — waiting for server ready…", "info");
+
+    // Scan both stdout and stderr for the port in background threads
+    let stdout = child.stdout.take();
     let stderr = child.stderr.take();
     let (tx, rx) = std::sync::mpsc::channel();
 
-    if let Some(stderr) = stderr {
+    fn spawn_reader<R: std::io::Read + Send + 'static>(
+        reader: R,
+        label: &'static str,
+        app: AppHandle,
+        tx: std::sync::mpsc::Sender<Option<u16>>,
+    ) {
         std::thread::spawn(move || {
-            let reader = BufReader::new(stderr);
-            let mut found = false;
-            for line in reader.lines() {
+            let buf = BufReader::new(reader);
+            let mut sent = false;
+            for line in buf.lines() {
                 match line {
                     Ok(line) => {
-                        if !found {
+                        let level = if line.contains("error") || line.contains("ERROR") {
+                            "error"
+                        } else {
+                            "info"
+                        };
+                        emit_log(&app, &format!("[{label}] {line}"), level);
+
+                        if !sent {
                             if let Some(port) = extract_port(&line) {
                                 let _ = tx.send(Some(port));
-                                found = true;
-                                // Continue draining so the pipe doesn't fill up
+                                sent = true;
                             }
                             if line.contains("EADDRINUSE") {
+                                emit_log(&app, "Port is already in use!", "error");
                                 let _ = tx.send(None);
-                                return;
+                                sent = true;
                             }
                         }
                     }
                     Err(_) => break,
                 }
             }
-            if !found {
-                let _ = tx.send(None);
-            }
         });
     }
+
+    if let Some(stdout) = stdout {
+        spawn_reader(stdout, "stdout", app.clone(), tx.clone());
+    }
+    if let Some(stderr) = stderr {
+        spawn_reader(stderr, "stderr", app.clone(), tx.clone());
+    }
+    // Drop the original sender so rx doesn't block forever if threads exit without sending
+    drop(tx);
 
     // Wait up to 30 seconds for port detection, fall back to default
     let port = rx
         .recv_timeout(Duration::from_secs(30))
         .unwrap_or(None)
         .or(Some(5173));
+
+    emit_log(&app, &format!("✓ Dev server running on port {}", port.unwrap_or(5173)), "info");
 
     // Store child process handle
     {
@@ -224,13 +281,33 @@ pub async fn stop_devserver(
     Ok(())
 }
 
-/// Extract port number from Vite output line.
+/// Strip ANSI escape sequences from a string.
+fn strip_ansi(s: &str) -> String {
+    let mut result = String::with_capacity(s.len());
+    let mut chars = s.chars();
+    while let Some(c) = chars.next() {
+        if c == '\x1b' {
+            // Skip until we hit a letter (the terminator of the escape sequence)
+            for esc_c in chars.by_ref() {
+                if esc_c.is_ascii_alphabetic() {
+                    break;
+                }
+            }
+        } else {
+            result.push(c);
+        }
+    }
+    result
+}
+
+/// Extract port number from Vite output line (strips ANSI codes first).
 fn extract_port(line: &str) -> Option<u16> {
+    let clean = strip_ansi(line);
     // Match patterns like "http://localhost:5173" or "http://127.0.0.1:5173"
     let patterns = ["localhost:", "127.0.0.1:"];
     for pat in patterns {
-        if let Some(idx) = line.find(pat) {
-            let after = &line[idx + pat.len()..];
+        if let Some(idx) = clean.find(pat) {
+            let after = &clean[idx + pat.len()..];
             let port_str: String = after.chars().take_while(|c| c.is_ascii_digit()).collect();
             if let Ok(port) = port_str.parse::<u16>() {
                 return Some(port);

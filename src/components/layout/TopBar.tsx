@@ -1,5 +1,6 @@
 import { Button } from "@components/shared/Button";
 import { useDevServerStore } from "@stores/devServerStore";
+import { useOutputLogStore } from "@stores/outputLogStore";
 import { useProjectStore } from "@stores/projectStore";
 import { useUIStore } from "@stores/uiStore";
 import { regenerateAll } from "@tauri/codegenCommands";
@@ -26,6 +27,9 @@ export function TopBar() {
   const setStopped = useDevServerStore((s) => s.setStopped);
   const setError = useDevServerStore((s) => s.setError);
 
+  const addLog = useOutputLogStore((s) => s.addEntry);
+  const openOutput = useOutputLogStore((s) => s.setOpen);
+
   async function handleSave() {
     if (!manifest || !projectPath) return;
     await saveManifest(projectPath, manifest);
@@ -37,24 +41,37 @@ export function TopBar() {
     if (!manifest || !projectPath) return;
 
     if (serverStatus === "running" && serverPort) {
-      window.open(`http://localhost:${serverPort}`, "_blank");
+      setCenterPanel("preview");
       return;
     }
 
     try {
-      // Save manifest if dirty, then always regenerate to ensure files exist
+      openOutput(true);
+      addLog("Preparing preview…");
+
+      // Save manifest if dirty
       if (isDirty) {
+        addLog("Saving manifest…");
         await saveManifest(projectPath, manifest);
         markClean();
+        addLog("✓ Manifest saved");
       }
+
+      // Always regenerate project files
+      addLog("Generating project files…");
       setStarting();
       await regenerateAll(projectPath, manifest);
+      addLog("✓ Code generation complete");
+
+      // Start dev server (Rust backend will emit its own log events)
+      addLog("Starting dev server…");
       await startDevServer(projectPath);
-      // Server started — port will be updated via status polling
-      // For now, assume default Vite port
+
       setRunning(5173);
-      window.open("http://localhost:5173", "_blank");
+      addLog("✓ Dev server ready — opening preview");
+      setCenterPanel("preview");
     } catch (err) {
+      addLog(String(err), "error");
       setError(String(err));
     }
   }
@@ -106,6 +123,13 @@ export function TopBar() {
           title="Code preview"
         >
           {"</>"}
+        </button>
+        <button
+          className={`${styles.iconButton} ${activeCenterPanel === "preview" ? styles.active : ""}`}
+          onClick={() => setCenterPanel("preview")}
+          title="Live preview"
+        >
+          ▶
         </button>
 
         <Button

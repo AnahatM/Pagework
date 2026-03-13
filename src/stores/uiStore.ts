@@ -14,7 +14,7 @@ export type InspectorTab =
   | "blog"
   | "settings";
 
-export type CenterPanel = "structure" | "code";
+export type CenterPanel = "structure" | "code" | "preview";
 
 interface UIState {
   /* ── Selection ─────────────────────────── */
