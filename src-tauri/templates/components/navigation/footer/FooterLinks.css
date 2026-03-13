@@ -1,0 +1,138 @@
+/* 
+ * FooterLinks.css
+ * This file contains styles for the footer links section of the application
+ * It defines the layout, text styles, and responsive behavior of the footer links
+ * Links are organized into columns with headers
+ * It uses CSS variables for colors and responsive units for sizing
+ */
+
+/* The container for all the columns of links */
+footer.footer div.footer-links {
+  /* Positioning and layout */
+  display: flex;
+  gap: clamp(15px, 3vw, 30px);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  /* Text */
+  color: var(--text);
+  font-size: clamp(10pt, 1.8vw, 12pt);
+  font-weight: 400;
+}
+
+/* Each column of links */
+footer.footer ul.footer-links-column {
+  /* Positioning and layout */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: clamp(80px, 15vw, 120px);
+  max-width: min-content;
+
+  /* Style */
+  padding-left: clamp(10px, 1.5vw, 15px);
+  padding-right: clamp(10px, 1.5vw, 15px);
+}
+
+/* Add borders only between columns and not on outer edges */
+footer.footer ul.footer-links-column:not(:first-child):not(:last-child) {
+  border-left: 1px dashed var(--outline);
+}
+
+/* For wider screens, ensure proper borders between adjacent columns */
+@media (min-width: 300px) {
+  footer.footer ul.footer-links-column:not(:first-child) {
+    border-left: 1px dashed var(--outline);
+  }
+}
+
+/* Each link in the column */
+footer.footer ul.footer-links-column li {
+  /* Positioning and layout */
+  margin-bottom: clamp(6px, 1vw, 10px);
+  width: fit-content;
+
+  /* Styles */
+  border-radius: clamp(2px, 0.3vw, 4px);
+  transition: all 0.2s ease-in-out;
+  border-bottom: 1px solid transparent;
+}
+
+footer.footer ul.footer-links-column li:hover {
+  /* Style */
+  text-decoration: underline;
+  border-bottom: 1px solid var(--outline);
+  background-color: var(--panel-shadow-light);
+}
+
+footer.footer ul.footer-links-column li.footer-links-header {
+  /* Styling */
+  font-family: var(--font-display);
+  font-size: clamp(8pt, 1.5vw, 10pt);
+  opacity: 0.8;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--outline);
+  color: var(--secondary);
+
+  /* Hover Interaction */
+  &:hover {
+    text-decoration: none;
+    background-color: transparent;
+    cursor: default;
+  }
+}
+
+/* Media queries for fine-tuning at specific breakpoints */
+@media (max-width: 300px) {
+  /* Stack columns vertically and remove borders */
+  footer.footer div.footer-links {
+    flex-direction: column;
+    gap: clamp(15px, 4vw, 20px);
+    align-items: center;
+  }
+
+  /* Center and Align Each Column */
+  footer.footer div.footer-links ul.footer-links-column {
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+    text-align: center;
+    padding-left: clamp(5px, 2vw, 10px);
+    padding-right: clamp(5px, 2vw, 10px);
+  }
+
+  /* Remove all borders when stacked vertically */
+  footer.footer div.footer-links ul.footer-links-column:not(:first-child) {
+    border-left: none;
+  }
+
+  /* Ensure no borders between columns */
+  footer.footer div.footer-links ul.footer-links-column:not(:first-child):not(:last-child) {
+    border-left: none;
+  }
+}
+
+@media (max-width: 320px) {
+  /* Extra small devices */
+  footer.footer div.footer-links {
+    font-size: clamp(9pt, 2.5vw, 11pt);
+    gap: clamp(10px, 2vw, 15px);
+  }
+
+  footer.footer div.footer-links ul.footer-links-column li.footer-links-header {
+    font-size: clamp(7pt, 2vw, 9pt);
+  }
+}
+
+@media (min-width: 1200px) {
+  /* On very large screens limit growth to maintain proportions */
+  footer.footer div.footer-links {
+    gap: clamp(25px, 2.5vw, 35px);
+  }
+}

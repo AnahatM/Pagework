@@ -1,0 +1,87 @@
+/* 
+ * AnimatedScrollArrows.css
+ * Styles for the animated scroll arrows component
+ */
+
+/* Container for the animated arrows */
+.animated-scroll-arrows {
+  position: relative;
+  width: clamp(20px, 3.5vw, 24px);
+  height: clamp(30px, 5vw, 35px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid var(--outline);
+  padding-left: clamp(6px, 1.2vw, 10px);
+  overflow: hidden; /* Prevent arrows from appearing beyond edges */
+}
+
+/* Arrow image styling - iOS wheel effect with variable sizing and opacity */
+.animated-scroll-arrows .arrow-image {
+  position: absolute;
+  width: clamp(6px, 1.5vw, 9px);
+  height: clamp(6px, 1.5vw, 9px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+/* Light theme arrow inversion */
+[data-theme="light"] .animated-scroll-arrows .arrow-image {
+  filter: invert(1);
+}
+
+/* iOS wheel effect animation - arrows cycle with variable opacity and scale */
+.animated-scroll-arrows .arrow-1 {
+  animation: cycleWheelEffect 2.2s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.animated-scroll-arrows .arrow-2 {
+  animation: cycleWheelEffect 2.2s ease-in-out infinite;
+  animation-delay: 0.73s;
+}
+
+.animated-scroll-arrows .arrow-3 {
+  animation: cycleWheelEffect 2.2s ease-in-out infinite;
+  animation-delay: 1.47s;
+}
+
+/* iOS wheel effect keyframes - linear speed throughout */
+@keyframes cycleWheelEffect {
+  0% {
+    /* Top edge - very faded and small */
+    opacity: 0.15;
+    transform: translateY(-12px) scale(0.6);
+  }
+  25% {
+    /* Moving towards center - getting brighter and larger */
+    opacity: 0.4;
+    transform: translateY(-6px) scale(0.8);
+  }
+  45% {
+    /* Near center - bright and large */
+    opacity: 0.85;
+    transform: translateY(-2px) scale(1.25);
+  }
+  50% {
+    /* Perfect center position - fully highlighted and largest */
+    opacity: 1;
+    transform: translateY(0px) scale(1.5);
+  }
+  55% {
+    /* Just past center - still bright and large */
+    opacity: 0.85;
+    transform: translateY(2px) scale(1.25);
+  }
+  75% {
+    /* Moving away from center - getting dimmer and smaller */
+    opacity: 0.4;
+    transform: translateY(6px) scale(0.8);
+  }
+  100% {
+    /* Bottom edge - very faded and small */
+    opacity: 0.15;
+    transform: translateY(12px) scale(0.6);
+  }
+}

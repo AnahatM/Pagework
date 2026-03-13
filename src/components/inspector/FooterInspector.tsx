@@ -101,101 +101,110 @@ export function FooterInspector() {
       {/* ── Columns ──────────────────── */}
       <div className={styles.sectionLabel}>Footer Columns</div>
       <div className={styles.columnList}>
-        {footer.columns.map((col, ci) => (
-          <div key={col.id} className={styles.column}>
-            <div className={styles.itemHeader}>
-              <span className={styles.itemLabel}>Column {ci + 1}</span>
-              <button
-                className={styles.removeBtn}
-                onClick={() => removeColumn(ci)}
-              >
-                ×
+        {footer.columns.length === 0 ? (
+          <div className={styles.emptyHint}>No footer columns yet.</div>
+        ) : (
+          footer.columns.map((col, ci) => (
+            <div key={col.id} className={styles.column}>
+              <div className={styles.itemHeader}>
+                <span className={styles.itemLabel}>Column {ci + 1}</span>
+                <button
+                  className={styles.removeBtn}
+                  onClick={() => removeColumn(ci)}
+                >
+                  ×
+                </button>
+              </div>
+              <TextControl
+                label="Header"
+                value={col.header}
+                onChange={(v) => setColumn(ci, { header: v })}
+              />
+
+              <div className={styles.linkList}>
+                {col.links.map((link, li) => (
+                  <div key={link.id} className={styles.linkItem}>
+                    <div className={styles.itemHeader}>
+                      <span className={styles.itemLabel}>Link {li + 1}</span>
+                      <button
+                        className={styles.removeBtn}
+                        onClick={() => removeLink(ci, li)}
+                      >
+                        ×
+                      </button>
+                    </div>
+                    <TextControl
+                      label="Label"
+                      value={link.label}
+                      onChange={(v) => setLink(ci, li, { label: v })}
+                    />
+                    <UrlControl
+                      label="URL"
+                      value={link.url}
+                      onChange={(v) => setLink(ci, li, { url: v })}
+                    />
+                    <TextControl
+                      label="Tooltip"
+                      value={link.tooltip}
+                      onChange={(v) => setLink(ci, li, { tooltip: v })}
+                    />
+                    <ToggleControl
+                      label="Open in new tab"
+                      value={link.openInNewTab}
+                      onChange={(v) => setLink(ci, li, { openInNewTab: v })}
+                    />
+                  </div>
+                ))}
+              </div>
+              <button className={styles.addBtn} onClick={() => addLink(ci)}>
+                + Add Link
               </button>
             </div>
-            <TextControl
-              label="Header"
-              value={col.header}
-              onChange={(v) => setColumn(ci, { header: v })}
-            />
-
-            <div className={styles.linkList}>
-              {col.links.map((link, li) => (
-                <div key={link.id} className={styles.linkItem}>
-                  <div className={styles.itemHeader}>
-                    <span className={styles.itemLabel}>Link {li + 1}</span>
-                    <button
-                      className={styles.removeBtn}
-                      onClick={() => removeLink(ci, li)}
-                    >
-                      ×
-                    </button>
-                  </div>
-                  <TextControl
-                    label="Label"
-                    value={link.label}
-                    onChange={(v) => setLink(ci, li, { label: v })}
-                  />
-                  <UrlControl
-                    label="URL"
-                    value={link.url}
-                    onChange={(v) => setLink(ci, li, { url: v })}
-                  />
-                  <TextControl
-                    label="Tooltip"
-                    value={link.tooltip}
-                    onChange={(v) => setLink(ci, li, { tooltip: v })}
-                  />
-                  <ToggleControl
-                    label="Open in new tab"
-                    value={link.openInNewTab}
-                    onChange={(v) => setLink(ci, li, { openInNewTab: v })}
-                  />
-                </div>
-              ))}
-            </div>
-            <button className={styles.addBtn} onClick={() => addLink(ci)}>
-              + Add Link
-            </button>
-          </div>
-        ))}
+          ))
+        )}
       </div>
       <button className={styles.addBtn} onClick={addColumn}>
         + Add Column
       </button>
 
-      {/* ── Social Links ──────────────── */}
+      {/* ── Social Links ────────────── */}
       <div className={styles.sectionLabel}>Social Links</div>
       <div className={styles.socialList}>
-        {footer.socialLinks.map((social, si) => (
-          <div key={social.id} className={styles.socialItem}>
-            <div className={styles.itemHeader}>
-              <span className={styles.itemLabel}>
-                {social.platform || "Social"}
-              </span>
-              <button
-                className={styles.removeBtn}
-                onClick={() => removeSocial(si)}
-              >
-                ×
-              </button>
+        {footer.socialLinks.length === 0 ? (
+          <div className={styles.emptyHint}>No social links yet.</div>
+        ) : (
+          footer.socialLinks.map((social, si) => (
+            <div key={social.id} className={styles.socialItem}>
+              <div className={styles.itemHeader}>
+                <span className={styles.itemLabel}>
+                  {social.platform || "Social"}
+                </span>
+                <button
+                  className={styles.removeBtn}
+                  onClick={() => removeSocial(si)}
+                >
+                  ×
+                </button>
+              </div>
+              <TextControl
+                label="Platform"
+                value={social.platform}
+                onChange={(v) => setSocial(si, { platform: v })}
+              />
+              <UrlControl
+                label="URL"
+                value={social.url}
+                onChange={(v) => setSocial(si, { url: v })}
+              />
+              <ImagePickerControl
+                label="Icon"
+                value={social.iconPath}
+                onChange={(v) => setSocial(si, { iconPath: v })}
+                category="socials"
+              />
             </div>
-            <TextControl
-              label="Platform"
-              value={social.platform}
-              onChange={(v) => setSocial(si, { platform: v })}
-            />
-            <UrlControl
-              label="URL"
-              value={social.url}
-              onChange={(v) => setSocial(si, { url: v })}
-            />
-            <ImagePickerControl
-              label="Icon"
-              value={social.iconPath}
-              onChange={(v) => setSocial(si, { iconPath: v })}
-            />
-          </div>
-        ))}
+          ))
+        )}
       </div>
       <button className={styles.addBtn} onClick={addSocial}>
         + Add Social Link

@@ -1,0 +1,135 @@
+/* 
+ * NavigationButton.css
+ * Styles for the navigation buttons in the navbar.
+ * These buttons can be used for navigation, popovers, and other actions.
+ */
+
+@import "./NavigationButtonPopover.css";
+
+/* Overall Nav Link */
+nav.navbar div.navbar-button-container {
+  display: inline-block;
+  position: relative;
+}
+
+a.navigation-button {
+  /* Get only as wide as needed */
+  width: fit-content;
+  /* Always full height of navbar links container */
+  height: 100%;
+  /* Center Content */
+  display: flex;
+  align-items: center;
+  /* Padding */
+  padding: 10px 12.5px;
+  /* Circular Corners */
+  border-radius: 50px;
+  /* Navbar Color */
+  background-color: var(--navbar-background);
+  border: 1px solid var(--nav-links-highlight);
+  /* Animation */
+  transition: all 0.15s ease-in-out;
+}
+
+a.navigation-button.active {
+  /* When current page is active */
+  border: 1px solid black;
+  background-color: linear-gradient(
+    135deg,
+    var(--nav-links-highlight) 0%,
+    var(--navbar-background) 100%
+  );
+  text-decoration: underline;
+}
+
+a.navigation-button .navigation-button-icon {
+  /* Icon Size */
+  max-width: 20px;
+  max-height: 20px;
+  /* Space between Icon and Label */
+  margin-right: 5px;
+
+  /* Top-Level Navbar Links Styled Grayscale */
+  filter: grayscale(100%);
+
+  transition: all 0.15s ease-in-out;
+}
+
+a.navigation-button .navigation-button-label {
+  color: var(--navbar-text);
+}
+
+a.navigation-button .navigation-button-expand-arrow {
+  /* Arrow Size */
+  max-width: 12px;
+  max-height: 12px;
+  /* Space between Label and Arrow */
+  margin-left: 5px;
+  /* Make arrow subtle */
+  opacity: 0.5;
+}
+
+/* Colored by default: icons are colored without needing hover */
+a.navigation-button.colored-by-default .navigation-button-icon {
+  filter: none;
+}
+
+/* Color on hover: icons only become colored on hover (overrides default grayscale) */
+a.navigation-button.color-on-hover .navigation-button-icon {
+  filter: grayscale(100%);
+  transition: all 0.15s ease-in-out;
+}
+
+a.navigation-button.color-on-hover:hover .navigation-button-icon {
+  filter: none;
+}
+
+/* If both coloredByDefault and colorOnHover are applied, coloredByDefault takes precedence */
+a.navigation-button.colored-by-default.color-on-hover .navigation-button-icon {
+  filter: none;
+}
+
+a.navigation-button:hover {
+  /* On hover, background is highlighted */
+  background: var(--nav-links-highlight);
+  box-shadow: inset 0 0 8px 5px var(--nav-links-shadow);
+  border: 1px solid black;
+}
+
+/* Styles for Special Navbar Buttons */
+a.navigation-button.outline-nav-button {
+  /* Outline Nav Button */
+  background-color: transparent;
+  border: 1px solid var(--navbar-text);
+
+  &:hover {
+    /* On hover, background is highlighted */
+    background-color: var(--nav-links-highlight);
+  }
+}
+
+/* Default Popover Style */
+nav.navbar div.navbar-popover {
+  /* Layout */
+  position: absolute;
+  margin-top: 4px;
+  padding: 8px;
+  left: 0;
+  top: 100%;
+  z-index: 1000;
+  min-width: max-content;
+
+  /* Styling */
+  border-radius: 12px;
+  border: 1px solid var(--nav-links-highlight);
+  background-color: var(--navbar-background-transluscent);
+  backdrop-filter: blur(10px);
+
+  /* Animation Properties */
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0.96) translateY(-8px);
+  transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.22s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.22s;
+  pointer-events: none;
+}

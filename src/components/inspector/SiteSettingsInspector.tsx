@@ -36,6 +36,7 @@ export function SiteSettingsInspector() {
       />
       <ImagePickerControl
         label="Favicon"
+        category="icons"
         value={settings.faviconPath}
         onChange={(v) => updateSiteSettings({ faviconPath: v })}
       />

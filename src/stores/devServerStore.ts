@@ -5,7 +5,12 @@
 
 import { create } from "zustand";
 
-export type DevServerStatus = "stopped" | "starting" | "running" | "error";
+export type DevServerStatus =
+  | "stopped"
+  | "starting"
+  | "running"
+  | "error"
+  | "installing";
 
 interface DevServerState {
   status: DevServerStatus;
@@ -14,10 +19,11 @@ interface DevServerState {
 }
 
 interface DevServerActions {
-  setRunning: (port: number) => void;
+  setRunning: (port: number | null) => void;
   setStarting: () => void;
   setStopped: () => void;
   setError: (message: string) => void;
+  setInstalling: () => void;
 }
 
 export const useDevServerStore = create<DevServerState & DevServerActions>()(
@@ -36,5 +42,8 @@ export const useDevServerStore = create<DevServerState & DevServerActions>()(
 
     setError: (message) =>
       set({ status: "error", port: null, errorMessage: message }),
+
+    setInstalling: () =>
+      set({ status: "installing", port: null, errorMessage: null }),
   }),
 );

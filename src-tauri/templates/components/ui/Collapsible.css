@@ -1,0 +1,129 @@
+/**
+ * Collapsible Component Styles
+ * 
+ * A minimal collapsible component that displays a title between horizontal lines
+ * with no background, borders, or content padding.
+ */
+
+.collapsible {
+  width: 100%;
+  /* Remove margin to eliminate any spacing around the collapsible */
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.collapsible-header-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 2rem;
+}
+
+.collapsible-line-left,
+.collapsible-line-right {
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-border, #ddd);
+  transition: opacity 0.3s ease;
+}
+
+.collapsible-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.collapsible-header:hover {
+  opacity: 0.8;
+}
+
+.collapsible-title {
+  margin: 0;
+  font-family: var(--font-display, "Helvetica Neue", Arial, sans-serif);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--text, #333) !important;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+}
+
+.collapsible-icon {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text, #333) !important;
+  transition: transform 0.3s ease;
+  user-select: none;
+  margin-left: 0.25rem;
+}
+
+.collapsible-icon.expanded {
+  transform: rotate(0deg);
+}
+
+.collapsible-content {
+  /* Completely remove all padding, margin, and background */
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  /* Keep only the animation */
+  animation: expandContent 0.3s ease-out;
+}
+
+@keyframes expandContent {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .collapsible-title {
+    color: var(--color-text-dark, #fff);
+  }
+
+  .collapsible-icon {
+    color: var(--color-text-dark, #fff);
+  }
+
+  .collapsible-line-left,
+  .collapsible-line-right {
+    background-color: var(--color-border-dark, #555);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .collapsible-title {
+    font-size: 1.25rem;
+  }
+
+  .collapsible-icon {
+    font-size: 1.25rem;
+  }
+
+  .collapsible-header {
+    padding: 0.5rem 0;
+  }
+
+  .collapsible-header-container {
+    gap: 0.75rem;
+  }
+}

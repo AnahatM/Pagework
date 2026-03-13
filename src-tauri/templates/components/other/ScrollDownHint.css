@@ -1,0 +1,98 @@
+/* 
+ * ScrollDownHint.css
+ * Provides a visual cue for users to scroll down.
+ * Uses CSS variables for consistent theming.
+ */
+
+button.scroll-down-hint {
+  /* Layout */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 1.2vw, 10px);
+  padding: clamp(1px, 0.8vw, 4px) clamp(8px, 1.2vw, 14px);
+  cursor: pointer;
+
+  /* Responsive offset from banner bottom */
+  top: clamp(15px, 4vw, 0px);
+
+  /* Visual styling */
+  background-color: var(--panel-background-translucent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--outline);
+  border-radius: clamp(20px, 4vw, 40px);
+  color: var(--text);
+
+  /* Typography */
+  font-family: var(--font-normal);
+  font-size: clamp(11px, 1.8vw, 13px);
+  font-weight: 400;
+
+  /* Interaction */
+  user-select: none;
+
+  /* Animation of pronounced bobbing with scale oscillation */
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: floatAndScale 4s ease-in-out infinite;
+}
+
+/* Fade in animation when showing */
+button.scroll-down-hint.fade-in {
+  opacity: 1;
+  transform: translateY(0px) scale(1);
+  pointer-events: auto;
+}
+
+/* Fade out animation when hiding */
+button.scroll-down-hint.fade-out {
+  opacity: 0;
+  transform: translateY(20px) scale(0.8);
+  pointer-events: none;
+}
+
+button.scroll-down-hint:hover {
+  background-color: var(--panel-background);
+  transform: scale(1.05);
+  border-color: var(--primary);
+}
+
+/* More pronounced floating animation with scale oscillation */
+@keyframes floatAndScale {
+  0% {
+    transform: translateY(0px) scale(1);
+  }
+  25% {
+    transform: translateY(-8px) scale(1.02);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.05);
+  }
+  75% {
+    transform: translateY(-8px) scale(1.02);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+
+/* Responsive adjustments for different screen sizes */
+@media (max-width: 768px) {
+  button.scroll-down-hint {
+    top: clamp(25px, 5vw, 5px);
+  }
+}
+
+@media (max-width: 480px) {
+  button.scroll-down-hint {
+    top: clamp(45px, 6vw, 10px);
+  }
+}
+
+@media (max-width: 320px) {
+  button.scroll-down-hint {
+    min-width: 100px;
+    top: clamp(50px, 8vw, 15px);
+  }
+}

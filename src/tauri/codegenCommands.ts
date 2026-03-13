@@ -8,6 +8,6 @@ import { invoke } from "@tauri-apps/api/core";
 export async function regenerateAll(
   projectPath: string,
   manifest: SiteBuilderManifest,
-): Promise<void> {
-  return invoke("regenerate_all", { projectPath, manifest });
+): Promise<string[]> {
+  return invoke<string[]>("regenerate_all", { projectPath, manifest });
 }

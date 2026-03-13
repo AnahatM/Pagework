@@ -1,0 +1,127 @@
+/* 
+ * FooterArea.css
+ * Style for the footer area of the application
+ * The footer area contains the footer name, navigation buttons, theme switch button, and copyright text
+ * It is a child of the main footer component
+ * The styles are designed to be responsive, adapting to different screen sizes
+ */
+
+@import "./FooterAreaResponsive.css";
+
+/* Overall Neuromorphic Footer UI Container */
+footer.footer div.footer-container {
+  /* Positioning and layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(20px, 4vw, 35px);
+
+  /* Style */
+  background-color: var(--panel-background);
+  box-shadow: inset 10px 10px 15px var(--panel-shadow-dark),
+    inset -10px -10px 15px var(--panel-shadow-light);
+  border-radius: clamp(10px, 2vw, 15px);
+
+  /* Interaction */
+  cursor: default;
+  user-select: none;
+}
+
+/* Name on the footer area */
+footer.footer div.footer-container p.footer-name {
+  /* Text */
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(18pt, 3.5vw, 24pt);
+  margin-bottom: clamp(8px, 1.5vw, 15px);
+  color: var(--primary);
+}
+
+/* Container for the action buttons in the footer */
+footer.footer div.footer-container div.footer-buttons-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-top: clamp(15px, 1.5vw, 20px);
+  align-items: center;
+  justify-content: center;
+}
+
+/* The special buttons on footer */
+footer.footer
+  div.footer-container
+  div.footer-buttons-container
+  .outline-nav-button.navigation-button {
+  border: 1px solid var(--primary);
+
+  /* Responsive sizing for footer buttons */
+  padding: clamp(6px, 1.5vw, 10px) clamp(8px, 2vw, 12.5px);
+  font-size: clamp(12px, 2.5vw, 16px);
+  min-width: fit-content;
+
+  /* Hover interactions */
+  &:hover {
+    background-color: var(--primary);
+    color: var(--inverse-primary);
+    border: 1px solid var(--inverse-primary);
+    box-shadow: none;
+  }
+}
+
+/* Label for the navigation buttons in footer */
+footer.footer
+  div.footer-container
+  div.footer-buttons-container
+  .outline-nav-button.navigation-button
+  .navigation-button-label {
+  /* Set text color override */
+  color: var(--primary);
+}
+
+/* Hover styles for the navigation buttons in footer */
+footer.footer
+  div.footer-container
+  div.footer-buttons-container
+  .outline-nav-button.navigation-button:hover
+  .navigation-button-label {
+  color: var(--inverse-primary);
+}
+
+/* Scale down button icons in footer for smaller screens */
+footer.footer
+  div.footer-container
+  div.footer-buttons-container
+  .outline-nav-button.navigation-button
+  .navigation-button-icon {
+  max-width: clamp(14px, 3vw, 20px);
+  max-height: clamp(14px, 3vw, 20px);
+}
+
+/* Theme switch button specific styles for footer area only */
+footer.footer div.footer-container div.footer-buttons-container button.theme-switch-button {
+  /* Override default circular size to match navigation buttons */
+  width: auto;
+  height: auto;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+
+  /* Match the padding of navigation buttons */
+  padding: clamp(6px, 1.5vw, 10px) clamp(8px, 2vw, 12.5px);
+
+  /* Ensure consistent sizing with other footer buttons */
+  min-width: fit-content;
+  box-sizing: border-box;
+}
+
+/* Copyright text responsive styling */
+footer.footer div.footer-container p {
+  /* Layout */
+  font-size: clamp(10px, 2vw, 14px);
+  margin: 0;
+
+  /* Styling */
+  color: var(--text);
+  opacity: 0.8;
+}

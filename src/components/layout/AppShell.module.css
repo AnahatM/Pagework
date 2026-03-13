@@ -5,10 +5,45 @@
   height: 100vh;
   background: var(--bg-primary);
   overflow: hidden;
+  position: relative;
 }
 
 .body {
   display: grid;
   grid-template-columns: var(--sidebar-width) 1fr var(--inspector-width);
   overflow: hidden;
+}
+
+.saveToast {
+  position: absolute;
+  bottom: calc(var(--statusbar-height) + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 16px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  pointer-events: none;
+  animation: fadeInOut 1.5s ease;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  85% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-4px);
+  }
 }

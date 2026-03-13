@@ -1,0 +1,116 @@
+/* 
+ * HeaderAndContent.css
+ * Styles for the HeaderAndContent component
+ * Handles layout for content with optional image gallery
+ */
+
+/* Main container for content with image gallery */
+.content-with-gallery {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* Image gallery container - vertical column on desktop */
+.image-gallery {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+/* Individual gallery images */
+.gallery-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px var(--panel-shadow-light);
+  transition: all 0.2s ease;
+  object-fit: cover;
+  border: 1px solid var(--outline);
+  cursor: pointer;
+}
+
+/* Hover effect for gallery images */
+.gallery-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px var(--panel-shadow-dark);
+}
+
+/* Main content area */
+.main-content {
+  width: 60%;
+  flex: 1;
+}
+
+/* Responsive design for tablets and mobile */
+@media (max-width: 768px) {
+  .content-with-gallery {
+    flex-direction: column-reverse;
+    gap: 1.5rem;
+  }
+
+  .image-gallery {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    gap: 1rem;
+  }
+
+  /* Add scrollbar styling for mobile gallery */
+  .image-gallery::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .image-gallery::-webkit-scrollbar-track {
+    background: var(--panel-background);
+    border-radius: 3px;
+  }
+
+  .image-gallery::-webkit-scrollbar-thumb {
+    background: var(--outline);
+    border-radius: 3px;
+  }
+
+  .gallery-image {
+    min-width: 200px;
+    max-width: 250px;
+    height: 150px;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+  .content-with-gallery {
+    gap: 1rem;
+  }
+
+  .image-gallery {
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .gallery-image {
+    min-width: 150px;
+    max-width: 180px;
+    height: 120px;
+  }
+}
+
+/* For extra small screens */
+@media (max-width: 320px) {
+  .gallery-image {
+    min-width: 120px;
+    max-width: 140px;
+    height: 100px;
+  }
+}

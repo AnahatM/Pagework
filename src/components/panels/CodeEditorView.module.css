@@ -1,0 +1,88 @@
+.container {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.fileTree {
+  width: 200px;
+  min-width: 160px;
+  border-right: 1px solid var(--glass-border);
+  background: var(--bg-secondary);
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.fileTreeHeader {
+  padding: 8px 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.fileItem {
+  display: block;
+  width: 100%;
+  padding: 4px 12px;
+  font-size: 0.72rem;
+  text-align: left;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fileItem:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.fileItemActive {
+  background: var(--accent-dim, rgba(99, 102, 241, 0.15));
+  color: var(--accent);
+}
+
+.folderLabel {
+  padding: 6px 12px 2px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.editorPane {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.editorHeader {
+  padding: 6px 12px;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--glass-border);
+  background: var(--bg-secondary);
+}
+
+.editorWrapper {
+  flex: 1;
+  min-height: 0;
+}
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}

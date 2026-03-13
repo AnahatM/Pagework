@@ -1,0 +1,90 @@
+/** DynamicSectionRow.css
+ * Styles for the DynamicSectionRow component
+ * Displays any number of sections horizontally with responsive wrapping.
+ */
+
+div.dynamic-section-row {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: var(--gap-size, 20px);
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Equal width sections */
+div.dynamic-section-row.equal-width .dynamic-section-panel {
+  flex: 1 1 var(--min-section-width, 280px);
+  min-width: var(--min-section-width, 280px);
+  max-width: calc(
+    (100% - (var(--section-count, 1) - 1) * var(--gap-size, 20px)) / var(--section-count, 1)
+  );
+}
+
+/* Non-equal width sections (content-based sizing) */
+div.dynamic-section-row:not(.equal-width) .dynamic-section-panel {
+  flex: 0 1 auto;
+  min-width: var(--min-section-width, 280px);
+}
+
+/* 2 sections layout */
+div.dynamic-section-row[style*="--section-count:2"] .dynamic-section-panel {
+  max-width: calc(50% - 10px);
+}
+
+/* 3 sections layout */
+div.dynamic-section-row[style*="--section-count:3"] .dynamic-section-panel {
+  max-width: calc(33.333% - 14px);
+}
+
+/* 4 sections layout */
+div.dynamic-section-row[style*="--section-count:4"] .dynamic-section-panel {
+  max-width: calc(25% - 15px);
+}
+
+/* 5+ sections layout */
+div.dynamic-section-row[style*="--section-count:5"] .dynamic-section-panel,
+div.dynamic-section-row[style*="--section-count:6"] .dynamic-section-panel,
+div.dynamic-section-row[style*="--section-count:7"] .dynamic-section-panel,
+div.dynamic-section-row[style*="--section-count:8"] .dynamic-section-panel {
+  max-width: calc(20% - 16px);
+}
+
+/* Responsive behavior for tablets */
+@media (max-width: 1200px) {
+  /* 4+ sections: 2 per row on tablet */
+  div.dynamic-section-row[style*="--section-count:4"] .dynamic-section-panel,
+  div.dynamic-section-row[style*="--section-count:5"] .dynamic-section-panel,
+  div.dynamic-section-row[style*="--section-count:6"] .dynamic-section-panel,
+  div.dynamic-section-row[style*="--section-count:7"] .dynamic-section-panel,
+  div.dynamic-section-row[style*="--section-count:8"] .dynamic-section-panel {
+    flex: 1 1 calc(50% - 10px);
+    max-width: calc(50% - 10px);
+  }
+
+  /* 3 sections: 2 per row on tablet, then 1 */
+  div.dynamic-section-row[style*="--section-count:3"] .dynamic-section-panel {
+    flex: 1 1 calc(50% - 10px);
+    max-width: calc(50% - 10px);
+  }
+}
+
+/* Responsive behavior for mobile */
+@media (max-width: 720px) {
+  div.dynamic-section-row .dynamic-section-panel {
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  div.dynamic-section-row {
+    padding: 0 10px;
+  }
+}

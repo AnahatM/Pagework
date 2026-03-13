@@ -1,0 +1,51 @@
+/* SimpleHeaderAndDescription Component Styles */
+
+.simple-header-description-container {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.simple-header-description-image {
+  flex: 0 0 400px; /* Fixed width for image column */
+  max-width: 400px;
+}
+
+.simple-header-description-url-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.simple-header-description-url-image:hover {
+  transform: scale(1.02);
+}
+
+.simple-header-description-content {
+  flex: 1; /* Take remaining space */
+  min-width: 0; /* Allow content to shrink */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 1000px) {
+  .simple-header-description-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .simple-header-description-image {
+    flex: none;
+    max-width: 500px;
+    align-self: center;
+  }
+
+  .simple-header-description-image .section-image-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}

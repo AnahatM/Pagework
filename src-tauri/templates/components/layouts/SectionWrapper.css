@@ -1,0 +1,23 @@
+/* 
+ * SectionWrapper.css 
+ * This file contains styles for the SectionWrapper component, 
+ * which serves as a container for different sections of the application.
+ * It defines the layout and appearance of sections in the application.
+ */
+
+div.section-wrapper {
+  /* Layout */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+div.section-wrapper div.section-content {
+  /* Layout */
+  max-width: 1300px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,84 @@
+/* Back button positioned in top left */
+.back-button {
+  /* 
+   * Positioning Unused
+   * Handle through inline styles as needed for use case
+   */
+  /* position: absolute; */
+  /* top: -10px; */
+  /* left: 20px; */
+  /* z-index: 900; */
+
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  width: auto;
+  height: 40px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+
+  /* Styling using navigation theme variables */
+  background-color: var(--navbar-background-transluscent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--nav-links-highlight);
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+
+  /* Remove default button styles */
+  font: inherit;
+  color: inherit;
+
+  /* Transition for smooth hover effects */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Back button icon */
+.back-button-icon {
+  /* Icon size */
+  width: 14px;
+  height: 14px;
+
+  /* Rotate the expand icon to point left (back) */
+  transform: rotate(90deg);
+
+  /* Filter for consistent styling with navbar theme */
+  filter: brightness(0.8);
+
+  /* Transition for smooth hover effects */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Back button text label */
+.back-button-text {
+  /* Typography */
+  font-size: 18px;
+  color: var(--navbar-text);
+
+  /* Layout */
+  white-space: nowrap;
+
+  /* Transition for smooth hover effects */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Back button hover state */
+.back-button:hover {
+  /* Enhanced styling on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Back button active state */
+.back-button:active {
+  transform: scale(0.95);
+}
+
+/* Focus state for accessibility */
+.back-button:focus-visible {
+  outline: 2px solid var(--navbar-text);
+  outline-offset: 2px;
+}

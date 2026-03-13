@@ -1,0 +1,152 @@
+/** SectionHeader.css
+ * Styles for the SectionHeader component
+ * Displays a header with title, subtitle, and optional link button.
+ */
+
+div.section-header {
+  width: 100%;
+  display: flex;
+  position: relative;
+
+  margin-bottom: 30px;
+}
+
+/* Remove margin when no link button is present */
+div.section-header.no-link-button {
+  margin-bottom: 0;
+}
+
+/* Left align layout */
+div.section-header.left {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+/* Center align layout */
+div.section-header.center {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+div.section-header div.section-header-main {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+  padding: 0;
+  margin: 15px 0;
+
+  /* Default Text Alignment */
+  text-align: left;
+}
+
+div.section-header div.section-header-actions {
+  /* Layout */
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+div.section-header div.section-header-main > * {
+  /* Ensure all children take full width */
+  width: 100%;
+}
+
+div.section-header div.section-header-main h3.section-header-preheading {
+  font-size: clamp(14px, 2.5vw, 18px);
+  font-weight: 300;
+  text-transform: uppercase;
+  font-family: var(--font-display);
+}
+
+div.section-header div.section-header-main h2.section-header-title {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 900;
+  font-family: var(--font-display);
+}
+
+div.section-header div.section-header-main p.section-header-subtitle {
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 300;
+  font-family: var(--font-normal);
+  font-style: italic;
+}
+
+/* Responsive behavior for narrow screens */
+@media (max-width: 500px) {
+  /* Left align: stack vertically on narrow screens */
+  div.section-header.left {
+    flex-direction: column !important;
+    align-items: stretch;
+  }
+
+  div.section-header.left div.section-header-actions {
+    justify-content: flex-start;
+  }
+
+  /* Center align: make actions match width of main and center button */
+  div.section-header.center div.section-header-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  div.section-header.center div.section-header-main {
+    padding: 0 20px;
+  }
+}
+
+/* For larger screens in center mode */
+@media (min-width: 615px) {
+  div.section-header.center {
+    position: relative;
+    align-items: center;
+  }
+
+  div.section-header.center div.section-header-main {
+    align-items: center;
+  }
+
+  div.section-header.center div.section-header-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+/* Force link button below title/subtitle when linkButtonAlwaysBelow is true */
+div.section-header.link-button-always-below {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+div.split-section section.section-panel div.section-header {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+div.split-section section.section-panel div.section-header-actions {
+  justify-content: flex-start;
+}
+
+div.section-header.link-button-always-below div.section-header-actions {
+  justify-content: flex-start;
+}
+
+/* Center alignment with always below button */
+div.section-header.center.link-button-always-below div.section-header-actions {
+  justify-content: center;
+}
+
+/* Override the absolute positioning for center mode when always below is enabled */
+@media (min-width: 615px) {
+  div.section-header.center.link-button-always-below div.section-header-actions {
+    position: static;
+    top: auto;
+    right: auto;
+  }
+}

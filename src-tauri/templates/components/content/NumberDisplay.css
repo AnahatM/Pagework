@@ -1,0 +1,76 @@
+/** 
+ * NumberDisplay.css
+ * Styles for the NumberDisplay component.
+ */
+
+div.number-display {
+  /* Layout and Positioning */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: fit-content;
+  padding: 20px 40px;
+
+  /* Styling */
+  background-color: var(--panel-background-translucent);
+  border: 1px solid var(--outline);
+  box-shadow: 2px 2px 5px var(--panel-shadow-dark), inset -2px -2px 5px var(--panel-shadow-light);
+  border-radius: 5px;
+  cursor: default;
+  transition: all 0.15s ease-in-out;
+  user-select: none;
+
+  /* Hover Interaction */
+  &:hover {
+    background-color: var(--page-background);
+    box-shadow: 4px 4px 10px var(--panel-shadow-dark), inset -2px -2px 5px var(--panel-shadow-light);
+    transform: scale(1.02) translateY(-2px);
+  }
+}
+
+div.number-display span.display-number {
+  font-size: 40pt;
+  font-weight: 900;
+}
+
+div.number-display span.number-label {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 13pt;
+  letter-spacing: 1px;
+}
+
+div.number-display span.mini-text {
+  font-size: 10pt;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1000px) {
+  div.number-display {
+    padding: 15px 30px;
+  }
+
+  div.number-display span.display-number {
+    font-size: 32pt;
+  }
+
+  div.number-display span.number-label {
+    font-size: 11pt;
+  }
+}
+
+@media (max-width: 600px) {
+  div.number-display {
+    padding: 10px 20px;
+    width: 100%;
+  }
+
+  div.number-display span.display-number {
+    font-size: 28pt;
+  }
+
+  div.number-display span.number-label {
+    font-size: 10pt;
+  }
+}

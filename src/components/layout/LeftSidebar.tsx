@@ -7,6 +7,7 @@ const INSPECTOR_TABS: { id: InspectorTab; label: string }[] = [
   { id: "theme", label: "Theme" },
   { id: "nav", label: "Nav" },
   { id: "footer", label: "Footer" },
+  { id: "blog", label: "Blog" },
   { id: "settings", label: "Settings" },
 ];
 

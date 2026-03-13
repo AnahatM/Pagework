@@ -1,0 +1,71 @@
+/* Table.css */
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin: 0 auto;
+}
+
+.simple-table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: var(--background);
+  color: var(--text);
+}
+
+.simple-table th,
+.simple-table td {
+  padding: 12px 16px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.simple-table th {
+  background-color: var(--inverse-primary);
+  color: var(--secondary);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.simple-table td {
+  background-color: var(--background);
+}
+
+/* Bordered variant */
+.simple-table.bordered th,
+.simple-table.bordered td {
+  border: 1px solid var(--outline) !important;
+}
+
+.simple-table.bordered {
+  border: 1px solid var(--outline) !important;
+}
+
+/* Borderless variant */
+.simple-table.borderless th,
+.simple-table.borderless td {
+  border: none;
+  border-bottom: 1px solid var(--outline);
+}
+
+/* Remove bottom border if alternating rows are enabled */
+.simple-table.alternating.borderless th,
+.simple-table.alternating.borderless td {
+  border-bottom: none !important;
+}
+
+/* Alternating row colors */
+.simple-table.alternating tbody tr:nth-child(even) {
+  background-color: var(--panel-shadow-light);
+}
+
+.simple-table.alternating tbody tr:nth-child(odd) {
+  background-color: var(--background);
+}
+
+/* Hover effect */
+.simple-table tbody tr:hover {
+  background-color: var(--panel-shadow);
+  transition: background-color 0.2s ease;
+}

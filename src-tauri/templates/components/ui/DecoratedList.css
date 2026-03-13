@@ -1,0 +1,26 @@
+/* 
+ * DecoratedList.css
+ * Styles for the decorated list component
+ */
+
+.content-section .decorated-list li h3,
+.decorated-list-component li h3 {
+  /* Styling */
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 13pt;
+}
+
+.content-section .decorated-list li p,
+.decorated-list-component li p {
+  /* Layout */
+  margin: 5px 15px;
+  margin-bottom: 25px;
+  padding-left: 15px;
+  max-width: min(100%, 500px);
+
+  /* Styling */
+  border-left: 1px solid var(--primary);
+  font-size: 16px;
+  backdrop-filter: blur(2px);
+}

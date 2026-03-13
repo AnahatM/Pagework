@@ -177,6 +177,94 @@
   min-width: 0;
 }
 
+.imageActions {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.imageBtn {
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.imageBtn:hover:not(:disabled) {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--accent);
+}
+
+.imageBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.imageBtnDanger:hover:not(:disabled) {
+  border-color: var(--danger, #e74c3c);
+  color: var(--danger, #e74c3c);
+}
+
+.assetBrowser {
+  margin-top: 6px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+.assetBrowserHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--glass-border);
+  background: var(--bg-secondary);
+}
+
+.assetList {
+  max-height: 120px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.assetItem {
+  padding: 4px 8px;
+  font-size: 0.72rem;
+  text-align: left;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.assetItem:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.assetItemActive {
+  background: var(--accent-dim, rgba(99, 102, 241, 0.15));
+  color: var(--accent);
+}
+
+.assetEmpty {
+  padding: 12px 8px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
 /* ── Group header ──── */
 
 .groupHeader {

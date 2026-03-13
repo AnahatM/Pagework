@@ -1,0 +1,86 @@
+/* TextParagraph component styles */
+
+.text-paragraph {
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+/* Space After Paragraph */
+.text-paragraph.space-after {
+  margin-bottom: 16px;
+}
+
+/* Border Bottom Paragraph */
+.text-paragraph.border-bottom {
+  border-bottom: 1px solid var(--outline);
+  margin-bottom: 25px;
+}
+
+[data-theme="light"] .text-paragraph.border-bottom {
+  border-bottom: 1px dashed var(--outline);
+}
+
+/* Heading Paragraph */
+.text-paragraph.heading-h1 {
+  font-size: 35px;
+}
+.text-paragraph.heading-h2 {
+  font-size: 30px;
+}
+.text-paragraph.heading-h3 {
+  font-size: 22px;
+}
+
+/* Highlight styling */
+.text-paragraph.highlight {
+  color: var(--inverse-primary);
+  background-color: var(--primary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  border-left: 3px solid var(--primary);
+}
+
+.text-paragraph.highlight .inline-link {
+  color: var(--inverse-primary);
+}
+
+/* Bold text styling */
+.text-paragraph.bold {
+  font-weight: 700;
+}
+
+/* Centered text styling */
+.text-paragraph.centered {
+  text-align: center;
+}
+
+/* Italic text styling */
+.text-paragraph.italic {
+  font-style: italic;
+}
+
+/* Uppercase text styling */
+.text-paragraph.uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.inline-link {
+  color: var(--primary);
+  text-decoration: underline;
+  font-weight: 500;
+  padding: 0 2px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: var(--secondary);
+    color: var(--inverse-primary);
+  }
+}
+
+@media (max-width: 768px) {
+  .text-paragraph {
+    font-size: 14px;
+  }
+}

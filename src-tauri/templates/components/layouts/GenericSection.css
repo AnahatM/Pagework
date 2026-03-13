@@ -1,0 +1,11 @@
+/* GenericSection.css
+ * Styles for the GenericSection component
+ */
+
+/* Basic styling for full-width blank section */
+div.generic-section {
+  width: 100%;
+  min-height: fit-content;
+  padding: 0 20px;
+  box-sizing: border-box;
+}

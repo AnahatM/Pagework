@@ -17,6 +17,8 @@ pub struct SiteBuilderManifest {
     pub footer: FooterConfig,
     pub pages: Vec<PageConfig>,
     pub assets: AssetsConfig,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub blog_config: Option<BlogConfig>,
 }
 
 // ── Site Settings ────────────────────────
@@ -150,8 +152,6 @@ pub struct PageConfig {
     pub meta_description: String,
     pub is_home_page: bool,
     pub components: Vec<ComponentInstance>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub blog_config: Option<BlogConfig>,
 }
 
 // ── Components ───────────────────────────

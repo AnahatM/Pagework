@@ -1,0 +1,297 @@
+/* 
+ * ImageCarousel.css
+ * Styles for the image carousel component
+ */
+
+.image-carousel {
+  /* Layout */
+  position: relative;
+  width: 100%;
+  margin: 2rem 0;
+  overflow: hidden;
+
+  /* Styling */
+  box-shadow: 0 5px 10px var(--panel-shadow-dark), 0 -5px 10px var(--panel-shadow-light);
+  border-radius: 10px;
+  background-color: var(--page-background);
+  border: 1px solid var(--outline);
+}
+
+/* Container for carousel slides with fixed aspect ratio */
+.image-carousel .carousel-container {
+  /* Layout */
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  display: flex;
+  overflow: hidden;
+
+  /* Styling */
+  background-color: #000;
+}
+
+/* Navigation arrows */
+.image-carousel .carousel-arrow {
+  /* Layout */
+  position: absolute;
+  top: 15%;
+  bottom: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  z-index: 2;
+
+  /* Styling */
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  opacity: 0.8;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  cursor: pointer;
+  transition: opacity 0.15s, background-color 0.15s backdrop-filter 0.15s;
+}
+
+.image-carousel .carousel-arrow:hover {
+  /* Styling */
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.image-carousel .carousel-arrow-prev {
+  /* Layout */
+  left: 0;
+
+  /* Styling */
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.image-carousel .carousel-arrow-next {
+  /* Layout */
+  right: 0;
+
+  /* Styling */
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.image-carousel .carousel-arrow-icon {
+  /* Layout */
+  width: 30px;
+  height: 30px;
+
+  /* Styling */
+  filter: invert(1);
+}
+
+/* Slide */
+.image-carousel .carousel-slide {
+  /* Layout */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Styling */
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.image-carousel .carousel-slide.active {
+  /* Styling */
+  opacity: 1;
+}
+
+/* Image styling */
+.image-carousel .carousel-image {
+  /* Layout */
+  width: 100%;
+  height: 100%;
+
+  /* Styling */
+  object-fit: contain;
+}
+
+/* Caption styling */
+.image-carousel .carousel-caption {
+  /* Layout */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* Styling */
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  color: white;
+  text-align: center;
+}
+
+.image-carousel .carousel-caption-text {
+  /* Layout */
+  flex: 1;
+
+  /* Styling */
+  text-align: center;
+}
+
+.image-carousel .carousel-link-button {
+  /* Layout */
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Styling */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid transparent;
+  border-radius: 50%;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: opacity 0.15s, background-color 0.15s;
+}
+
+.image-carousel .carousel-link-button:hover {
+  /* Styling */
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.image-carousel .carousel-link-icon {
+  /* Layout */
+  width: 20px;
+  height: 20px;
+}
+
+/* Indicator dots */
+.image-carousel .carousel-indicators {
+  /* Layout */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 15px;
+  gap: 8px;
+
+  /* Styling */
+  background-color: black;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.image-carousel .carousel-dot {
+  /* Layout */
+  width: 10px;
+  height: 10px;
+
+  /* Styling */
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  opacity: 0.3;
+  cursor: pointer;
+  transition: all 0.15s ease-in;
+
+  &:hover {
+    /* Styling */
+    transform: scale(1.2);
+    opacity: 0.6;
+  }
+}
+
+.image-carousel .carousel-dot.active {
+  /* Styling */
+  transform: scale(1.15);
+  opacity: 1;
+}
+
+/* Image counter */
+.image-carousel .carousel-counter {
+  /* Layout */
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 5px 10px;
+  z-index: 2;
+
+  /* Styling */
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  color: white;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.8rem;
+  cursor: default;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .image-carousel .carousel-arrow {
+    /* Layout */
+    width: 40px;
+  }
+
+  .image-carousel .carousel-arrow-icon {
+    /* Layout */
+    width: 20px;
+    height: 20px;
+  }
+
+  .image-carousel .carousel-caption {
+    /* Layout */
+    padding: 8px;
+
+    /* Styling */
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-carousel .carousel-arrow {
+    /* Layout */
+    width: 30px;
+  }
+
+  .image-carousel .carousel-counter {
+    /* Layout */
+    padding: 3px 8px;
+
+    /* Styling */
+    font-size: 0.7rem;
+  }
+
+  .image-carousel .carousel-dot {
+    /* Layout */
+    width: 8px;
+    height: 8px;
+  }
+
+  .image-carousel .carousel-link-button {
+    /* Layout */
+    width: 28px;
+    height: 28px;
+    padding: 5px;
+  }
+
+  .image-carousel .carousel-link-icon {
+    /* Layout */
+    width: 18px;
+    height: 18px;
+  }
+}

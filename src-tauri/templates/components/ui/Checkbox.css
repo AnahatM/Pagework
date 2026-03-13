@@ -1,0 +1,55 @@
+/* 
+ * Checkbox.css
+ * Styles for the Checkbox component.
+ */
+
+.checkbox-container {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 10px;
+  padding: 10px;
+
+  /* Styling */
+  user-select: none;
+  cursor: pointer;
+  background-color: var(--panel-background);
+  border-radius: 5px;
+  box-shadow: inset 5px 5px 10px var(--panel-shadow-dark),
+    inset -5px -5px 10px var(--panel-shadow-light);
+  border: 1px solid transparent;
+  transition: all 0.15s ease-in-out;
+
+  /* Hover interaction */
+  &:hover {
+    border: 1px solid var(--outline);
+  }
+}
+
+.checkbox-container .checkbox-input {
+  /* Layout */
+  width: 1.1rem;
+  height: 1.1rem;
+  cursor: pointer;
+
+  /* Styling */
+  accent-color: var(--primary);
+}
+
+.checkbox-container .checkbox-label {
+  font-weight: 300;
+}
+
+.checkbox-container .checkbox-input:disabled + .checkbox-label {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.checkbox-container:hover .checkbox-input:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.checkbox-container:active .checkbox-input:not(:disabled) {
+  filter: brightness(0.9);
+}

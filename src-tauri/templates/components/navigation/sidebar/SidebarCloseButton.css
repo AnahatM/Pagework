@@ -1,0 +1,86 @@
+/* 
+ * SidebarCloseButton.css
+ * Styles for the sidebar close button
+ * This file contains styles for the sidebar header, close button, and its icon.
+ * It uses CSS variables from Navbar.css for consistent theming.
+ */
+
+/* Sidebar header with close button */
+.sidebar-header {
+  /* Layout */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+
+  /* Styling */
+  border-bottom: 1px solid var(--nav-links-highlight);
+}
+
+.sidebar-header-title {
+  /* Typography */
+  font-size: 20pt;
+  font-weight: 300;
+  color: var(--navbar-text);
+}
+
+/* Close button styling - similar to hamburger button */
+.sidebar-close-button {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  box-sizing: border-box;
+
+  /* Styling using navbar variables */
+  background-color: var(--navbar-background);
+  border: 1px solid var(--nav-links-highlight);
+  border-radius: 50%;
+  color: var(--navbar-text);
+
+  /* Remove default button styles */
+  cursor: pointer;
+  outline: none;
+
+  /* Animation */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Close button icon */
+.sidebar-close-button-icon {
+  /* Icon size */
+  width: 14px;
+  height: 14px;
+  opacity: 50%;
+
+  /* Filter for consistent styling */
+  filter: brightness(0.8);
+
+  /* Animation */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Close button hover state */
+.sidebar-close-button:hover {
+  /* Enhanced styling on hover */
+  background-color: var(--nav-links-highlight);
+  box-shadow: inset 0 0 8px 2px var(--nav-links-shadow);
+  border-color: var(--navbar-text);
+  transform: scale(1.05);
+}
+
+.sidebar-close-button:hover .sidebar-close-button-icon {
+  /* Brighten icon on hover */
+  filter: brightness(1.2);
+  opacity: 80%;
+}
+
+/* Focus state for accessibility */
+.sidebar-close-button:focus-visible {
+  outline: 2px solid var(--navbar-text);
+  outline-offset: 2px;
+}

@@ -1,0 +1,162 @@
+/* 
+ * SectionWithImage.css 
+ * Styles for the SectionWithImage component
+ */
+
+/* Import Image Styles */
+@import "./SectionWithImageStyles.css";
+
+.section-with-image {
+  margin: 0 20px;
+}
+
+/* Main container inside the panel */
+.section-with-image-content {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 200px;
+  position: relative;
+}
+
+/* Text content area */
+.section-text-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  z-index: 2;
+}
+
+.section-with-image-content.image-right .section-text-content {
+  padding-right: 25px;
+  max-width: 600px;
+}
+
+/* Image styles are now handled in SectionWithImageStyles.css and inline styles */
+
+/* Floating image positioning */
+.section-with-image-content.image-floating.image-left {
+  flex-direction: row;
+}
+
+.section-with-image-content.image-floating.image-left .section-image {
+  order: 0;
+  margin-right: 32px !important;
+  margin-left: 20px !important; /* Keep inside panel, add some offset */
+}
+
+.section-with-image-content.image-floating.image-left .section-text-content {
+  order: 1;
+  padding-left: 20px;
+}
+
+.section-with-image-content.image-floating.image-right {
+  flex-direction: row;
+}
+
+.section-with-image-content.image-floating.image-right .section-image {
+  order: 1;
+  margin-left: 32px !important;
+  margin-right: 20px !important; /* Keep inside panel, add some offset */
+}
+
+.section-with-image-content.image-floating.image-right .section-text-content {
+  order: 0;
+  padding-right: 20px;
+}
+
+/* Stretch to Edge Style - Positioning and margins only */
+
+/* Stretch to edge positioning */
+.section-with-image-content.image-stretchToEdge.image-left {
+  flex-direction: row;
+  padding-left: 0;
+}
+
+.section-with-image-content.image-stretchToEdge.image-left .section-image {
+  order: 0;
+  margin-right: 32px !important;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.section-with-image-content.image-stretchToEdge.image-left .section-text-content {
+  order: 1;
+}
+
+.section-with-image-content.image-stretchToEdge.image-right {
+  flex-direction: row;
+  padding-right: 0;
+}
+
+.section-with-image-content.image-stretchToEdge.image-right .section-image {
+  order: 1;
+  margin-left: 32px !important;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.section-with-image-content.image-stretchToEdge.image-right .section-text-content {
+  order: 0;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 992px) {
+  .section-with-image-content {
+    flex-direction: column !important;
+    align-items: flex-start;
+    min-height: auto;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Image positioning in mobile */
+  /* When image was on left, put it above text */
+  .section-with-image-content.image-left .section-image {
+    order: 0 !important;
+  }
+
+  .section-with-image-content.image-left .section-text-content {
+    order: 1 !important;
+  }
+
+  /* When image was on right, put it below text */
+  .section-with-image-content.image-right .section-image {
+    order: 1 !important;
+  }
+
+  .section-with-image-content.image-right .section-text-content {
+    order: 0 !important;
+  }
+
+  /* Override all desktop margins and padding in mobile */
+  .section-with-image-content.image-floating.image-left .section-image,
+  .section-with-image-content.image-floating.image-right .section-image,
+  .section-with-image-content.image-stretchToEdge.image-left .section-image,
+  .section-with-image-content.image-stretchToEdge.image-right .section-image {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .section-with-image-content.image-floating.image-left .section-text-content,
+  .section-with-image-content.image-floating.image-right .section-text-content,
+  .section-with-image-content.image-stretchToEdge.image-left .section-text-content,
+  .section-with-image-content.image-stretchToEdge.image-right .section-text-content {
+    padding: 0 !important;
+  }
+
+  /* Reset container margins in mobile */
+  .section-with-image-content.image-stretchToEdge.image-left,
+  .section-with-image-content.image-stretchToEdge.image-right {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}

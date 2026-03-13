@@ -1,0 +1,183 @@
+/*
+ * SidebarNavButton.css
+ * Sidebar Navigation Button Styles
+ * Navigation buttons used within the mobile sidebar.
+ * Follows similar structure to NavigationButton.css but adapted for vertical layout.
+ * Uses CSS variables from Navbar.css for consistent theming.
+ */
+
+/* Main sidebar navigation button container */
+.sidebar-nav-button {
+  /* Layout */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main button element */
+.sidebar-nav-button-main {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 16px;
+
+  /* Styling using navbar variables */
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--navbar-text);
+  text-decoration: none;
+
+  /* Animation */
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+/* Button icon */
+.sidebar-nav-button-icon {
+  /* Icon size */
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+
+  /* Colored icons by default in sidebar */
+  filter: none;
+
+  /* Animation */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Button label */
+.sidebar-nav-button-label {
+  /* Layout */
+  flex: 1;
+  text-align: left;
+
+  /* Typography */
+  font-size: 12pt;
+  color: var(--navbar-text);
+}
+
+/* Expand/collapse arrow for subpages */
+.sidebar-nav-button-expand-arrow {
+  /* Arrow size */
+  width: 12px;
+  height: 12px;
+
+  /* Styling */
+  opacity: 0.3;
+  pointer-events: none; /* Let container handle clicks */
+
+  /* Animation */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Expand/collapse arrow container */
+.sidebar-nav-button-expand-container {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  margin-left: 8px;
+  margin-right: -8px;
+  padding: 4px 8px;
+
+  /* Styling */
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+
+  /* Animation */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover state for expand container */
+.sidebar-nav-button-expand-container:hover {
+  background-color: var(--navbar-background-transluscent);
+  border: 1px solid var(--nav-links-highlight);
+}
+
+/* Focus state for expand container */
+.sidebar-nav-button-expand-container:focus-visible {
+  outline: 1px solid var(--navbar-text);
+  outline-offset: 2px;
+}
+
+/* Hover state */
+.sidebar-nav-button-main:hover {
+  /* Enhanced styling on hover */
+  border: 1px solid var(--nav-links-highlight);
+  background-color: var(--navbar-background-transluscent);
+  transform: translateX(4px);
+}
+
+/* Active state */
+.sidebar-nav-button.active .sidebar-nav-button-main {
+  /* Styling for active/current page */
+  background-color: var(--navbar-background);
+  border-color: var(--nav-links-highlight);
+}
+
+/* Subpages container */
+.sidebar-nav-button-subpages {
+  /* Animation */
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Completely remove all spacing when collapsed */
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* Show subpages when parent is expanded */
+.sidebar-nav-button.expanded .sidebar-nav-button-subpages {
+  opacity: 1;
+  max-height: 500px; /* Arbitrary large value to allow scrolling */
+  overflow: auto;
+
+  /* Only add layout properties when expanded */
+  margin-left: 20px;
+  margin-top: 8px;
+  padding-left: 8px;
+  border-left: 1px solid var(--nav-links-highlight);
+}
+
+/* Subpage styling */
+.sidebar-nav-button-subpages .sidebar-nav-button {
+  /* Spacing between subpages compensate for hover shift */
+  width: calc(100% - 4px);
+  margin-bottom: 4px;
+}
+
+/* Focus state for accessibility */
+.sidebar-nav-button-main:focus-visible {
+  outline: 1px solid var(--navbar-text);
+}
+
+/* Button with subpages indicator */
+.sidebar-nav-button.has-subpages .sidebar-nav-button-main {
+  position: relative;
+}
+
+/* Animation for expand/collapse arrow */
+.sidebar-nav-button.expanded .sidebar-nav-button-expand-arrow {
+  transform: rotate(180deg);
+}
+
+/* When expanded and hovered, combine transforms */
+.sidebar-nav-button.expanded
+  .sidebar-nav-button-expand-container:hover
+  .sidebar-nav-button-expand-arrow {
+  transform: rotate(180deg);
+}
+
+/* Third level subpages */
+.sidebar-nav-button-subpages .sidebar-nav-button-subpages {
+  margin-left: 16px;
+  padding-left: 12px;
+  border-left: 1px solid var(--nav-links-highlight);
+}

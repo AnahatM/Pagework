@@ -4,6 +4,7 @@
    ═══════════════════════════════════════════ */
 
 import type {
+  BlogConfig,
   ComponentInstance,
   FooterColumn,
   NavItem,
@@ -71,6 +72,9 @@ interface ProjectActions {
 
   /* ── Site settings ─────────────────────── */
   updateSiteSettings: (settings: Partial<SiteSettings>) => void;
+
+  /* ── Blog ───────────────────────────────── */
+  updateBlogConfig: (blogConfig: BlogConfig) => void;
 }
 
 /* ── Deep-clone helpers for immutable updates ── */
@@ -422,6 +426,14 @@ export const useProjectStore = create<ProjectState & ProjectActions>()(
         updateManifest(state, (m) => ({
           ...m,
           siteSettings: { ...m.siteSettings, ...settings },
+        })),
+      ),
+
+    updateBlogConfig: (blogConfig) =>
+      set((state) =>
+        updateManifest(state, (m) => ({
+          ...m,
+          blogConfig,
         })),
       ),
   }),

@@ -1,0 +1,81 @@
+/*
+ * Navigation Theme Variables
+ * Centralized CSS custom properties for navigation components
+ * This file defines all colors, spacing, and styling variables used across
+ * navbar, sidebar, and other navigation-related components.
+ */
+
+:root {
+  /* Navigation Background Colors */
+  --navbar-background: #050315;
+  --navbar-background-transluscent: #050315d0;
+  --navbar-shadow: #050315bd;
+  --nav-links-background: #1e1d2cd3;
+  --nav-links-highlight: #242233;
+  --nav-links-shadow: #13121d;
+
+  /* Navigation Text Colors */
+  --navbar-text: #bdbdd3;
+
+  /* Navigation Layout Variables */
+  --navbar-max-height: 100px;
+  --navbar-padding: 0 20px;
+  --navbar-padding-left: 5px;
+  --navbar-border-radius: 25px;
+  --navbar-desktop-top-offset: 40px;
+  --navbar-desktop-max-width: min(95vw, 900px);
+
+  /* Navigation Button Variables */
+  --nav-button-padding: 10px 12.5px;
+  --nav-button-border-radius: 50px;
+  --nav-button-gap: 4px;
+  --nav-button-icon-size: 20px;
+  --nav-button-expand-arrow-size: 12px;
+
+  /* Navigation Transitions */
+  --nav-transition-fast: 0.15s ease-in-out;
+  --nav-transition-medium: 0.3s ease-in-out;
+  --nav-transition-slow: 0.4s ease-in-out;
+  --nav-transition-navbar: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --nav-transition-popover: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  --nav-transition-expand: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Sidebar Specific Variables */
+  --sidebar-width: 280px;
+  --sidebar-backdrop-background: rgba(0, 0, 0, 0.5);
+  --sidebar-button-padding: 12px 16px;
+  --sidebar-button-border-radius: 8px;
+  --sidebar-expand-container-size: 32px;
+  --sidebar-icon-size: 20px;
+  --sidebar-expand-arrow-size: 12px;
+
+  /* Z-Index Layers */
+  --nav-z-index: 1000;
+  --sidebar-z-index: 1001;
+  --popover-z-index: 1000;
+
+  /* Mobile Breakpoints */
+  --nav-mobile-breakpoint: 820px;
+  --nav-mobile-navbar-height: 70px;
+  --nav-mobile-logo-size: 40px;
+}
+
+/* Light theme overrides */
+[data-theme="light"] {
+  /* Navigation components may need light theme adjustments */
+  /* Light theme navigation variables will be added here as needed */
+  --navbar-text-light-override: inherit; /* Placeholder to prevent empty ruleset */
+}
+
+/* Dark theme specific navigation styles */
+[data-theme="dark"] {
+  /* Dark theme navigation enhancements */
+  --navbar-text-dark-override: inherit; /* Placeholder to prevent empty ruleset */
+}
+
+/* Mobile specific navigation variables */
+@media (max-width: 820px) {
+  :root {
+    --navbar-max-height: var(--nav-mobile-navbar-height);
+  }
+}

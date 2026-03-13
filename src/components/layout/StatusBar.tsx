@@ -9,6 +9,7 @@ export function StatusBar() {
   const statusLabels: Record<string, string> = {
     stopped: "Dev server stopped",
     starting: "Starting dev server…",
+    installing: "Installing dependencies…",
     running: "Dev server running",
     error: "Dev server error",
   };

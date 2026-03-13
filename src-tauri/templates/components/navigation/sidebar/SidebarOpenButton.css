@@ -1,0 +1,78 @@
+/*
+ * SidebarButton.css
+ * Sidebar Toggle Button Styles
+ * Hamburger menu button for mobile navigation.
+ * Uses CSS variables from Navbar.css for consistent theming.
+ */
+
+/* Main hamburger button */
+button.sidebar-button {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  box-sizing: border-box;
+
+  /* Styling using navbar variables */
+  background-color: var(--navbar-background);
+  border: 1px solid var(--navbar-text);
+  border-radius: 50%;
+  color: var(--navbar-text);
+
+  /* Remove default button styles */
+  cursor: pointer;
+  outline: none;
+
+  /* Animation */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hamburger icon */
+button.sidebar-button img.sidebar-button-hamburger {
+  /* Icon size */
+  width: 20px;
+  height: 20px;
+
+  /* Filter for consistent styling */
+  filter: brightness(0.8);
+
+  /* Animation */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover state */
+button.sidebar-button:hover {
+  /* Enhanced styling on hover */
+  background-color: var(--nav-links-highlight);
+  box-shadow: inset 0 0 8px 2px var(--nav-links-shadow);
+  border-color: var(--navbar-text);
+  transform: scale(1.05);
+}
+
+button.sidebar-button:hover img.sidebar-button-hamburger {
+  /* Brighten icon on hover */
+  filter: brightness(1);
+  transform: rotate(180deg);
+}
+
+/* Active/open state */
+button.sidebar-button.open {
+  /* Styling when sidebar is open */
+  background-color: var(--nav-links-highlight);
+  border-color: var(--navbar-text);
+}
+
+button.sidebar-button.open img.sidebar-button-hamburger {
+  /* Rotate hamburger when open */
+  transform: rotate(90deg);
+  filter: brightness(1.2);
+}
+
+/* Focus state for accessibility */
+button.sidebar-button:focus-visible {
+  outline: 2px solid var(--navbar-text);
+  outline-offset: 2px;
+}

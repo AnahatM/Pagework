@@ -1,0 +1,32 @@
+/* InvisibleSection.css
+ * Styles for the InvisibleSection component
+ */
+
+/* Basic styling for full-width blank section */
+div.invisible-section {
+  width: 100%;
+  min-height: fit-content;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+div.invisible-section .section-panel {
+  /* Additional styles for the section panel if needed */
+  background-color: transparent; /* Make it invisible */
+  border: none; /* Remove borders */
+  box-shadow: none; /* Remove shadows */
+  backdrop-filter: none; /* Remove any backdrop filter */
+  -webkit-backdrop-filter: none; /* Remove any webkit backdrop filter */
+}
+
+div.invisible-section.blur .section-panel {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@media (max-width: 480px) {
+  div.invisible-section .section-panel {
+    padding: 0;
+    margin: 0;
+  }
+}

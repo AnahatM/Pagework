@@ -1,0 +1,125 @@
+/*
+ * Sidebar.css
+ * Sidebar Styles
+ * Mobile navigation sidebar component with backdrop and sliding animation.
+ * Uses CSS variables from Navbar.css for consistent theming.
+ */
+
+/* Main sidebar container hidden by default */
+aside.sidebar {
+  /* Position and layering */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 999;
+
+  /* Initial state - hidden */
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s ease, opacity 0.3s ease;
+
+  /* Prevent body scroll when sidebar is open */
+  overflow: hidden;
+}
+
+/* Sidebar when open */
+aside.sidebar.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Backdrop overlay */
+aside.sidebar div.sidebar-backdrop {
+  /* Full screen overlay */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Styling using navbar variables */
+  background-color: var(--navbar-background-transluscent);
+
+  /* Initial state - transparent */
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Interaction */
+  cursor: pointer;
+}
+
+/* Backdrop when sidebar is open */
+aside.sidebar.open div.sidebar-backdrop {
+  opacity: 0.3;
+}
+
+/* Sidebar content panel */
+aside.sidebar nav.sidebar-content {
+  /* Position and size */
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(300px, 80vw);
+  height: 100vh;
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+
+  /* Styling using navbar variables */
+  background-color: var(--navbar-background-transluscent);
+  backdrop-filter: blur(10px);
+
+  /* Shadow on the left side */
+  box-shadow: -5px 0 15px var(--navbar-shadow);
+
+  /* Animation */
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Sidebar content when open */
+aside.sidebar.open nav.sidebar-content {
+  transform: translateX(0);
+}
+
+/* Navigation list styling */
+aside.sidebar nav.sidebar-content ul.sidebar-nav-list {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  /* Ensure full width */
+  width: 100%;
+}
+
+/* List item styling */
+aside.sidebar nav.sidebar-content ul.sidebar-nav-list li {
+  width: 100%;
+}
+
+/* Scrollbar styling for webkit browsers */
+aside.sidebar nav.sidebar-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+aside.sidebar nav.sidebar-content::-webkit-scrollbar-track {
+  background-color: var(--navbar-background);
+}
+
+aside.sidebar nav.sidebar-content::-webkit-scrollbar-thumb {
+  background-color: var(--nav-links-highlight);
+  border-radius: 3px;
+}
+
+aside.sidebar nav.sidebar-content::-webkit-scrollbar-thumb:hover {
+  background-color: var(--navbar-text);
+}

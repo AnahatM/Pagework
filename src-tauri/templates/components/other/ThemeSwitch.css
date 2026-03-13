@@ -1,0 +1,61 @@
+/* 
+ * ThemeSwitch.css
+ * This file contains styles for the theme switch button, which toggles between light and dark modes.
+ * Light mode features a moon icon, while dark mode features a sun icon.
+ * It uses CSS variables for consistent theming across the application.
+ */
+
+button.theme-switch-button {
+  /* Layout */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+
+  /* Styling */
+  background: none;
+  border: 1px solid var(--primary);
+  border-radius: 50%;
+
+  /* Animation */
+  transition: scale 0.15s ease-in-out, transform 0.5s ease-in-out;
+
+  &:hover {
+    background-color: var(--primary);
+    color: var(--inverse-primary);
+    border: 1px solid var(--inverse-primary);
+    transform: rotate(360deg);
+  }
+}
+
+button.theme-switch-button img {
+  /* Layout */
+  width: 16px;
+  height: 16px;
+
+  /* Styling */
+  opacity: 0.7;
+  transition: filter 0.15s ease-in-out;
+}
+
+/* Dark mode sun should be white by default (inverted), then black on hover */
+[data-theme="dark"] button.theme-switch-button img {
+  filter: invert(1);
+}
+
+[data-theme="dark"] button.theme-switch-button:hover img {
+  filter: none;
+}
+
+/* Light mode moon should be black by default, then white on hover */
+[data-theme="light"] button.theme-switch-button img {
+  filter: none;
+}
+
+[data-theme="light"] button.theme-switch-button:hover img {
+  filter: invert(1);
+}

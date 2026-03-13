@@ -18,6 +18,8 @@ pub fn run() {
             commands::project::save_manifest,
             commands::project::get_recent_projects,
             commands::project::add_recent_project,
+            commands::project::read_project_file,
+            commands::project::list_project_files,
             // Codegen
             commands::codegen::regenerate_all,
             // Assets
@@ -26,6 +28,9 @@ pub fn run() {
             commands::assets::delete_asset,
             // Dev server
             commands::devserver::get_devserver_status,
+            commands::devserver::start_devserver,
+            commands::devserver::stop_devserver,
+            commands::devserver::run_npm_install,
             // System
             commands::system::check_node_installed,
             commands::system::check_npm_installed,

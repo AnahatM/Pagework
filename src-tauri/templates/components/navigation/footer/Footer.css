@@ -1,0 +1,59 @@
+/* 
+ * Footer.css
+ * Styles for the Footer component
+ * This file contains styles for the footer container and its elements.
+ */
+
+footer.footer {
+  /* Positioning and layout */
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 350px;
+  max-height: 350px;
+  padding: 50px;
+
+  /* Style */
+  background-color: var(--panel-background-translucent);
+  box-shadow: inset 0 10px 15px var(--panel-shadow-light);
+  box-shadow: inset 5px -10px 15px var(--panel-shadow-dark);
+
+  /* Fix scroll anchoring issues */
+  overflow: anchor;
+  scroll-margin-bottom: 0;
+}
+
+/* Backdrop filter using pseudo-element to avoid scroll issues */
+footer.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Responsive Layout */
+@media (max-width: 970px) {
+  footer.footer {
+    flex-direction: column;
+    align-items: center;
+    max-height: none; /* Remove height constraint in mobile */
+    min-height: auto; /* Allow natural height */
+  }
+}
+
+@media (max-width: 480px) {
+  footer.footer {
+    padding: clamp(25px, 4vw, 40px);
+    padding-bottom: 60px;
+    max-height: none; /* Remove height constraint in mobile */
+    min-height: auto; /* Allow natural height */
+  }
+}

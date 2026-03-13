@@ -1,0 +1,29 @@
+/* SectionPanel.css
+ * Styles for the SectionPanel component
+ * Generic component for displaying content in a container.
+ * Adaptible for various layouts and content types.
+ */
+
+section.section-panel {
+  /* Layout */
+  width: 100%;
+  min-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 25px;
+
+  /* Styling */
+  background-color: var(--panel-background-translucent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid var(--outline);
+}
+
+@media (max-width: 500px) {
+  section.section-panel {
+    padding: 10px;
+  }
+}

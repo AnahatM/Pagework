@@ -1,0 +1,59 @@
+/* 
+ * NotFound.css
+ * Styles for the NotFound component
+ * This file contains styles for the Not Found container and its elements.
+ */
+
+div.not-found-container {
+  /* Layout and Positioning */
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Interaction */
+  user-select: none;
+}
+
+div.not-found-container div.not-found-panel {
+  /* Layout and Positioning */
+  width: min(90vw, 500px);
+  min-height: 300px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  /* Styling */
+  background-color: var(--panel-background-translucent);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 10px;
+  border: 1px solid var(--outline);
+
+  /* Text */
+  text-align: center;
+}
+
+/* Main Not Found Title */
+div.not-found-container div.not-found-panel h1 {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--outline);
+  font-weight: 800;
+}
+
+/* Preheading Style */
+div.not-found-container div.not-found-panel h2 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* Error description text */
+div.not-found-container div.not-found-panel p {
+  margin-bottom: 20px;
+  max-width: max(300px, 80%);
+}

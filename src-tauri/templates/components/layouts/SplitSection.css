@@ -1,0 +1,32 @@
+/** SplitSection.css
+ * Styles for the SplitSection component
+ * Displays content in two panels side by side.
+ */
+
+div.split-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+div.split-section .section-panel {
+  flex: 1 1 320px;
+  min-width: 320px;
+  max-width: calc(50% - 10px);
+}
+
+/* When panels wrap vertically, make them full width */
+@media (max-width: 720px) {
+  div.split-section .section-panel {
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+}

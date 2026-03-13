@@ -1,0 +1,54 @@
+/* 
+ * SectionWithImageStyles.css 
+ * Image-specific styles 
+ */
+
+/* Base image styles */
+.section-image {
+  flex-shrink: 0;
+  object-fit: cover;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  height: auto;
+  align-self: stretch;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* Floating Style - Circular image that floats and offsets from edges */
+.section-image.image-floating {
+  width: 180px !important;
+  height: 180px !important;
+  border-radius: 50% !important;
+  position: relative;
+  background: transparent !important;
+}
+
+/* Stretch to Edge Style */
+.section-image.image-stretchToEdge {
+  height: auto !important;
+  align-self: stretch !important;
+  max-width: 40% !important;
+  min-width: 200px;
+  border-radius: 12px;
+}
+
+/* Mobile Responsive Styles for Images */
+@media (max-width: 992px) {
+  /* Mobile floating style */
+  .section-image.image-floating {
+    width: 200px !important;
+    height: 200px !important;
+    margin: 0 !important;
+    position: static;
+    object-fit: cover !important;
+  }
+
+  /* Mobile stretch style */
+  .section-image.image-stretchToEdge {
+    width: 80% !important;
+    max-width: 300px !important;
+    height: 200px !important;
+    margin: 0 auto !important;
+    border-radius: 12px;
+    object-fit: cover !important;
+  }
+}

@@ -3,6 +3,7 @@
    Main layout when a project is open
    ═══════════════════════════════════════════ */
 
+import { useAutoSave } from "@hooks/useAutoSave";
 import { useProjectStore } from "@stores/projectStore";
 import { useUIStore } from "@stores/uiStore";
 import { useEffect } from "react";
@@ -17,6 +18,7 @@ export function AppShell() {
   const pages = useProjectStore((s) => s.manifest?.pages ?? []);
   const selectedPageId = useUIStore((s) => s.selectedPageId);
   const selectPage = useUIStore((s) => s.selectPage);
+  const { saveIndicator } = useAutoSave();
 
   // Auto-select first page if none selected
   useEffect(() => {
@@ -34,6 +36,7 @@ export function AppShell() {
         <RightSidebar />
       </div>
       <StatusBar />
+      {saveIndicator && <div className={styles.saveToast}>Saved</div>}
     </div>
   );
 }

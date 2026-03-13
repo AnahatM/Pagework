@@ -1,0 +1,86 @@
+/** 
+ * Resets.css
+ * This file contains CSS resets to ensure consistent styling across browsers.
+ */
+
+/* Reset Default CSS Properties */
+* {
+  /* Layout Reset */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 100%;
+
+  /* Visual Reset */
+  border: none;
+  outline: none;
+  text-decoration: none;
+  list-style: none;
+  font-synthesis: style weight;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Default Transition */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Set Default Colors and Fonts */
+body {
+  /* Colors */
+  color: var(--text);
+  background-color: var(--page-background);
+
+  /* Text */
+  font-family: var(--font-normal);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+}
+
+/* 
+ * Ensure minimum full height for body 
+ * Prevent horizontal overflow scrolling
+ */
+html,
+body {
+  /* Layout */
+  overflow-x: hidden;
+  min-height: 100%;
+}
+
+/* Ensure minimum full height for root element */
+#root,
+#root div.app-container {
+  /* Layout */
+  min-height: 100%;
+}
+
+/* Set Text Color */
+p,
+a,
+span,
+li {
+  /* Styling */
+  color: var(--text);
+}
+
+/* Set Selection Highlight Color */
+::selection {
+  /* Styling */
+  background-color: var(--text-selection);
+}
+
+u {
+  /* Underline */
+  text-decoration: underline;
+}
+
+strong {
+  /* Bold */
+  font-weight: bold;
+}
+
+em {
+  /* Italic */
+  font-style: italic;
+}

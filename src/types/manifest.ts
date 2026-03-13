@@ -13,6 +13,7 @@ export interface SiteBuilderManifest {
   footer: FooterConfig;
   pages: PageConfig[];
   assets: AssetsConfig;
+  blogConfig?: BlogConfig;
 }
 
 /* ── Site Settings ───────────────────────── */
@@ -122,7 +123,6 @@ export interface PageConfig {
   metaDescription: string;
   isHomePage: boolean;
   components: ComponentInstance[];
-  blogConfig?: BlogConfig;
 }
 
 /* ── Components ──────────────────────────── */

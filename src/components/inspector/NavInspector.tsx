@@ -83,72 +83,79 @@ export function NavInspector() {
         label="Logo"
         value={nav.logoPath}
         onChange={updateNavLogo}
+        category="icons"
       />
 
       <div className={styles.sectionLabel}>Navigation Items</div>
       <div className={styles.itemList}>
-        {nav.navItems.map((item, idx) => (
-          <div key={item.id} className={styles.item}>
-            <div className={styles.itemHeader}>
-              <span className={styles.itemLabel}>#{idx + 1}</span>
+        {nav.navItems.length === 0 ? (
+          <div className={styles.emptyHint}>
+            No navigation items yet. Add one to get started.
+          </div>
+        ) : (
+          nav.navItems.map((item, idx) => (
+            <div key={item.id} className={styles.item}>
+              <div className={styles.itemHeader}>
+                <span className={styles.itemLabel}>#{idx + 1}</span>
+                <button
+                  className={styles.removeBtn}
+                  onClick={() => removeItem(idx)}
+                >
+                  ×
+                </button>
+              </div>
+              <TextControl
+                label="Label"
+                value={item.linkName}
+                onChange={(v) => setItem(idx, { linkName: v })}
+              />
+              <TextControl
+                label="Path"
+                value={item.path}
+                onChange={(v) => setItem(idx, { path: v })}
+              />
+              <TextControl
+                label="Icon"
+                value={item.linkIcon}
+                onChange={(v) => setItem(idx, { linkIcon: v })}
+              />
+
+              {item.subPages.length > 0 && (
+                <div className={styles.subList}>
+                  {item.subPages.map((sub, si) => (
+                    <div key={sub.id} className={styles.item}>
+                      <div className={styles.itemHeader}>
+                        <span className={styles.itemLabel}>Sub #{si + 1}</span>
+                        <button
+                          className={styles.removeBtn}
+                          onClick={() => removeSubPage(idx, si)}
+                        >
+                          ×
+                        </button>
+                      </div>
+                      <TextControl
+                        label="Label"
+                        value={sub.linkName}
+                        onChange={(v) => setSubPage(idx, si, { linkName: v })}
+                      />
+                      <TextControl
+                        label="Path"
+                        value={sub.path}
+                        onChange={(v) => setSubPage(idx, si, { path: v })}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
               <button
-                className={styles.removeBtn}
-                onClick={() => removeItem(idx)}
+                className={styles.addSubBtn}
+                onClick={() => addSubPage(idx)}
               >
-                ×
+                + Sub Page
               </button>
             </div>
-            <TextControl
-              label="Label"
-              value={item.linkName}
-              onChange={(v) => setItem(idx, { linkName: v })}
-            />
-            <TextControl
-              label="Path"
-              value={item.path}
-              onChange={(v) => setItem(idx, { path: v })}
-            />
-            <TextControl
-              label="Icon"
-              value={item.linkIcon}
-              onChange={(v) => setItem(idx, { linkIcon: v })}
-            />
-
-            {item.subPages.length > 0 && (
-              <div className={styles.subList}>
-                {item.subPages.map((sub, si) => (
-                  <div key={sub.id} className={styles.item}>
-                    <div className={styles.itemHeader}>
-                      <span className={styles.itemLabel}>Sub #{si + 1}</span>
-                      <button
-                        className={styles.removeBtn}
-                        onClick={() => removeSubPage(idx, si)}
-                      >
-                        ×
-                      </button>
-                    </div>
-                    <TextControl
-                      label="Label"
-                      value={sub.linkName}
-                      onChange={(v) => setSubPage(idx, si, { linkName: v })}
-                    />
-                    <TextControl
-                      label="Path"
-                      value={sub.path}
-                      onChange={(v) => setSubPage(idx, si, { path: v })}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-            <button
-              className={styles.addSubBtn}
-              onClick={() => addSubPage(idx)}
-            >
-              + Sub Page
-            </button>
-          </div>
-        ))}
+          ))
+        )}
       </div>
       <button className={styles.addBtn} onClick={addItem}>
         + Add Nav Item

@@ -38,6 +38,11 @@
   animation: pulse 1s infinite;
 }
 
+.indicator.installing {
+  background: var(--status-warning);
+  animation: pulse 1s infinite;
+}
+
 .indicator.running {
   background: var(--status-success);
 }

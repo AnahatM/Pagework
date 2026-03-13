@@ -1,3 +1,4 @@
+import { BlogInspector } from "@components/inspector/BlogInspector";
 import { ComponentInspector } from "@components/inspector/ComponentInspector";
 import { FooterInspector } from "@components/inspector/FooterInspector";
 import { NavInspector } from "@components/inspector/NavInspector";
@@ -14,6 +15,7 @@ const TAB_LABELS: Record<string, string> = {
   nav: "Navigation",
   footer: "Footer",
   settings: "Site Settings",
+  blog: "Blog Posts",
 };
 
 export function RightSidebar() {
@@ -41,6 +43,8 @@ export function RightSidebar() {
         return <FooterInspector />;
       case "settings":
         return <SiteSettingsInspector />;
+      case "blog":
+        return <BlogInspector />;
       default:
         return null;
     }

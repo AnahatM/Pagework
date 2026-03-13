@@ -1,0 +1,167 @@
+/* 
+ * Modal.css
+ * Styles for the Modal component
+ * This file contains styles for the modal backdrop, container, and content elements.
+ */
+
+/* Modal backdrop overlay */
+.modal-backdrop {
+  /* Layout and Positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Styling */
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+
+  /* Animation */
+  animation: modal-fade-in 0.2s ease-out;
+}
+
+/* Modal container */
+.modal-container {
+  /* Layout and Positioning */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-radius: 12px;
+
+  /* Styling */
+  background-color: var(--panel-background);
+  border: 1px solid var(--outline);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 4px 15px rgba(0, 0, 0, 0.2);
+
+  /* Interaction */
+  user-select: none;
+
+  /* Animation */
+  animation: modal-slide-in 0.3s ease-out;
+}
+
+/* Modal content area */
+.modal-content {
+  /* Layout and Positioning */
+  flex: 1;
+  overflow-y: auto;
+
+  /* Styling */
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Close button */
+.modal-close-button {
+  /* Layout and Positioning */
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 35px;
+  height: 35px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Styling */
+  background: none;
+  border: 1px solid transparent;
+  color: var(--text);
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 50%;
+
+  /* Interaction */
+  transition: all 0.2s ease;
+}
+
+.modal-close-button:hover {
+  background-color: var(--panel-background-translucent);
+  color: var(--negative);
+  border: 1px solid var(--negative);
+}
+
+.modal-close-button:active {
+  transform: scale(0.95);
+}
+
+.modal-close-button:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Animations */
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-slide-in {
+  from {
+    transform: scale(0.9) translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .modal-container {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .modal-close-button {
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+  }
+}
+
+/* Dark theme specific adjustments */
+:root[data-theme="dark"] .modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Light theme specific adjustments */
+:root[data-theme="light"] .modal-backdrop {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Utility classes for common modal sizes */
+.modal-container.modal-small {
+  width: 400px;
+  max-width: 90vw;
+}
+
+.modal-container.modal-medium {
+  width: 600px;
+  max-width: 90vw;
+}
+
+.modal-container.modal-large {
+  width: 800px;
+  max-width: 95vw;
+}
+
+.modal-container.modal-fullscreen {
+  width: 95vw;
+  height: 90vh;
+}

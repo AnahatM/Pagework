@@ -1,0 +1,88 @@
+/* 
+ * LinkButton.css
+ * This file contains styles for the link button, which can be used for navigation or actions.
+ */
+
+a.link-button {
+  /* Layout */
+  padding: 8px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  /* Styling */
+  background-color: transparent;
+  color: var(--inverse-primary);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px var(--panel-shadow-dark);
+
+  /* Text */
+  text-align: center;
+  font-size: 14px;
+  font-family: var(--font-normal);
+  text-decoration: none;
+
+  /* Animation */
+  transition: all 0.15s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* Background Types */
+a.link-button.background-primary {
+  background-color: var(--primary);
+  color: var(--inverse-primary);
+}
+
+a.link-button.background-secondary {
+  background-color: var(--secondary);
+  color: var(--inverse-primary);
+}
+
+a.link-button.background-transparent {
+  background-color: transparent;
+  color: var(--primary);
+}
+
+/* Font Types */
+a.link-button.font-normal {
+  font-family: var(--font-normal);
+  font-weight: var(--font-weight-normal);
+  text-transform: none;
+}
+
+a.link-button.font-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Outline Types */
+a.link-button.outline-none {
+  border: none;
+}
+
+a.link-button.outline-normal {
+  border: 1px solid var(--outline);
+}
+
+a.link-button.outline-primary {
+  border: 1px solid var(--primary);
+}
+
+/* Width Control */
+a.link-button.fit-to-text {
+  width: fit-content;
+  display: inline-flex;
+}
+
+/* Icon Styling */
+a.link-button img.link-button-icon {
+  height: 18px;
+  width: auto;
+  object-fit: contain;
+  margin-right: 5px;
+}

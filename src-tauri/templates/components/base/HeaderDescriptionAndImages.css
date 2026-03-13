@@ -1,0 +1,66 @@
+/* HeaderDescriptionAndImages Component Styles */
+
+.header-description-images-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.header-description-images-container .header-description-content {
+  width: 100%;
+}
+
+.header-description-images-container .header-description-images-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* gap is set via inline style for customization */
+}
+
+.header-description-images-container .header-description-image {
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px var(--panel-shadow-light);
+  transition: all 0.2s ease;
+  object-fit: cover;
+  border: 1px solid var(--outline);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s ease-in-out;
+}
+
+/* Hover effect for images */
+.header-description-images-container .header-description-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px var(--panel-shadow-dark);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .header-description-images-container {
+    gap: 1.5rem;
+  }
+
+  .header-description-images-container .header-description-images-row {
+    justify-content: center;
+    gap: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-description-images-container {
+    gap: 1rem;
+  }
+
+  .header-description-images-container .header-description-images-row {
+    gap: 0.5rem;
+  }
+
+  .header-description-images-container .header-description-image {
+    max-width: 90vw !important;
+  }
+}

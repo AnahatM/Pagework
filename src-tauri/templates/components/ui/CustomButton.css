@@ -1,0 +1,97 @@
+.button {
+  /* Layout */
+  display: inline-flex;
+  justify-content: center;
+  padding: 10px 15px;
+  align-items: center;
+  min-width: 150px;
+
+  /* Styling */
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button:active {
+  transform: translateY(0);
+  filter: brightness(0.95);
+  box-shadow: none;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Solid variants */
+.button-primary.button-solid {
+  background-color: var(--primary);
+  color: var(--inverse-primary);
+}
+
+.button-secondary.button-solid {
+  background-color: var(--secondary);
+  color: var(--inverse-primary);
+}
+
+.button-positive.button-solid {
+  background-color: var(--positive);
+  color: white;
+}
+
+.button-warning.button-solid {
+  background-color: var(--warning);
+  color: black;
+}
+
+.button-negative.button-solid {
+  background-color: var(--negative);
+  color: white;
+}
+
+/* Translucent variants */
+.button-primary.button-translucent {
+  background-color: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.button-secondary.button-translucent {
+  background-color: transparent;
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
+}
+
+.button-positive.button-translucent {
+  background-color: var(--positive-translucent);
+  border: 1px solid var(--positive);
+  color: var(--positive);
+}
+
+.button-warning.button-translucent {
+  background-color: var(--warning-translucent);
+  border: 1px solid var(--warning);
+  color: var(--warning);
+}
+
+.button-negative.button-translucent {
+  background-color: var(--negative-translucent);
+  border: 1px solid var(--negative);
+  color: var(--negative);
+}
+
+.button.button-display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 700;
+}

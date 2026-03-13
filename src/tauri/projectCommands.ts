@@ -39,3 +39,14 @@ export async function getRecentProjects(): Promise<RecentProject[]> {
 export async function addRecentProject(project: RecentProject): Promise<void> {
   return invoke("add_recent_project", { project });
 }
+
+export async function readProjectFile(
+  projectPath: string,
+  relativePath: string,
+): Promise<string> {
+  return invoke("read_project_file", { projectPath, relativePath });
+}
+
+export async function listProjectFiles(projectPath: string): Promise<string[]> {
+  return invoke("list_project_files", { projectPath });
+}

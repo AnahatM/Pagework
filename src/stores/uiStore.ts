@@ -11,6 +11,7 @@ export type InspectorTab =
   | "theme"
   | "nav"
   | "footer"
+  | "blog"
   | "settings";
 
 export type CenterPanel = "structure" | "code";
