@@ -69,9 +69,9 @@
   --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
 
   --text-xs: 11px;
-  --text-sm: 12px;
-  --text-base: 13px;
-  --text-md: 14px;
+  --text-sm: 12.5px;
+  --text-base: 14px;
+  --text-md: 15px;
   --text-lg: 16px;
   --text-xl: 20px;
   --text-2xl: 24px;
