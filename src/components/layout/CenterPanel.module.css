@@ -7,6 +7,35 @@
   overflow: hidden;
 }
 
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 4px 12px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--glass-border);
+  flex-shrink: 0;
+}
+
+.pageName {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pagePath {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+}
+
 .emptyState {
   display: flex;
   align-items: center;

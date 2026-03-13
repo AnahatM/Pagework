@@ -1,9 +1,11 @@
-import { useNavigationViewport, useOptimizedScroll } from "@/hooks/useWindowEvents.ts";
+import {
+  useNavigationViewport,
+  useOptimizedScroll,
+} from "@/hooks/useWindowEvents.ts";
 import Sidebar from "@components/navigation/sidebar/Sidebar.tsx";
 import SidebarOpenButton from "@components/navigation/sidebar/SidebarOpenButton.tsx";
 import type { NavItem } from "@components/navigation/types/NavigationTypes.ts";
 import ThemeSwitch from "@components/other/ThemeSwitch.tsx";
-import { ASSET_PATHS } from "@routes/AssetPathHandler.ts";
 import navConfig from "@routes/NavigationConfiguration.json";
 import { useEffect, useRef, useState, type JSX } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -24,7 +26,9 @@ const isActive = (path: string): boolean => {
   let currentPath = window.location.pathname;
   // Ensure currentPath starts with a leading slash
   if (basePath !== "/" && currentPath.startsWith(basePath)) {
-    currentPath = currentPath.slice(basePath.length - (basePath.endsWith("/") ? 1 : 0));
+    currentPath = currentPath.slice(
+      basePath.length - (basePath.endsWith("/") ? 1 : 0),
+    );
     if (!currentPath.startsWith("/")) currentPath = "/" + currentPath;
   }
   if (path === "/") return currentPath === "/";
@@ -74,10 +78,12 @@ export default function Navbar(): JSX.Element {
 
   // Return the Navbar component JSX
   return (
-    <nav className={`navbar ${isScrolled ? "scrolled" : ""} ${isMobile ? "mobile" : "desktop"}`}>
+    <nav
+      className={`navbar ${isScrolled ? "scrolled" : ""} ${isMobile ? "mobile" : "desktop"}`}
+    >
       {/* Logo with Link to Homepage */}
-      <Link to="/">
-        <img className="navbar-logo" alt="Anahat Audgal" src={`${ASSET_PATHS.GRAPHICS}logo.png`} />
+      <Link to="/" className="navbar-logo-link">
+        <span className="navbar-logo-text">{document.title || "Home"}</span>
       </Link>
 
       {/* Navigation Links Loaded from Nav Config */}
@@ -135,7 +141,10 @@ export default function Navbar(): JSX.Element {
           {/* Theme Switch for Mobile */}
           <ThemeSwitch />
           {/* Hamburger button for mobile view */}
-          <SidebarOpenButton isOpen={sidebarOpen} onClick={() => setSidebarOpen((v) => !v)} />
+          <SidebarOpenButton
+            isOpen={sidebarOpen}
+            onClick={() => setSidebarOpen((v) => !v)}
+          />
         </div>
       )}
 

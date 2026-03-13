@@ -25,6 +25,7 @@ pub fn generate_package_json(project_name: &str, author_name: &str) -> String {
   }},
   "dependencies": {{
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "react": "^19.1.0",

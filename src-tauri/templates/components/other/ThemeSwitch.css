@@ -22,7 +22,9 @@ button.theme-switch-button {
   border-radius: 50%;
 
   /* Animation */
-  transition: scale 0.15s ease-in-out, transform 0.5s ease-in-out;
+  transition:
+    scale 0.15s ease-in-out,
+    transform 0.5s ease-in-out;
 
   &:hover {
     background-color: var(--primary);
@@ -32,30 +34,21 @@ button.theme-switch-button {
   }
 }
 
-button.theme-switch-button img {
+button.theme-switch-button svg {
   /* Layout */
   width: 16px;
   height: 16px;
 
   /* Styling */
   opacity: 0.7;
-  transition: filter 0.15s ease-in-out;
+  color: var(--primary);
+  transition: color 0.15s ease-in-out;
 }
 
-/* Dark mode sun should be white by default (inverted), then black on hover */
-[data-theme="dark"] button.theme-switch-button img {
-  filter: invert(1);
+[data-theme="dark"] button.theme-switch-button svg {
+  color: var(--primary);
 }
 
-[data-theme="dark"] button.theme-switch-button:hover img {
-  filter: none;
-}
-
-/* Light mode moon should be black by default, then white on hover */
-[data-theme="light"] button.theme-switch-button img {
-  filter: none;
-}
-
-[data-theme="light"] button.theme-switch-button:hover img {
-  filter: invert(1);
+button.theme-switch-button:hover svg {
+  color: var(--inverse-primary);
 }

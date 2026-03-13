@@ -363,3 +363,41 @@ export function UrlControl({ label, value, onChange }: UrlControlProps) {
     </div>
   );
 }
+
+/* ══════════════════════════════════════════════
+   Path Control — internal path with page validation
+   ══════════════════════════════════════════════ */
+
+interface PathControlProps {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+}
+
+export function PathControl({ label, value, onChange }: PathControlProps) {
+  const pages = useProjectStore((s) => s.manifest?.pages ?? []);
+
+  const isExternal =
+    value.startsWith("http://") || value.startsWith("https://");
+  const isHome = value === "/";
+  const pageExists =
+    isExternal || isHome || pages.some((p) => p.path === value);
+
+  return (
+    <div className={styles.control}>
+      <label className={styles.label}>{label}</label>
+      <input
+        className={styles.input}
+        type="text"
+        value={value ?? ""}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="/"
+      />
+      {value && !isExternal && !pageExists && (
+        <span className={styles.pathWarning}>
+          Page "{value}" doesn't exist yet
+        </span>
+      )}
+    </div>
+  );
+}

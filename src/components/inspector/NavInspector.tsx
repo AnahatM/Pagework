@@ -1,6 +1,10 @@
 import type { NavItem } from "@/types/manifest";
 import { useProjectStore } from "@stores/projectStore";
-import { ImagePickerControl, TextControl } from "./controls/Controls";
+import {
+  ImagePickerControl,
+  PathControl,
+  TextControl,
+} from "./controls/Controls";
 import styles from "./NavInspector.module.css";
 
 function generateId() {
@@ -109,7 +113,7 @@ export function NavInspector() {
                 value={item.linkName}
                 onChange={(v) => setItem(idx, { linkName: v })}
               />
-              <TextControl
+              <PathControl
                 label="Path"
                 value={item.path}
                 onChange={(v) => setItem(idx, { path: v })}
@@ -138,7 +142,7 @@ export function NavInspector() {
                         value={sub.linkName}
                         onChange={(v) => setSubPage(idx, si, { linkName: v })}
                       />
-                      <TextControl
+                      <PathControl
                         label="Path"
                         value={sub.path}
                         onChange={(v) => setSubPage(idx, si, { path: v })}

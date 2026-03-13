@@ -32,42 +32,54 @@
   margin-left: 4px;
 }
 
-.spacer {
-  flex: 1;
+.center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  padding: 2px;
+  -webkit-app-region: no-drag;
+}
+
+.tabButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.tabButton:hover {
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+}
+
+.tabButton.active {
+  background: var(--bg-primary);
+  color: var(--accent);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 .right {
   display: flex;
   align-items: center;
   gap: var(--space-xs);
+  margin-left: auto;
   -webkit-app-region: no-drag;
-}
-
-.iconButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border: none;
-  border-radius: var(--radius-sm);
-  background: transparent;
-  color: var(--text-secondary);
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition:
-    background var(--transition-fast),
-    color var(--transition-fast);
-}
-
-.iconButton:hover {
-  background: var(--bg-tertiary);
-  color: var(--text-primary);
-}
-
-.iconButton.active {
-  background: var(--accent-muted);
-  color: var(--accent);
 }
 
 /* ── Error banner ─── */

@@ -43,11 +43,6 @@ export function PageStructureView() {
 
   return (
     <div className={styles.view}>
-      <div className={styles.pageHeader}>
-        <span className={styles.pageName}>{activePage.name}</span>
-        <span className={styles.pagePath}>{activePage.path}</span>
-      </div>
-
       <div className={styles.componentList}>
         {activePage.components.map((comp) => (
           <ComponentBlock

@@ -1,6 +1,12 @@
 // filepath: c:\Dev\RobotomiesWebsite\src\components\content\ImageCarousel.tsx
 import { analyzeImageBrightness } from "@/utils/ImageUtils";
-import assetPath, { ASSET_PATHS } from "@routes/AssetPathHandler";
+import {
+  faChevronLeft,
+  faChevronRight,
+  faExternalLinkAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import assetPath from "@routes/AssetPathHandler";
 import { useEffect, useRef, useState, type JSX } from "react";
 import "./ImageCarousel.css";
 
@@ -45,7 +51,7 @@ export default function ImageCarousel(props: ImageCarouselProps): JSX.Element {
     images,
     autoScroll = false,
     autoScrollTimeMS: autoScrollTime = 3000,
-    className = ""
+    className = "",
   } = props;
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -95,7 +101,9 @@ export default function ImageCarousel(props: ImageCarouselProps): JSX.Element {
     if (isAutoScrolling) {
       setIsAutoScrolling(false);
     }
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length,
+    );
   };
 
   const goToNext = (): void => {
@@ -131,15 +139,14 @@ export default function ImageCarousel(props: ImageCarouselProps): JSX.Element {
         </div>
 
         {/* Previous button */}
-        <button className="carousel-arrow carousel-arrow-prev" onClick={goToPrevious}>
-          <img
-            src={`${ASSET_PATHS.GRAPHICS}expand.png`}
-            alt="Previous"
+        <button
+          className="carousel-arrow carousel-arrow-prev"
+          onClick={goToPrevious}
+        >
+          <FontAwesomeIcon
+            icon={faChevronLeft}
             className="carousel-arrow-icon"
-            style={{
-              transform: "rotate(90deg)",
-              filter: arrowColor === "black" ? "brightness(0)" : "brightness(1)"
-            }}
+            style={{ color: arrowColor }}
           />
         </button>
 
@@ -163,15 +170,14 @@ export default function ImageCarousel(props: ImageCarouselProps): JSX.Element {
         ))}
 
         {/* Next button */}
-        <button className="carousel-arrow carousel-arrow-next" onClick={goToNext}>
-          <img
-            src={`${ASSET_PATHS.GRAPHICS}expand.png`}
-            alt="Next"
+        <button
+          className="carousel-arrow carousel-arrow-next"
+          onClick={goToNext}
+        >
+          <FontAwesomeIcon
+            icon={faChevronRight}
             className="carousel-arrow-icon"
-            style={{
-              transform: "rotate(-90deg)",
-              filter: arrowColor === "black" ? "brightness(0)" : "brightness(1)"
-            }}
+            style={{ color: arrowColor }}
           />
         </button>
       </div>
@@ -190,9 +196,8 @@ export default function ImageCarousel(props: ImageCarouselProps): JSX.Element {
           onClick={() => openImageInNewTab(images[currentIndex].path)}
           aria-label="Open image in new tab"
         >
-          <img
-            src={`${ASSET_PATHS.GRAPHICS}link.png`}
-            alt="Open in new tab"
+          <FontAwesomeIcon
+            icon={faExternalLinkAlt}
             className="carousel-link-icon"
           />
         </button>

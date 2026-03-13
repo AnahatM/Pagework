@@ -5,26 +5,6 @@
   overflow: hidden;
 }
 
-.pageHeader {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  padding: 10px var(--space-md);
-  border-bottom: 1px solid var(--glass-border);
-  background: var(--bg-secondary);
-}
-
-.pageName {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.pagePath {
-  font-size: 0.7rem;
-  color: var(--text-tertiary);
-}
-
 .componentList {
   flex: 1;
   overflow-y: auto;

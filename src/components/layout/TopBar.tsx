@@ -1,4 +1,15 @@
 import { Button } from "@components/shared/Button";
+import {
+  faCloudArrowUp,
+  faCode,
+  faEye,
+  faFloppyDisk,
+  faLayerGroup,
+  faPlay,
+  faStop,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDevServerStore } from "@stores/devServerStore";
 import { useOutputLogStore } from "@stores/outputLogStore";
 import { useProjectStore } from "@stores/projectStore";
@@ -107,45 +118,48 @@ export function TopBar() {
         {isDirty && <span className={styles.dirty}>(unsaved)</span>}
       </div>
 
-      <div className={styles.spacer} />
+      <div className={styles.center}>
+        <button
+          className={`${styles.tabButton} ${activeCenterPanel === "structure" ? styles.active : ""}`}
+          onClick={() => setCenterPanel("structure")}
+        >
+          <FontAwesomeIcon icon={faLayerGroup} />
+          <span>Structure</span>
+        </button>
+        <button
+          className={`${styles.tabButton} ${activeCenterPanel === "code" ? styles.active : ""}`}
+          onClick={() => setCenterPanel("code")}
+        >
+          <FontAwesomeIcon icon={faCode} />
+          <span>Code</span>
+        </button>
+        <button
+          className={`${styles.tabButton} ${activeCenterPanel === "preview" ? styles.active : ""}`}
+          onClick={() => setCenterPanel("preview")}
+        >
+          <FontAwesomeIcon icon={faEye} />
+          <span>Preview</span>
+        </button>
+      </div>
 
       <div className={styles.right}>
-        <button
-          className={`${styles.iconButton} ${activeCenterPanel === "structure" ? styles.active : ""}`}
-          onClick={() => setCenterPanel("structure")}
-          title="Structure view"
-        >
-          ☰
-        </button>
-        <button
-          className={`${styles.iconButton} ${activeCenterPanel === "code" ? styles.active : ""}`}
-          onClick={() => setCenterPanel("code")}
-          title="Code preview"
-        >
-          {"</>"}
-        </button>
-        <button
-          className={`${styles.iconButton} ${activeCenterPanel === "preview" ? styles.active : ""}`}
-          onClick={() => setCenterPanel("preview")}
-          title="Live preview"
-        >
-          ▶
-        </button>
-
         <Button
           size="sm"
           variant="secondary"
           onClick={handleSave}
           disabled={!isDirty}
         >
+          <FontAwesomeIcon icon={faFloppyDisk} />
           Save
         </Button>
         {serverStatus === "running" ? (
           <>
             <Button size="sm" variant="primary" onClick={handlePreview}>
+              <FontAwesomeIcon icon={faPlay} />
               Open Preview
             </Button>
             <Button size="sm" variant="ghost" onClick={handleStopServer}>
+              <FontAwesomeIcon icon={faStop} />
               Stop
             </Button>
           </>
@@ -158,6 +172,7 @@ export function TopBar() {
               serverStatus === "starting" || serverStatus === "installing"
             }
           >
+            <FontAwesomeIcon icon={faPlay} />
             {serverStatus === "starting"
               ? "Starting…"
               : serverStatus === "installing"
@@ -166,9 +181,11 @@ export function TopBar() {
           </Button>
         )}
         <Button size="sm" variant="ghost" onClick={() => openModal("publish")}>
+          <FontAwesomeIcon icon={faCloudArrowUp} />
           Publish
         </Button>
         <Button size="sm" variant="ghost" onClick={closeProject}>
+          <FontAwesomeIcon icon={faXmark} />
           Close
         </Button>
       </div>

@@ -1,5 +1,35 @@
-import assetPath from "@routes/AssetPathHandler";
+import {
+  faBluesky,
+  faDiscord,
+  faFacebook,
+  faGithub,
+  faInstagram,
+  faLinkedin,
+  faMastodon,
+  faReddit,
+  faTiktok,
+  faTwitch,
+  faTwitter,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { type JSX } from "react";
+
+const platformIcons: Record<string, typeof faGithub> = {
+  github: faGithub,
+  linkedin: faLinkedin,
+  twitter: faTwitter,
+  youtube: faYoutube,
+  instagram: faInstagram,
+  discord: faDiscord,
+  twitch: faTwitch,
+  tiktok: faTiktok,
+  mastodon: faMastodon,
+  bluesky: faBluesky,
+  reddit: faReddit,
+  facebook: faFacebook,
+};
 
 /**
  * Interface for the properties of the SocialIcon component.
@@ -7,30 +37,27 @@ import { type JSX } from "react";
 interface SocialIconProps {
   /** The URL that the icon links to. */
   url: string;
-  /** The path to the icon image. */
-  imgSrc: string;
-  /** The alternative text for the image for accessibility. */
+  /** The platform name (github, linkedin, twitter, etc.) */
+  platform: string;
+  /** The alternative text for accessibility. */
   alt: string;
-  /** Whether to invert the icon colors in dark mode, default is true. */
-  invertOnDarkMode?: boolean;
 }
 
 /**
- * A React component that renders a social icon as a clickable image link to an external URL.
- *
- * @param props - The properties for the social icon.
- *
- * @returns A JSX element representing the social icon link.
+ * A React component that renders a social icon as a clickable FontAwesome icon link.
  */
 export default function SocialIcon(props: SocialIconProps): JSX.Element {
+  const icon = platformIcons[props.platform.toLowerCase()] || faGlobe;
+
   return (
     <a
       href={props.url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`social-link ${props.invertOnDarkMode ? "invert-on-dark" : "no-invert"}`}
+      className="social-link"
+      aria-label={props.alt}
     >
-      <img src={assetPath(props.imgSrc)} alt={props.alt} />
+      <FontAwesomeIcon icon={icon} />
     </a>
   );
 }

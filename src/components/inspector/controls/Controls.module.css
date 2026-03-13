@@ -27,6 +27,12 @@
   border-color: var(--accent);
 }
 
+.pathWarning {
+  font-size: 0.65rem;
+  color: var(--status-warning, #ffb300);
+  margin-top: -2px;
+}
+
 .textarea {
   composes: input;
   min-height: 64px;

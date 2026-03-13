@@ -34,11 +34,17 @@ nav.navbar {
   user-select: none;
 
   /* Smooth transitions using theme variables */
-  transition: top var(--nav-transition-navbar), left var(--nav-transition-navbar),
-    width var(--nav-transition-navbar), max-width var(--nav-transition-navbar),
-    border-radius var(--nav-transition-navbar), transform var(--nav-transition-navbar),
-    background-color var(--nav-transition-slow), backdrop-filter var(--nav-transition-medium),
-    -webkit-backdrop-filter var(--nav-transition-medium), box-shadow var(--nav-transition-medium);
+  transition:
+    top var(--nav-transition-navbar),
+    left var(--nav-transition-navbar),
+    width var(--nav-transition-navbar),
+    max-width var(--nav-transition-navbar),
+    border-radius var(--nav-transition-navbar),
+    transform var(--nav-transition-navbar),
+    background-color var(--nav-transition-slow),
+    backdrop-filter var(--nav-transition-medium),
+    -webkit-backdrop-filter var(--nav-transition-medium),
+    box-shadow var(--nav-transition-medium);
 }
 
 /* Translucent background when scrolled */
@@ -100,11 +106,18 @@ nav.navbar.mobile {
   border-bottom: 1px solid var(--nav-links-highlight);
 }
 
-nav.navbar .navbar-logo {
-  /* Layout */
-  width: 55px;
-  height: 50px;
+nav.navbar .navbar-logo-link {
+  text-decoration: none;
   margin: 20px;
+  display: flex;
+  align-items: center;
+}
+
+nav.navbar .navbar-logo-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+  white-space: nowrap;
 }
 
 nav.navbar div.navbar-center-links {
@@ -118,11 +131,14 @@ nav.navbar div.navbar-center-links {
   /* Styling */
   border-radius: var(--nav-button-border-radius);
   background-color: var(--nav-links-background);
-  box-shadow: inset 5px 5px 5px var(--nav-links-highlight),
+  box-shadow:
+    inset 5px 5px 5px var(--nav-links-highlight),
     inset -10px -10px 15px var(--nav-links-shadow);
 
   /* Smooth transitions */
-  transition: background-color var(--nav-transition-medium), box-shadow var(--nav-transition-medium);
+  transition:
+    background-color var(--nav-transition-medium),
+    box-shadow var(--nav-transition-medium);
 }
 
 nav.navbar div.navbar-right-ui {
@@ -146,11 +162,7 @@ nav.navbar .theme-switch-button {
   border-radius: 50%;
 }
 
-[data-theme="light"] nav.navbar .theme-switch-button img {
-  filter: invert(1);
-}
-
-nav.navbar .theme-switch-button img {
+nav.navbar .theme-switch-button svg {
   width: 16px;
   height: 16px;
 }
@@ -160,8 +172,7 @@ nav.navbar .theme-switch-button img {
     max-height: 70px;
   }
 
-  nav.navbar .navbar-logo {
-    width: 40px;
-    height: 40px;
+  nav.navbar .navbar-logo-text {
+    font-size: 0.95rem;
   }
 }
