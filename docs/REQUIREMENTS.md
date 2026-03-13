@@ -1,4 +1,4 @@
-# SiteBuilder — Requirements & Design Decisions
+# Pagework — Requirements & Design Decisions
 
 ## 1. Product Vision
 
@@ -10,13 +10,13 @@ A local desktop application that enables non-technical users to build, customize
 
 ## 2. Core Principles
 
-| Principle                   | Description                                                                                                                       |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| **Manifest-driven**         | A single JSON manifest (`sitebuilder.project.json`) is the source of truth for the entire website. All code is generated from it. |
-| **No code required**        | Every aspect of the website is controllable through the visual interface.                                                         |
-| **Real website output**     | The generated project is a standard React+Vite app — deployable anywhere, no vendor lock-in.                                      |
-| **Clean separation**        | SiteBuilder app ≠ user's website project. They are fully independent filesystem entities.                                         |
-| **Extensible architecture** | Designed so new components, templates, features (preview panel, AI generation, etc.) can be added with minimal refactoring.       |
+| Principle                   | Description                                                                                                                    |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| **Manifest-driven**         | A single JSON manifest (`pagework.project.json`) is the source of truth for the entire website. All code is generated from it. |
+| **No code required**        | Every aspect of the website is controllable through the visual interface.                                                      |
+| **Real website output**     | The generated project is a standard React+Vite app — deployable anywhere, no vendor lock-in.                                   |
+| **Clean separation**        | Pagework app ≠ user's website project. They are fully independent filesystem entities.                                         |
+| **Extensible architecture** | Designed so new components, templates, features (preview panel, AI generation, etc.) can be added with minimal refactoring.    |
 
 ---
 
@@ -24,14 +24,14 @@ A local desktop application that enables non-technical users to build, customize
 
 ### 3.1 Project Management
 
-| Requirement               | Details                                                                                                                     |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| **Create project**        | New project wizard with: project name, directory (default `~/SiteBuilder/Projects/` or custom), starter template selection. |
-| **Open project**          | Open any existing SiteBuilder project by browsing to its folder (locate `sitebuilder.project.json`).                        |
-| **Recent projects**       | App remembers recently opened projects for quick re-opening on the welcome screen.                                          |
-| **Save**                  | Auto-save on changes + manual Ctrl+S. Both update the manifest and regenerate affected code files.                          |
-| **One project at a time** | Single-project window. Open a different project by returning to welcome screen or File → Open.                              |
-| **Open in file explorer** | Button to open the project folder in the system file manager.                                                               |
+| Requirement               | Details                                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Create project**        | New project wizard with: project name, directory (default `~/Pagework/Projects/` or custom), starter template selection. |
+| **Open project**          | Open any existing Pagework project by browsing to its folder (locate `pagework.project.json`).                           |
+| **Recent projects**       | App remembers recently opened projects for quick re-opening on the welcome screen.                                       |
+| **Save**                  | Auto-save on changes + manual Ctrl+S. Both update the manifest and regenerate affected code files.                       |
+| **One project at a time** | Single-project window. Open a different project by returning to welcome screen or File → Open.                           |
+| **Open in file explorer** | Button to open the project folder in the system file manager.                                                            |
 
 ### 3.2 Starter Templates
 

@@ -47,9 +47,7 @@ export function SetupGuideModal() {
             <li className={styles.step}>
               Run the installer and follow the prompts (keep defaults)
             </li>
-            <li className={styles.step}>
-              Restart SiteBuilder after installation
-            </li>
+            <li className={styles.step}>Restart Pagework after installation</li>
           </ol>
         </div>
 

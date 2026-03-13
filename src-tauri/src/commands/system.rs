@@ -32,12 +32,12 @@ pub async fn check_npm_installed() -> Result<String, String> {
     }
 }
 
-/// Get default project directory (user's home/SiteBuilder Projects).
+/// Get default project directory (user's home/Pagework Projects).
 #[tauri::command]
 pub async fn get_default_project_dir() -> Result<String, String> {
     let home = dirs::home_dir()
         .ok_or("Could not determine home directory")?;
-    let default_dir = home.join("SiteBuilder Projects");
+    let default_dir = home.join("Pagework Projects");
     Ok(default_dir.to_string_lossy().to_string())
 }
 

@@ -3,7 +3,7 @@ pub mod schema;
 use crate::manifest::schema::SiteBuilderManifest;
 use std::path::Path;
 
-const MANIFEST_FILENAME: &str = "sitebuilder.project.json";
+const MANIFEST_FILENAME: &str = "pagework.project.json";
 
 /// Read and parse a manifest from a project directory.
 pub fn read_manifest(project_path: &Path) -> Result<SiteBuilderManifest, String> {

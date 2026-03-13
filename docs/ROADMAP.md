@@ -1,4 +1,4 @@
-# SiteBuilder — Implementation Roadmap
+# Pagework — Implementation Roadmap
 
 Step-by-step plan organized into phases. Each phase builds on the previous one and produces a testable milestone.
 
@@ -89,7 +89,7 @@ Step-by-step plan organized into phases. Each phase builds on the previous one a
 
 ### 2.3 Open Project flow
 
-- Native file dialog to locate `sitebuilder.project.json`
+- Native file dialog to locate `pagework.project.json`
 - Validate and load manifest
 - Add to recent projects
 

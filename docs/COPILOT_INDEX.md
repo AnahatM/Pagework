@@ -1,12 +1,12 @@
-# SiteBuilder — GitHub Copilot Context Index
+# Pagework — GitHub Copilot Context Index
 
-> **Purpose**: This file gives GitHub Copilot (or any AI assistant) full context about the SiteBuilder project so development can continue seamlessly across sessions without re-explaining anything.
+> **Purpose**: This file gives GitHub Copilot (or any AI assistant) full context about the Pagework project so development can continue seamlessly across sessions without re-explaining anything.
 
-## What Is SiteBuilder?
+## What Is Pagework?
 
-SiteBuilder is a **local desktop application** for building websites without writing code. It uses a set of premade React components and a visual interface (inspired by Unity's inspector pattern) to let non-technical users create, edit, and publish websites. Built with **Rust + Tauri v2** (desktop shell) and **React + TypeScript** (UI).
+Pagework is a **local desktop application** for building websites without writing code. It uses a set of premade React components and a visual interface (inspired by Unity's inspector pattern) to let non-technical users create, edit, and publish websites. Built with **Rust + Tauri v2** (desktop shell) and **React + TypeScript** (UI).
 
-The app is **manifest-driven**: a `sitebuilder.project.json` file is the single source of truth for every page, component, prop value, theme color, route, nav link, and footer link. The actual website codebase (React + Vite) is **generated** from this manifest. Users never need to touch code.
+The app is **manifest-driven**: a `pagework.project.json` file is the single source of truth for every page, component, prop value, theme color, route, nav link, and footer link. The actual website codebase (React + Vite) is **generated** from this manifest. Users never need to touch code.
 
 ## Key Documents (Read These First)
 
@@ -14,7 +14,7 @@ The app is **manifest-driven**: a `sitebuilder.project.json` file is the single 
 | -------------------------------------------------------- | ------------------------------------------------------------------- |
 | [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md)             | All requirements, design decisions, constraints, and goals          |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)             | Technical architecture, module structure, data flow, tech stack     |
-| [docs/MANIFEST_SCHEMA.md](docs/MANIFEST_SCHEMA.md)       | Full schema for `sitebuilder.project.json` manifest                 |
+| [docs/MANIFEST_SCHEMA.md](docs/MANIFEST_SCHEMA.md)       | Full schema for `pagework.project.json` manifest                    |
 | [docs/COMPONENT_REGISTRY.md](docs/COMPONENT_REGISTRY.md) | All available website components, their props, and future additions |
 | [docs/ROADMAP.md](docs/ROADMAP.md)                       | Step-by-step implementation plan with phases                        |
 | [docs/STATUS.md](docs/STATUS.md)                         | Current progress — which phase/step we're on                        |
@@ -23,7 +23,7 @@ The app is **manifest-driven**: a `sitebuilder.project.json` file is the single 
 ## Project Structure (Planned)
 
 ```
-SiteBuilder/
+Pagework/
 ├── COPILOT_INDEX.md              ← YOU ARE HERE
 ├── docs/                         ← All design & planning docs
 │
@@ -103,12 +103,12 @@ The component library and website template originates from:
 
 - **`c:\Dev\PortfolioWebsiteTemplate`** — Reference React+Vite website with all premade components
 
-The SiteBuilder's `templates/` folder contains the actual component source files that get copied into user projects. These are derived from PortfolioWebsiteTemplate but may diverge.
+Pagework's `templates/` folder contains the actual component source files that get copied into user projects. These are derived from PortfolioWebsiteTemplate but may diverge.
 
 ## Quick Reference
 
 - **State management**: Zustand (simple, minimal boilerplate)
-- **Manifest file**: `sitebuilder.project.json` in project root — single source of truth
+- **Manifest file**: `pagework.project.json` in project root — single source of truth
 - **Code generation**: Rust-side, writes .tsx/.css/.json files from manifest
 - **Preview**: `npm run dev` spawned as child process, opens default browser
 - **Builder theme**: Dark only, glassy/acrylic/translucent aesthetic

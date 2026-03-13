@@ -28,7 +28,7 @@ export function WelcomeScreen() {
     const selected = await open({
       directory: true,
       multiple: false,
-      title: "Open SiteBuilder Project",
+      title: "Open Pagework Project",
     });
     if (!selected) return;
     try {

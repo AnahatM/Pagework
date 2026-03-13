@@ -1,4 +1,4 @@
-# SiteBuilder — Technical Architecture
+# Pagework — Technical Architecture
 
 ## 1. Tech Stack
 
@@ -60,7 +60,7 @@
                   │  User's Website       │
                   │  Project Folder       │
                   │                       │
-                  │  sitebuilder.project  │
+                  │  pagework.project     │
                   │  .json               │
                   │  src/                │
                   │  public/             │
@@ -85,7 +85,7 @@ Zustand store updated (in-memory manifest)
         ▼
 Save triggered (auto or Ctrl+S)
         │
-        ├──► Write sitebuilder.project.json to disk
+        ├──► Write pagework.project.json to disk
         │
         └──► Invoke Rust codegen commands via IPC
                 │
@@ -434,7 +434,7 @@ interface DevServerStore {
 
 ### 6.3 Component Source Files
 
-The actual React component implementations (Banner.tsx, SectionHeader.tsx, etc.) are **not generated** — they are **copied** from the `templates/components/` directory in the SiteBuilder app into the user's project on creation. They remain unchanged unless the user updates their SiteBuilder app version.
+The actual React component implementations (Banner.tsx, SectionHeader.tsx, etc.) are **not generated** — they are **copied** from the `templates/components/` directory in the Pagework app into the user's project on creation. They remain unchanged unless the user updates their Pagework app version.
 
 ---
 
@@ -444,7 +444,7 @@ When a user creates or opens a project, this is the structure:
 
 ```
 MyWebsite/
-├── sitebuilder.project.json     ← Manifest (source of truth)
+├── pagework.project.json        ← Manifest (source of truth)
 ├── index.html                   ← Generated
 ├── package.json                 ← Generated
 ├── vite.config.ts               ← Static (copied from template)

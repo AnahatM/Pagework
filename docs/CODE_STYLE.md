@@ -1,4 +1,4 @@
-# SiteBuilder — Code Style & Architecture Guidelines
+# Pagework — Code Style & Architecture Guidelines
 
 Rules for keeping the codebase clean, DRY, maintainable, and extensible.
 

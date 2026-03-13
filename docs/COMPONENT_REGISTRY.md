@@ -1,6 +1,6 @@
-# SiteBuilder — Component Registry
+# Pagework — Component Registry
 
-This document defines every component available in the SiteBuilder, how the component registry works, and planned future components.
+This document defines every component available in Pagework, how the component registry works, and planned future components.
 
 ---
 
@@ -489,7 +489,7 @@ These components should be created and added to the registry in future versions:
 
 ## 5. Adding a New Component
 
-To add a new component to SiteBuilder:
+To add a new component to Pagework:
 
 1. **Create the React component** in `templates/components/{category}/` — standard React component with TypeScript props interface.
 
@@ -497,6 +497,6 @@ To add a new component to SiteBuilder:
 
 3. **Add codegen support** in `src-tauri/src/codegen/pages.rs` — add the component type to the JSX generation switch/match, mapping manifest prop values to JSX attributes.
 
-4. **Update existing projects** — when a user opens a project created with an older version of SiteBuilder, the new component source files should be copied into their project's `src/components/` directory if missing.
+4. **Update existing projects** — when a user opens a project created with an older version of Pagework, the new component source files should be copied into their project's `src/components/` directory if missing.
 
 5. **Add to starter templates** (optional) — if the component should appear in any starter template, add it to the relevant template definition.

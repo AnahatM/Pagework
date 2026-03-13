@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════
    Manifest Types
-   Single source of truth for sitebuilder.project.json
+   Single source of truth for pagework.project.json
    ═══════════════════════════════════════════ */
 
 /** Top-level manifest schema */

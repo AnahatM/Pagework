@@ -1,4 +1,4 @@
-# SiteBuilder — Manifest Schema (`sitebuilder.project.json`)
+# Pagework — Manifest Schema (`pagework.project.json`)
 
 This document defines the complete schema for the manifest file that serves as the single source of truth for every user website project.
 

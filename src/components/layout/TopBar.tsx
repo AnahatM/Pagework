@@ -52,13 +52,13 @@ export function TopBar() {
 
   useEffect(() => {
     const title = projectPath
-      ? `SiteBuilder — ${manifest?.projectName ?? "Untitled"} (${projectPath})`
-      : "SiteBuilder";
+      ? `Pagework — ${manifest?.projectName ?? "Untitled"} (${projectPath})`
+      : "Pagework";
     document.title = title;
     getCurrentWindow().setTitle(title);
     return () => {
-      document.title = "SiteBuilder";
-      getCurrentWindow().setTitle("SiteBuilder");
+      document.title = "Pagework";
+      getCurrentWindow().setTitle("Pagework");
     };
   }, [projectPath, manifest?.projectName]);
 
