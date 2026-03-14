@@ -10,8 +10,7 @@ export type ComponentCategory =
   | "media"
   | "interactive"
   | "data"
-  | "utility"
-  | "design";
+  | "utility";
 
 export interface ComponentDefinition {
   /** Unique type key (e.g., "GenericSection") — matches ComponentInstance.type */

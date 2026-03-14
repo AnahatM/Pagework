@@ -53,8 +53,6 @@ fn write_color_set(colors: &crate::manifest::schema::ThemeColorSet, out: &mut St
     out.push('\n');
     out.push_str(&format!("  --text: {};\n", colors.text));
     out.push_str(&format!("  --text-selection: {};\n", colors.text_selection));
-    out.push('\n');
-    out.push_str(&format!("  --grid-background-lines: {};\n", colors.grid_background_lines));
 }
 
 /// Generate index.css content with font imports and CSS variables.

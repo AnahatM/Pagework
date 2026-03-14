@@ -83,13 +83,13 @@ All templates start with plain, basic colors and minimal content — just enough
 
 ### 3.6 Theming
 
-| Requirement         | Details                                                                                                                                                                                                                                                    |
-| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Color variables** | All CSS custom properties editable: page-background, panel-background, panel-shadow-light, panel-shadow-dark, outline, primary, inverse-primary, secondary, text, text-selection, grid-background-lines, positive, warning, negative (and their variants). |
-| **Both themes**     | Light theme and dark theme colors are independently editable.                                                                                                                                                                                              |
-| **Color picker**    | Full color picker control for each variable.                                                                                                                                                                                                               |
-| **Fonts**           | Curated list of ~30–50 popular Google Fonts for `--font-normal` and `--font-display`.                                                                                                                                                                      |
-| **No layout vars**  | `--font-size-normal`, `--max-width`, `--mobile-width` etc. are NOT user-editable.                                                                                                                                                                          |
+| Requirement         | Details                                                                                                                                                                                                                             |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Color variables** | All CSS custom properties editable: page-background, panel-background, panel-shadow-light, panel-shadow-dark, outline, primary, inverse-primary, secondary, text, text-selection, positive, warning, negative (and their variants). |
+| **Both themes**     | Light theme and dark theme colors are independently editable.                                                                                                                                                                       |
+| **Color picker**    | Full color picker control for each variable.                                                                                                                                                                                        |
+| **Fonts**           | Curated list of ~30–50 popular Google Fonts for `--font-normal` and `--font-display`.                                                                                                                                               |
+| **No layout vars**  | `--font-size-normal`, `--max-width`, `--mobile-width` etc. are NOT user-editable.                                                                                                                                                   |
 
 ### 3.7 Navigation Editor
 

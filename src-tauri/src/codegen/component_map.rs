@@ -42,9 +42,6 @@ pub fn component_import_info(component_type: &str) -> Option<(&'static str, bool
         "SizedBox" => Some(("utils/SizedBox", false)),
         "FlexRow" => Some(("utils/FlexRow", true)),
 
-        // Design (design/)
-        "GridBackground" => Some(("design/GridBackground", false)),
-
         _ => None,
     }
 }

@@ -18,7 +18,6 @@ const COLOR_LABELS: Record<string, string> = {
   secondary: "Secondary",
   text: "Text",
   "text-selection": "Text Selection",
-  "grid-background-lines": "Grid Lines",
   positive: "Positive",
   "positive-dark": "Positive Dark",
   "positive-light": "Positive Light",
@@ -45,7 +44,6 @@ const DEFAULT_LIGHT: ThemeColorSet = {
   secondary: "#363636",
   text: "#050505",
   "text-selection": "#c0c0c0",
-  "grid-background-lines": "#b0b0b0",
 };
 
 const DEFAULT_DARK: ThemeColorSet = {
@@ -60,7 +58,6 @@ const DEFAULT_DARK: ThemeColorSet = {
   secondary: "#707070",
   text: "#c0c0c0",
   "text-selection": "#3a3a3a",
-  "grid-background-lines": "#353535",
 };
 
 const DEFAULT_GLOBAL: ThemeGlobalColors = {

@@ -277,7 +277,6 @@ export function componentDemoTemplate(
           component("SizedBox", { height: 60 }),
           component("TextParagraph", { text: "Below the 60px spacer." }),
         ]),
-        component("GridBackground", {}),
       ],
     }),
   ];

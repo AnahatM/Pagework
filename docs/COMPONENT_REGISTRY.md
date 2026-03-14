@@ -34,7 +34,6 @@ type ComponentCategory =
   | "interactive" // Buttons, inputs, etc. (LinkButton, CustomButton, etc.)
   | "data" // Data display (Table, NumberDisplay, DecoratedList, etc.)
   | "utility" // Spacing, layout helpers (SizedBox, FlexRow)
-  | "design" // Visual/decorative (GridBackground)
   | "blog"; // Blog-specific (BlogPostCard, BlogPostContent)
 
 interface PropDefinition {
@@ -396,23 +395,6 @@ These are the top-level layout containers. They accept children.
 | `fullWidth`      | boolean                                                                     | `false`        | No       | Fill container width    |
 
 - **Accepts children**: Yes
-
----
-
-### 2.8 Design Components (`design`)
-
-#### `GridBackground`
-
-> Animated canvas grid with glow effects. Typically placed at top of page.
-
-| Prop            | Type                       | Default | Required | Description             |
-| --------------- | -------------------------- | ------- | -------- | ----------------------- |
-| `gridSize`      | number (min: 10, max: 200) | `50`    | No       | Grid cell size          |
-| `showGrid`      | boolean                    | `true`  | No       | Show grid lines         |
-| `enableRipples` | boolean                    | `true`  | No       | Click ripple animations |
-
-- **Accepts children**: No
-- **Note**: Simplified props for builder. Advanced props (colors, opacity) inherit from theme.
 
 ---
 

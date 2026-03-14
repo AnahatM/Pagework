@@ -71,7 +71,6 @@ This document defines the complete schema for the manifest file that serves as t
       "secondary": "#363636",
       "text": "#050505",
       "text-selection": "#c0c0c0",
-      "grid-background-lines": "#b0b0b0",
     },
     "dark": {
       "page-background": "#0a0a0a",
@@ -85,7 +84,6 @@ This document defines the complete schema for the manifest file that serves as t
       "secondary": "#707070",
       "text": "#c0c0c0",
       "text-selection": "#3a3a3a",
-      "grid-background-lines": "#353535",
     },
     "global": {
       "positive": "#00b35c",
@@ -400,7 +398,6 @@ Video sections for the Content Creator template:
       "secondary": "#363636",
       "text": "#050505",
       "text-selection": "#c0c0c0",
-      "grid-background-lines": "#b0b0b0",
     },
     "dark": {
       "page-background": "#0a0a0a",
@@ -414,7 +411,6 @@ Video sections for the Content Creator template:
       "secondary": "#707070",
       "text": "#c0c0c0",
       "text-selection": "#3a3a3a",
-      "grid-background-lines": "#353535",
     },
     "global": {
       "positive": "#00b35c",

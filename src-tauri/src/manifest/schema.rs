@@ -65,7 +65,6 @@ pub struct ThemeColorSet {
     pub secondary: String,
     pub text: String,
     pub text_selection: String,
-    pub grid_background_lines: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

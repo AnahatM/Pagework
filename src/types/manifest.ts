@@ -52,7 +52,6 @@ export interface ThemeColorSet {
   secondary: string;
   text: string;
   "text-selection": string;
-  "grid-background-lines": string;
 }
 
 export interface ThemeGlobalColors {

@@ -11,7 +11,6 @@ import {
   SectionHeader,
 } from "./content";
 import { Collapsible, DecoratedList, Table } from "./data";
-import { GridBackground } from "./design";
 import { LinkButton } from "./interactive";
 import { SectionImage, VideoEmbed } from "./media";
 import {
@@ -56,8 +55,6 @@ export const COMPONENT_REGISTRY: Record<string, ComponentDefinition> = {
   // Utility
   SizedBox,
   FlexRow,
-  // Design
-  GridBackground,
 };
 
 /** Components grouped by category for the palette UI */
@@ -73,7 +70,6 @@ export function getComponentsByCategory(): Record<
     interactive: [],
     data: [],
     utility: [],
-    design: [],
   };
 
   for (const def of Object.values(COMPONENT_REGISTRY)) {
@@ -99,5 +95,4 @@ export const CATEGORY_LABELS: Record<ComponentCategory, string> = {
   interactive: "Interactive",
   data: "Data",
   utility: "Utility",
-  design: "Design",
 };

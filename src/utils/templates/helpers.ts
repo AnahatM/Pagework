@@ -45,7 +45,6 @@ export const DEFAULT_THEME = {
     secondary: "#363636",
     text: "#050505",
     "text-selection": "#c0c0c0",
-    "grid-background-lines": "#b0b0b0",
   },
   dark: {
     "page-background": "#0a0a0a",
@@ -59,7 +58,6 @@ export const DEFAULT_THEME = {
     secondary: "#707070",
     text: "#c0c0c0",
     "text-selection": "#3a3a3a",
-    "grid-background-lines": "#353535",
   },
   global: {
     positive: "#00b35c",
