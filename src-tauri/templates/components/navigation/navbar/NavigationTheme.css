@@ -22,8 +22,6 @@
   --navbar-padding: 0 20px;
   --navbar-padding-left: 5px;
   --navbar-border-radius: 25px;
-  --navbar-desktop-top-offset: 40px;
-  --navbar-desktop-max-width: min(95vw, 900px);
 
   /* Navigation Button Variables */
   --nav-button-padding: 10px 12.5px;

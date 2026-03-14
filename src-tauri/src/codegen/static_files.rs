@@ -40,10 +40,11 @@ pub fn generate_package_json(project_name: &str, author_name: &str) -> String {
     "typescript": "~5.8.3",
     "vite": "^6.3.5",
     "vite-tsconfig-paths": "^5.1.4"
-  }}
+  }},
+  "author": "{}"
 }}
 "#,
-        safe_name
+        safe_name, author_name
     )
 }
 

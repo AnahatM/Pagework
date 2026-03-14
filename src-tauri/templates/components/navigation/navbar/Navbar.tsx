@@ -1,14 +1,11 @@
-import {
-  useNavigationViewport,
-  useOptimizedScroll,
-} from "@/hooks/useWindowEvents.ts";
+import { useNavigationViewport } from "@/hooks/useWindowEvents.ts";
 import Sidebar from "@components/navigation/sidebar/Sidebar.tsx";
 import SidebarOpenButton from "@components/navigation/sidebar/SidebarOpenButton.tsx";
 import type { NavItem } from "@components/navigation/types/NavigationTypes.ts";
 import ThemeSwitch from "@components/other/ThemeSwitch.tsx";
 import navConfig from "@routes/NavigationConfiguration.json";
-import { useEffect, useRef, useState, type JSX } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, type JSX } from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 import NavigationButton from "./NavigationButton.tsx";
 
@@ -53,33 +50,14 @@ const isActive = (path: string): boolean => {
  * @returns {JSX.Element} The rendered `Navbar` component
  */
 export default function Navbar(): JSX.Element {
-  // Use custom hooks for window events
   const { isMobile } = useNavigationViewport();
-  const { isScrolled } = useOptimizedScroll(50);
-
-  // State to manage sidebar open/close state
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const location = useLocation();
-  const isNavigatingRef = useRef(false);
 
-  // Store the navigation items and other pages from the configuration
   const navItems: NavItem[] = navConfig.navItems;
   const otherPages: NavItem[] = navConfig.otherPages;
 
-  // Track route changes to prevent navbar state reset during navigation
-  useEffect(() => {
-    isNavigatingRef.current = true;
-    const timeoutId = setTimeout(() => {
-      isNavigatingRef.current = false;
-    }, 200); // Give time for scroll reset to complete
-    return () => clearTimeout(timeoutId);
-  }, [location.pathname]);
-
-  // Return the Navbar component JSX
   return (
-    <nav
-      className={`navbar ${isScrolled ? "scrolled" : ""} ${isMobile ? "mobile" : "desktop"}`}
-    >
+    <nav className={`navbar ${isMobile ? "mobile" : "desktop"}`}>
       {/* Logo with Link to Homepage */}
       <Link to="/" className="navbar-logo-link">
         {navConfig.logoPath ? (
