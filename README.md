@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/anahatm/pagework/releases"><img src="https://img.shields.io/github/v/release/anahatm/pagework?style=flat-square&color=blue" alt="Release"></a>
+  <a href="https://github.com/AnahatM/Pagework/releases"><img src="https://img.shields.io/github/v/release/AnahatM/Pagework?style=flat-square&color=blue&include_prereleases" alt="Release"></a>
   <img src="https://img.shields.io/badge/version-0.1.0-blue?style=flat-square" alt="Version">
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square" alt="Platform">
   <img src="https://img.shields.io/badge/built%20with-Tauri%20v2-24C8DB?style=flat-square&logo=tauri&logoColor=white" alt="Tauri v2">
