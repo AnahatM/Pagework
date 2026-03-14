@@ -12,6 +12,7 @@ pub fn generate_navigation(nav: &NavigationConfig) -> String {
         .collect();
 
     let root = serde_json::json!({
+        "logoPath": nav.logo_path,
         "navItems": json_items,
         "otherPages": []
     });

@@ -120,6 +120,13 @@ nav.navbar .navbar-logo-text {
   white-space: nowrap;
 }
 
+nav.navbar .navbar-logo-image {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
 nav.navbar div.navbar-center-links {
   /* Layout using theme variables */
   display: flex;

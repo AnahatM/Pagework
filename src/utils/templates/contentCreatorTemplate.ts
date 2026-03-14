@@ -29,12 +29,20 @@ export function contentCreatorTemplate(
       path: "/",
       isHomePage: true,
       components: [
-        component("Banner", { altText: "Banner" }, [
-          component("BannerHeader", {
-            titleText: projectName,
-            subtitleText: "Creator • Educator • Entertainer",
-          }),
-        ]),
+        component(
+          "Banner",
+          {
+            lightImageUrl: "/assets/banners/main_banner_light.png",
+            darkImageUrl: "/assets/banners/main_banner_dark.png",
+            altText: "Banner",
+          },
+          [
+            component("BannerHeader", {
+              titleText: projectName,
+              subtitleText: "Creator • Educator • Entertainer",
+            }),
+          ],
+        ),
         component("GenericSection", {}, [
           component("SectionHeader", { title: "Latest Content" }),
           component("TextParagraph", {

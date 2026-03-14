@@ -119,7 +119,7 @@ export function baseManifest(projectName: string): SiteBuilderManifest {
     },
     theme: DEFAULT_THEME,
     navigation: {
-      logoPath: "",
+      logoPath: "/assets/icons/PageworkLogo_White.png",
       navItems: [
         {
           id: uid("nav"),

@@ -3,6 +3,7 @@
    Shown when no project is open
    ═══════════════════════════════════════════ */
 
+import pageworkLogo from "@/assets/PageworkLogo_White.png";
 import {
   faFolderOpen,
   faMinus,
@@ -71,7 +72,7 @@ export function WelcomeScreen() {
           </button>
         </div>
       </div>
-      <h1 className={styles.title}>{APP_NAME}</h1>
+      <img src={pageworkLogo} alt={APP_NAME} className={styles.logo} />
       <p className={styles.subtitle}>{APP_DESCRIPTION}</p>
 
       <div className={styles.actions}>

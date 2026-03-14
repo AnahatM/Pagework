@@ -27,13 +27,22 @@ export function portfolioTemplate(projectName: string): SiteBuilderManifest {
       path: "/",
       isHomePage: true,
       components: [
-        component("Banner", { altText: "Banner", showScrollHint: true }, [
-          component("BannerHeader", {
-            preHeadingText: "Hello, I'm",
-            titleText: projectName,
-            subtitleText: "Developer & Designer",
-          }),
-        ]),
+        component(
+          "Banner",
+          {
+            lightImageUrl: "/assets/banners/main_banner_light.png",
+            darkImageUrl: "/assets/banners/main_banner_dark.png",
+            altText: "Banner",
+            showScrollHint: true,
+          },
+          [
+            component("BannerHeader", {
+              preHeadingText: "Hello, I'm",
+              titleText: projectName,
+              subtitleText: "Developer & Designer",
+            }),
+          ],
+        ),
         component("GenericSection", {}, [
           component("SectionHeader", { title: "About Me" }),
           component("TextParagraph", {

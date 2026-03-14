@@ -216,6 +216,30 @@ pub fn copy_template_files(templates_dir: &Path, project_dir: &Path) -> Result<(
         &dst_src.join("vite-env.d.ts"),
     )?;
 
+    // Copy default assets (banners, icons) into project's public/assets/
+    let default_assets = templates_dir.join("assets").join("defaults");
+    if default_assets.exists() {
+        let public_assets = project_dir.join("public").join("assets");
+        // Banner images → public/assets/banners/
+        let banners_dir = public_assets.join("banners");
+        std::fs::create_dir_all(&banners_dir).map_err(|e| e.to_string())?;
+        copy_file_if_exists(
+            &default_assets.join("main_banner_light.png"),
+            &banners_dir.join("main_banner_light.png"),
+        )?;
+        copy_file_if_exists(
+            &default_assets.join("main_banner_dark.png"),
+            &banners_dir.join("main_banner_dark.png"),
+        )?;
+        // Logo → public/assets/icons/
+        let icons_dir = public_assets.join("icons");
+        std::fs::create_dir_all(&icons_dir).map_err(|e| e.to_string())?;
+        copy_file_if_exists(
+            &default_assets.join("PageworkLogo_White.png"),
+            &icons_dir.join("PageworkLogo_White.png"),
+        )?;
+    }
+
     // Create NotFoundPage if not present
     let not_found_dir = project_dir.join("src").join("pages").join("core");
     std::fs::create_dir_all(&not_found_dir).map_err(|e| e.to_string())?;

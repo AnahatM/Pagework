@@ -16,6 +16,15 @@
   -webkit-app-region: no-drag;
 }
 
+.appLogo {
+  height: 18px;
+  width: auto;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
 .projectName {
   font-size: 0.85rem;
   font-weight: 600;

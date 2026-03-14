@@ -10,12 +10,21 @@ export function landingPageTemplate(projectName: string): SiteBuilderManifest {
       path: "/",
       isHomePage: true,
       components: [
-        component("Banner", { altText: "Hero", showScrollHint: true }, [
-          component("BannerHeader", {
-            titleText: projectName,
-            subtitleText: "Your tagline goes here",
-          }),
-        ]),
+        component(
+          "Banner",
+          {
+            lightImageUrl: "/assets/banners/main_banner_light.png",
+            darkImageUrl: "/assets/banners/main_banner_dark.png",
+            altText: "Hero",
+            showScrollHint: true,
+          },
+          [
+            component("BannerHeader", {
+              titleText: projectName,
+              subtitleText: "Your tagline goes here",
+            }),
+          ],
+        ),
         component("GenericSection", {}, [
           component("SectionHeader", { title: "Features", align: "center" }),
           component("DynamicSectionRow", { gap: 20, minSectionWidth: 250 }, [

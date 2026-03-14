@@ -1,3 +1,4 @@
+import pageworkLogo from "@/assets/PageworkLogo_White.png";
 import { Button } from "@components/shared/Button";
 import {
   faCloudArrowUp,
@@ -135,6 +136,7 @@ export function TopBar() {
         </div>
       )}
       <div className={styles.left}>
+        <img src={pageworkLogo} alt="Pagework" className={styles.appLogo} />
         <span className={styles.projectName}>
           {manifest?.projectName ?? "Untitled"}
         </span>

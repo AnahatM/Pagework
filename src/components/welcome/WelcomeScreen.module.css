@@ -55,6 +55,14 @@
   color: #fff;
 }
 
+.logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+}
+
 .title {
   font-size: 2rem;
   font-weight: 700;

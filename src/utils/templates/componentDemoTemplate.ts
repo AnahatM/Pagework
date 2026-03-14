@@ -41,7 +41,8 @@ export function componentDemoTemplate(
         component(
           "Banner",
           {
-            imageUrl: "/assets/banners/banner.webp",
+            lightImageUrl: "/assets/banners/main_banner_light.png",
+            darkImageUrl: "/assets/banners/main_banner_dark.png",
             altText: "Hero Banner",
             showScrollHint: true,
           },
