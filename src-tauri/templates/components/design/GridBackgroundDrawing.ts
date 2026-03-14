@@ -1,7 +1,14 @@
 import { ANIMATION, CANVAS } from "./GridBackgroundConstants";
-import { calculateCombinedGlow, filterActiveRipples } from "./GridBackgroundRippleEffect";
+import {
+  calculateCombinedGlow,
+  filterActiveRipples,
+} from "./GridBackgroundRippleEffect";
 import type { DrawingContext, GlowParams } from "./GridBackgroundTypes";
-import { alphaToHex, getCellCenter, resolveCSSVariable } from "./GridBackgroundUtils";
+import {
+  alphaToHex,
+  getCellCenter,
+  resolveCSSVariable,
+} from "./GridBackgroundUtils";
 
 /**
  * Drawing utilities for GridBackground component
@@ -17,7 +24,7 @@ export function drawGridWithEffects(
   gridOpacity: number,
   glowIntensity: number,
   showGrid: boolean,
-  rippleIntensity: number
+  rippleIntensity: number,
 ): void {
   const { ctx, canvasSize, mousePosition, currentTime } = context;
   const { width, height } = canvasSize;
@@ -33,8 +40,10 @@ export function drawGridWithEffects(
   const rows = Math.ceil(height / gridSize) + 1;
 
   // Resolve CSS variables with fallbacks
-  const resolvedGridColor = resolveCSSVariable(context.resolvedGridColor) || "#ababc4";
-  const resolvedGlowColor = resolveCSSVariable(context.resolvedGlowColor) || "#5c5ced";
+  const resolvedGridColor =
+    resolveCSSVariable(context.resolvedGridColor) || "#b0b0b0";
+  const resolvedGlowColor =
+    resolveCSSVariable(context.resolvedGlowColor) || "#5c5ced";
 
   // Draw grid cells with effects
   for (let col = 0; col < cols; col++) {
@@ -52,7 +61,7 @@ export function drawGridWithEffects(
         gridSize,
         glowRadius,
         glowIntensity,
-        rippleIntensity
+        rippleIntensity,
       };
 
       const totalGlowAlpha = calculateCombinedGlow(glowParams);
@@ -82,7 +91,7 @@ function drawGlowEffect(
   y: number,
   gridSize: number,
   glowColor: string,
-  alpha: number
+  alpha: number,
 ): void {
   ctx.fillStyle = `${glowColor}${alphaToHex(alpha)}`;
   ctx.fillRect(x, y, gridSize, gridSize);
@@ -97,7 +106,7 @@ function drawGridCell(
   y: number,
   gridSize: number,
   gridColor: string,
-  opacity: number
+  opacity: number,
 ): void {
   ctx.strokeStyle = `${gridColor}${alphaToHex(opacity)}`;
   ctx.lineWidth = CANVAS.LINE_WIDTH;
@@ -113,7 +122,7 @@ export function prepareDrawingContext(
   mousePosition: { x: number; y: number },
   ripples: DrawingContext["ripples"],
   gridColor: string,
-  glowColor: string
+  glowColor: string,
 ): DrawingContext {
   return {
     ctx,
@@ -122,6 +131,6 @@ export function prepareDrawingContext(
     ripples,
     currentTime: Date.now(),
     resolvedGridColor: gridColor,
-    resolvedGlowColor: glowColor
+    resolvedGlowColor: glowColor,
   };
 }

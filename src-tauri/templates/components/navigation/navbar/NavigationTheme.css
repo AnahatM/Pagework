@@ -7,15 +7,15 @@
 
 :root {
   /* Navigation Background Colors */
-  --navbar-background: #050315;
-  --navbar-background-transluscent: #050315d0;
-  --navbar-shadow: #050315bd;
-  --nav-links-background: #1e1d2cd3;
-  --nav-links-highlight: #242233;
-  --nav-links-shadow: #13121d;
+  --navbar-background: #0a0a0a;
+  --navbar-background-transluscent: #0a0a0ad0;
+  --navbar-shadow: #0a0a0abd;
+  --nav-links-background: #1e1e1ed3;
+  --nav-links-highlight: #2a2a2a;
+  --nav-links-shadow: #141414;
 
   /* Navigation Text Colors */
-  --navbar-text: #bdbdd3;
+  --navbar-text: #c0c0c0;
 
   /* Navigation Layout Variables */
   --navbar-max-height: 100px;
